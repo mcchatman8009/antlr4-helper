@@ -30,7 +30,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-grammar tinyc;
+grammar Tinyc;
 
 /*
     http://www.iro.umontreal.ca/~felipe/IFT2030-Automne2002/Complements/tinyc.c

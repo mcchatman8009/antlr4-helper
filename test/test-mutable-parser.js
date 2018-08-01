@@ -2,8 +2,8 @@ const chai = require('chai');
 const textModule = require('../dist');
 const AntlrFactoryBuilder = require('../dist').AntlrFactoryBuilder;
 const MutableAntlrParser = require('../dist').MutableAntlrParser;
-const TinycLexer = require('./tinyc/tinycLexer').tinycLexer;
-const TinycParser = require('./tinyc/tinycParser').tinycParser;
+const TinycLexer = require('./tinyc/TinycLexer').TinycLexer;
+const TinycParser = require('./tinyc/TinycParser').TinycParser;
 const tinycParser = require('./tinyc/tinycParser');
 
 chai.should();

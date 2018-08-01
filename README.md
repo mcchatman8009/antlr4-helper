@@ -20,7 +20,7 @@ npm install -S antlr4-helper
 ### Changing Parsed Text
 ```javascript
 //
-// An example using the grammar  grammars/tinyc/tinyc.g4
+// An example using the grammar  grammars/tinyc/Tinyc.g4
 //
 const factory = new AntlrFactoryBuilder()
     .lexer((input) => new TinycLexer(input))
