@@ -5,6 +5,34 @@ import {createBuffer, MutableTextRange, TextBuffer, TextRange} from 'text-manipu
 import {AntlrParser} from './antlr-parser';
 import {AntlrRuleClass} from '../';
 
+/**
+ * The MutableAntlrParser allows for text manipulation at the rule and token level.
+ * Once the parse is complete the {@link getText} method enables one to see the complete
+ * text of all the changes.
+ *
+ * <br/>
+ * @example
+ * <br/>
+ *
+ * <code>
+ * <pre>
+ *  ...
+ * const parser = new MutableAntlrParser(factory);
+ * ...
+ * parser.addExitRuleListener(ExpressionContext, (rule)=>{
+ *     parser.setRuleText(rule, 'replaced expression');
+ *     console.log(parser.getRuleText(rule));
+ * });
+ *
+ * parser.parse(text);
+ *
+ * console.log(parser.getText());
+ *
+ * </pre>
+ * </code>
+ *
+ * @class MutableAntlrParser
+ */
 export class MutableAntlrParser {
     private parser: AntlrParser;
     private textModel: TextBuffer;
@@ -130,7 +158,7 @@ export class MutableAntlrParser {
      * <code>
      * parser.addEnterRuleListener(ExpressionContext, (rule)=>{
      *     console.log("entering an expression rule");
-     * })
+     * });
      * </code>
      * </pre>
      *
@@ -157,7 +185,7 @@ export class MutableAntlrParser {
      * <code>
      * parser.addExitRuleListener(ExpressionContext, (rule)=>{
      *     console.log(parser.getRuleText(rule));
-     * })
+     * });
      * </code>
      * </pre>
      *
