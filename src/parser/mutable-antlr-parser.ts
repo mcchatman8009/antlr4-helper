@@ -1,7 +1,7 @@
 import {AntlrFactory} from '../factory/antlr-factory';
 import {ParserRuleContext, Token} from 'antlr4';
 import {TerminalNode} from 'antlr4/tree/Tree';
-import {createBuffer, MutableTextRange, TextBuffer, TextRange} from 'text-manipulation';
+import {createBuffer, MutableTextRange, TextBuffer} from 'text-manipulation';
 import {AntlrParser} from './antlr-parser';
 import {AntlrRuleClass} from '../';
 
