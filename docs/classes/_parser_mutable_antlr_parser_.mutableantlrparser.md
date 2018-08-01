@@ -2,6 +2,24 @@
 
 # Class: MutableAntlrParser
 
+The MutableAntlrParser allows for text manipulation at the rule and token level. Once the parse is complete the [getText](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettext) method enables one to see the complete text of all the changes.
+
+*__example__*:   
+
+```
+...
+const parser = new MutableAntlrParser(factory);
+...
+parser.addExitRuleListener(ExpressionContext, (rule)=>{
+    parser.setRuleText(rule, 'replaced expression');
+    console.log(parser.getRuleText(rule));
+});
+parser.parse(text);
+console.log(parser.getText());
+```
+
+*__class__*: MutableAntlrParser
+
 ## Hierarchy
 
 **MutableAntlrParser**
@@ -99,7 +117,7 @@ Add a listener for when the parser enters a given rule. See example below
 ```
 parser.addEnterRuleListener(ExpressionContext, (rule)=>{
     console.log("entering an expression rule");
-})
+});
 ```
 
 **Type parameters:**
@@ -121,7 +139,7 @@ ___
 
 ▸ **addExitRuleListener**T(ruleClass: *[AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`ParserRuleContext`>*, listener: *`function`*): `void`
 
-Add a listener for when the parser exits a given rule. Within this listener is where you would call methods such as [setRuleText](_parser_mutable_antlr_parser_.mutableantlrparser.md#setruletext), [getRuleText](_parser_mutable_antlr_parser_.mutableantlrparser.md#getruletext) ,[setTokenText](_parser_mutable_antlr_parser_.mutableantlrparser.md#settokentext) and [getTokenText](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokentext)
+Add a listener for when the parser exits a given rule. Within this listener is where you would typically call methods such as [setRuleText](_parser_mutable_antlr_parser_.mutableantlrparser.md#setruletext), [getRuleText](_parser_mutable_antlr_parser_.mutableantlrparser.md#getruletext) ,[setTokenText](_parser_mutable_antlr_parser_.mutableantlrparser.md#settokentext) and [getTokenText](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokentext)
 
 See example below:
 *__example__*:   
@@ -129,7 +147,7 @@ See example below:
 ```
 parser.addExitRuleListener(ExpressionContext, (rule)=>{
     console.log(parser.getRuleText(rule));
-})
+});
 ```
 
 **Type parameters:**
