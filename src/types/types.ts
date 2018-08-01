@@ -1,3 +1,6 @@
 import {ParserRuleContext} from 'antlr4';
 
-export type AntlrRuleClass<T> = new (parent: ParserRuleContext, invokingState: number) => T;
+/**
+ * The class/constructor of the ParserRuleContext
+ */
+export type AntlrRuleClass<T extends ParserRuleContext> = new (parent: ParserRuleContext, invokingState: number) => T;

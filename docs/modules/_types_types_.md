@@ -18,6 +18,8 @@
 
 **ΤAntlrRuleClass**: *`object`*
 
+The class/constructor of the ParserRuleContext
+
 #### Type declaration
 
 ___

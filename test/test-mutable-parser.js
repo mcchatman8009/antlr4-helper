@@ -1,8 +1,7 @@
 const chai = require('chai');
-const mocha = require('mocha');
 const textModule = require('../dist');
 const AntlrFactoryBuilder = require('../dist').AntlrFactoryBuilder;
-const MutableTextAntlrParser = require('../dist').MutableTextAntlrParser;
+const MutableAntlrParser = require('../dist').MutableAntlrParser;
 const TinycLexer = require('./tinyc/tinycLexer').tinycLexer;
 const TinycParser = require('./tinyc/tinycParser').tinycParser;
 const tinycParser = require('./tinyc/tinycParser');
@@ -18,14 +17,19 @@ describe('Test Creating a Mutable Parser', function () {
             .rootRule((parser) => parser.program())
             .build();
 
-        const parser = new MutableTextAntlrParser(factory);
+        const parser = new MutableAntlrParser(factory);
+        let varName;
+
         parser.addExitRuleListener(tinycParser.IdContext, (rule) => {
             parser.setRuleText(rule, 'var');
 
+            // The rule change now be changed
+            varName = parser.getRuleText(rule);
         });
 
         parser.parse('a = 10;');
         parser.getText().should.equal('var = 10;');
+        varName.should.equal('var');
     });
 
 });

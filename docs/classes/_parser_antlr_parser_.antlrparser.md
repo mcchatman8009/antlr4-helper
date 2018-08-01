@@ -27,14 +27,14 @@
 
 * [addEnterRuleListener](_parser_antlr_parser_.antlrparser.md#addenterrulelistener)
 * [addExitRuleListener](_parser_antlr_parser_.antlrparser.md#addexitrulelistener)
+* [doesRuleMatchClass](_parser_antlr_parser_.antlrparser.md#doesrulematchclass)
 * [enterEveryRule](_parser_antlr_parser_.antlrparser.md#entereveryrule)
 * [exitEveryRule](_parser_antlr_parser_.antlrparser.md#exiteveryrule)
+* [getRuleRange](_parser_antlr_parser_.antlrparser.md#getrulerange)
 * [getRuleText](_parser_antlr_parser_.antlrparser.md#getruletext)
 * [getTokenRange](_parser_antlr_parser_.antlrparser.md#gettokenrange)
 * [getTokenText](_parser_antlr_parser_.antlrparser.md#gettokentext)
 * [parse](_parser_antlr_parser_.antlrparser.md#parse)
-* [ruleMatch](_parser_antlr_parser_.antlrparser.md#rulematch)
-* [ruleToRange](_parser_antlr_parser_.antlrparser.md#ruletorange)
 * [visitErrorNode](_parser_antlr_parser_.antlrparser.md#visiterrornode)
 * [visitTerminal](_parser_antlr_parser_.antlrparser.md#visitterminal)
 
@@ -48,11 +48,13 @@
 
 ⊕ **new AntlrParser**(factory: *[AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md)*): [AntlrParser](_parser_antlr_parser_.antlrparser.md)
 
+Provide an AntlrFactory to construct
+
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| factory | [AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md) |
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| factory | [AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md) |   |
 
 **Returns:** [AntlrParser](_parser_antlr_parser_.antlrparser.md)
 
@@ -64,14 +66,14 @@ ___
 
 ### `<Private>` enterRuleSubject
 
-**● enterRuleSubject**: *`Subject`<`AntlrRule`>*
+**● enterRuleSubject**: *`Subject`<`ParserRuleContext`>*
 
 ___
 <a id="exitrulesubject"></a>
 
 ### `<Private>` exitRuleSubject
 
-**● exitRuleSubject**: *`Subject`<`AntlrRule`>*
+**● exitRuleSubject**: *`Subject`<`ParserRuleContext`>*
 
 ___
 <a id="factory"></a>
@@ -95,17 +97,27 @@ ___
 
 ###  addEnterRuleListener
 
-▸ **addEnterRuleListener**T(ruleClass: *[AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`AntlrRule`>*, listener: *`function`*): `void`
+▸ **addEnterRuleListener**T(ruleClass: *[AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`ParserRuleContext`>*, listener: *`function`*): `void`
+
+Add a listener for when the parser enters a given rule. See example below
+
+*__example__*:   
+
+```
+parser.addEnterRuleListener(ExpressionContext, (rule)=>{
+    console.log("entering an expression rule");
+})
+```
 
 **Type parameters:**
 
-#### T :  `AntlrRule`
+#### T :  `ParserRuleContext`
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| ruleClass | [AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`AntlrRule`> |
-| listener | `function` |
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| ruleClass | [AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`ParserRuleContext`> |  - |
+| listener | `function` |   |
 
 **Returns:** `void`
 
@@ -114,19 +126,47 @@ ___
 
 ###  addExitRuleListener
 
-▸ **addExitRuleListener**T(ruleClass: *[AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`AntlrRule`>*, listener: *`function`*): `void`
+▸ **addExitRuleListener**T(ruleClass: *[AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`ParserRuleContext`>*, listener: *`function`*): `void`
+
+Add a listener for when the parser exits a given rule. See example below
+
+*__example__*:   
+
+```
+parser.addExitRuleListener(ExpressionContext, (rule)=>{
+    console.log(parser.getRuleText(rule));
+})
+```
 
 **Type parameters:**
 
-#### T :  `AntlrRule`
+#### T :  `ParserRuleContext`
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| ruleClass | [AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`AntlrRule`> |
-| listener | `function` |
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| ruleClass | [AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`ParserRuleContext`> |  - |
+| listener | `function` |   |
 
 **Returns:** `void`
+
+___
+<a id="doesrulematchclass"></a>
+
+###  doesRuleMatchClass
+
+▸ **doesRuleMatchClass**(rule: *`ParserRuleContext`*, ruleClass: *[AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`any`>*): `boolean`
+
+Checks if a rule matches the ruleClass given
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| rule | `ParserRuleContext` |  - |
+| ruleClass | [AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`any`> |  - |
+
+**Returns:** `boolean`
 
 ___
 <a id="entereveryrule"></a>
@@ -159,17 +199,37 @@ ___
 **Returns:** `void`
 
 ___
+<a id="getrulerange"></a>
+
+###  getRuleRange
+
+▸ **getRuleRange**(rule: *`ParserRuleContext`*): [`object`, `object`]
+
+Get the range of a given rule, where the first object is the start position and the last is the end position
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| rule | `ParserRuleContext` |  - |
+
+**Returns:** [`object`, `object`]
+, {column: number; line: number}]}
+
+___
 <a id="getruletext"></a>
 
 ###  getRuleText
 
-▸ **getRuleText**(rule: *`AntlrRule`*): `string`
+▸ **getRuleText**(rule: *`ParserRuleContext`*): `string`
+
+Get the complete text of a completely parsed rule
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| rule | `AntlrRule` |
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| rule | `ParserRuleContext` |  - |
 
 **Returns:** `string`
 
@@ -178,15 +238,18 @@ ___
 
 ###  getTokenRange
 
-▸ **getTokenRange**(token: * `Token` &#124; `TerminalNode`*): `TextRange`
+▸ **getTokenRange**(token: * `Token` &#124; `TerminalNode`*): [`object`, `object`]
+
+Get the range of a given token, where the first object is the start position and the last is the end position
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| token |  `Token` &#124; `TerminalNode`|
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| token |  `Token` &#124; `TerminalNode`|  - |
 
-**Returns:** `TextRange`
+**Returns:** [`object`, `object`]
+, {column: number; line: number}]}
 
 ___
 <a id="gettokentext"></a>
@@ -195,11 +258,13 @@ ___
 
 ▸ **getTokenText**(token: * `Token` &#124; `TerminalNode`*): `string`
 
+Get the text of a given token
+
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| token |  `Token` &#124; `TerminalNode`|
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| token |  `Token` &#124; `TerminalNode`|  - |
 
 **Returns:** `string`
 
@@ -208,46 +273,18 @@ ___
 
 ###  parse
 
-▸ **parse**(input: *`string`*): `AntlrRule`
+▸ **parse**(input: *`string`*): `ParserRuleContext`
+
+Parse the input string
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| input | `string` |
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| input | `string` |  - |
 
-**Returns:** `AntlrRule`
-
-___
-<a id="rulematch"></a>
-
-###  ruleMatch
-
-▸ **ruleMatch**(rule: *`AntlrRule`*, clazz: *[AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`any`>*): `boolean`
-
-**Parameters:**
-
-| Param | Type |
-| ------ | ------ |
-| rule | `AntlrRule` |
-| clazz | [AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`any`> |
-
-**Returns:** `boolean`
-
-___
-<a id="ruletorange"></a>
-
-###  ruleToRange
-
-▸ **ruleToRange**(rule: *`AntlrRule`*): `TextRange`
-
-**Parameters:**
-
-| Param | Type |
-| ------ | ------ |
-| rule | `AntlrRule` |
-
-**Returns:** `TextRange`
+**Returns:** `ParserRuleContext`
+- the invoked root rule
 
 ___
 <a id="visiterrornode"></a>
