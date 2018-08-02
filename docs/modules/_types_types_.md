@@ -19,6 +19,12 @@
 
 **ΤAntlrRange**: *[`object`, `object`]*
 
+A simple list that represents:
+
+\[{ column: number; line: number }, { column: number; line: number }\];
+
+Where the first object is the start position and the last is the end position
+
 ___
 <a id="antlrruleclass"></a>
 
