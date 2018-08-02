@@ -71,7 +71,7 @@ let varName;
 parser.addExitRuleListener(tinycParser.IdContext, (rule) => {
     parser.setRuleText(rule, 'var');
 
-    // The rule has been change
+    // The rule has been changed
     varName = parser.getRuleText(rule);
 });
 
