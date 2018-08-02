@@ -34,20 +34,19 @@ import {AntlrRuleClass} from '../';
  * @class MutableAntlrParser
  */
 export class MutableAntlrParser {
-    private parser: AntlrParser;
     private textModel: TextBuffer;
     private changedRuleMap: Map<ParserRuleContext, MutableTextRange>;
     private changedTokenMap: Map<Token, MutableTextRange>;
 
     /**
      * Provide an AntlrFactory to construct
-     * @param {AntlrFactory} factory
+     * @param {AntlrFactory | AntlrParser} parser
      */
-    constructor(factory: AntlrFactory) {
-        this.parser = new AntlrParser(factory);
+    constructor(private parser: AntlrParser) {
         this.changedRuleMap = new Map<ParserRuleContext, MutableTextRange>();
         this.changedTokenMap = new Map<Token, MutableTextRange>();
     }
+
 
     /**
      * Parse the input string

@@ -6,12 +6,20 @@
 
 ### Type aliases
 
+* [AntlrRange](_types_types_.md#antlrrange)
 * [AntlrRuleClass](_types_types_.md#antlrruleclass)
 
 ---
 
 ## Type aliases
 
+<a id="antlrrange"></a>
+
+###  AntlrRange
+
+**ΤAntlrRange**: *[`object`, `object`]*
+
+___
 <a id="antlrruleclass"></a>
 
 ###  AntlrRuleClass

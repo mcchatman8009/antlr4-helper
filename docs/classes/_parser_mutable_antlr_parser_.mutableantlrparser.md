@@ -57,7 +57,7 @@ console.log(parser.getText());
 
 ###  constructor
 
-⊕ **new MutableAntlrParser**(factory: *[AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md)*): [MutableAntlrParser](_parser_mutable_antlr_parser_.mutableantlrparser.md)
+⊕ **new MutableAntlrParser**(parser: *[AntlrParser](_parser_antlr_parser_.antlrparser.md)*): [MutableAntlrParser](_parser_mutable_antlr_parser_.mutableantlrparser.md)
 
 Provide an AntlrFactory to construct
 
@@ -65,7 +65,7 @@ Provide an AntlrFactory to construct
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| factory | [AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md) |   |
+| parser | [AntlrParser](_parser_antlr_parser_.antlrparser.md) |   |
 
 **Returns:** [MutableAntlrParser](_parser_mutable_antlr_parser_.mutableantlrparser.md)
 
