@@ -151,7 +151,7 @@ export class ErrorRuleHandler extends ErrorListener {
             const sibling = this.parser.previousSiblings(rule);
 
             if (sibling) {
-                const start = sibling.stop;
+                const start = (sibling.stop) ? sibling.stop : sibling.start;
                 from = {column: start.column + start.text.length, line: start.line - 1};
                 to = {column: token.column, line: token.line - 1};
 
