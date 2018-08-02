@@ -7,7 +7,7 @@ export type AntlrRuleClass<T extends ParserRuleContext> = new (parent: ParserRul
 /**
  *  A simple list that represents:
  *
- *  [{ column: number; line: number }, { column: number; line: number }];
+ *  <pre>[{ column: number; line: number }, { column: number; line: number }]</pre>
  *
  *  Where the first object is the start position and the last is the end position
  */
