@@ -1,12 +1,12 @@
 import {ParserRuleContext, Recognizer, Token} from 'antlr4';
 import {sortRange} from 'text-manipulation/dist/buffer/utils';
-import {AntlrParser} from './antlr-parser';
 import * as _ from 'lodash';
 import {ErrorListener, RecognitionException} from 'antlr4/error';
 import {TextBuffer} from 'text-manipulation';
 import {AntlrRuleError} from './antlr-rule-error';
 import {RuleTable} from './rule-table';
 import {AntlrRange} from '../';
+import {AntlrParser} from './antlr-parser';
 
 const max = Math.max;
 
@@ -148,7 +148,7 @@ export class ErrorRuleHandler extends ErrorListener {
             let from, to;
             const token = rule.start;
 
-            const sibling = this.parser.previousSiblings(rule);
+            const sibling = this.parser.getRuleBefore(rule);
 
             if (sibling) {
                 const start = (sibling.stop) ? sibling.stop : sibling.start;

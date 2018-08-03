@@ -1,7 +1,7 @@
 const chai = require('chai');
 const helper = require('../dist');
 const AntlrFactoryBuilder = require('../dist').AntlrFactoryBuilder;
-const AntlrParser = require('../dist').AntlrParser;
+const BasicAntlrParser = require('../dist').BasicAntlrParser;
 const MutableAntlrParser = require('../dist').MutableAntlrParser;
 const TinycLexer = require('./tinyc/TinycLexer').TinycLexer;
 const TinycParser = require('./tinyc/TinycParser').TinycParser;
@@ -16,7 +16,7 @@ const factory = new AntlrFactoryBuilder()
 
 describe('Test Parser Rule errors', function () {
     it('check for the statement error on line 2', () => {
-        const parser = new AntlrParser(factory);
+        const parser = new BasicAntlrParser(factory);
         parser.parse('var = 10; \n if \n(b) {a = b }');
         // const ruleTable = parser.getRulePositionTable();
         // const errorRuleTable = parser.getErrorRuleTable();
@@ -26,7 +26,7 @@ describe('Test Parser Rule errors', function () {
     });
 
     it('check for simple statement rule error', () => {
-        const parser = new AntlrParser(factory);
+        const parser = new BasicAntlrParser(factory);
         parser.parse('var = 10');
         // const ruleTable = parser.getRulePositionTable();
         // const errorRuleTable = parser.getErrorRuleTable();
@@ -37,7 +37,7 @@ describe('Test Parser Rule errors', function () {
     });
 
     it('create error using custom validator', () => {
-        const parser = new AntlrParser(factory);
+        const parser = new BasicAntlrParser(factory);
 
         parser.addCustomRuleValidator(tinycParser.IdContext, (id) => {
             const str = parser.getTokenText(id.STRING());

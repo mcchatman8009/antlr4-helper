@@ -1,7 +1,7 @@
 const chai = require('chai');
 const textModule = require('../dist');
 const AntlrFactoryBuilder = require('../dist').AntlrFactoryBuilder;
-const AntlrParser = require('../dist').AntlrParser;
+const BasicAntlrParser = require('../dist').BasicAntlrParser;
 const MutableAntlrParser = require('../dist').MutableAntlrParser;
 const TinycLexer = require('./tinyc/TinycLexer').TinycLexer;
 const TinycParser = require('./tinyc/TinycParser').TinycParser;
@@ -17,17 +17,20 @@ describe('Test Creating a Mutable Parser', function () {
             .rootRule((parser) => parser.program())
             .build();
 
-        const parser = new AntlrParser(factory);
+        const parser = new MutableAntlrParser(new BasicAntlrParser(factory));
 
         parser.addExitRuleListener(tinycParser.IdContext, (rule) => {
         });
 
         // parser.parse('variable = 10;\n = 111;');
-        parser.parse('variable =');
-        const table = parser.getRulePositionTable();
-        const token = parser.getTokenPositionTable();
-        const errors = parser.getErrors();
-        const errorsTable = parser.getErrorRuleTable();
+        parser.parse('variable = 10;');
+        let table = parser.getRulePositionTable();
+
+        const rule = parser.getRuleAt(0, 0);
+        rule.setText('apples');
+        table = parser.getRulePositionTable();
+        const txt = rule.getText();
+
         return;
     });
 
@@ -38,7 +41,7 @@ describe('Test Creating a Mutable Parser', function () {
             .rootRule((parser) => parser.program())
             .build();
 
-        const parser = new MutableAntlrParser(new AntlrParser(factory));
+        const parser = new MutableAntlrParser(new BasicAntlrParser(factory));
         let varName;
 
         parser.addExitRuleListener(tinycParser.IdContext, (rule) => {

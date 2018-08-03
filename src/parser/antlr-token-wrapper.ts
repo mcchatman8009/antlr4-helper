@@ -2,23 +2,28 @@ import {Token} from 'antlr4';
 import {AntlrParser} from './antlr-parser';
 import {AntlrRange} from '../';
 
-export class AntlrTokenWrapper {
-    constructor(private token: Token, private parser: AntlrParser) {
-    }
+export interface AntlrTokenWrapper {
+    /**
+     * The raw Antlr Token Object
+     * @returns {Token}
+     */
+    getToken(): Token;
 
-    getToken(): Token {
-        return this.token;
-    }
+    /**
+     * The rule name, as you would see it in a Antlr Grammar
+     * @returns {string}
+     */
+    getName(): string;
 
-    getName(): string {
-        return this.parser.getTokenName(this.token);
-    }
+    /**
+     * The complete text of the Token
+     * @returns {string}
+     */
+    getText(): string;
 
-    getText(): string {
-        return this.parser.getTokenText(this.token);
-    }
-
-    getRange(): AntlrRange {
-        return this.parser.getTokenRange(this.token);
-    }
+    /**
+     * The text range of the token
+     * @returns {AntlrRange}
+     */
+    getRange(): AntlrRange;
 }
