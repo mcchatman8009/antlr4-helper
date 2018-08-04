@@ -4,34 +4,31 @@
 // npm run build
 //
 
-const AntlrFactoryBuilder = require('../../dist').AntlrFactoryBuilder;
-const AntlrParser = require('../../dist').AntlrParser;
-const MutableAntlrParser = require('../../dist').MutableAntlrParser;
+const antlrHelper = require('../../dist');
 
 const TinycLexer = require('./parser/TinycLexer').TinycLexer;
 const TinycParser = require('./parser/TinycParser').TinycParser;
-const tinycParser = require('./parser/tinycParser');
 
-const factory = new AntlrFactoryBuilder()
+
+const factory = antlrHelper.createFactoryBuilder()
     .lexer((input) => new TinycLexer(input))
     .parser(tokenStream => new TinycParser(tokenStream))
     .rootRule((parser) => parser.program())
     .build();
 
-// Create a mutable parser
-const parser = new MutableAntlrParser(new AntlrParser(factory));
+const parser = antlrHelper.createParser(factory);
+parser.parse('a = 10;');
+parser.checkForErrors();
 
 let varName;
 
-parser.addExitRuleListener(tinycParser.IdContext, (rule) => {
-    parser.setRuleText(rule, 'var');
+parser
+    .filter((rule) => rule.getName() === 'id')
+    .forEach((rule) => {
+        rule.setText('var');
 
-    // The rule has been change
-    varName = parser.getRuleText(rule);
-});
-
-
-parser.parse('a = 10;');
+        varName = rule.getText();
+    });
 
 console.log("The changed text:");
 console.log(parser.getText()); //var = 10;

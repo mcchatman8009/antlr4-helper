@@ -1,8 +1,6 @@
 const chai = require('chai');
-const textModule = require('../dist');
+const antlrHelper = require('../dist');
 const AntlrFactoryBuilder = require('../dist').AntlrFactoryBuilder;
-const AntlrParser = require('../dist').AntlrParser;
-const MutableAntlrParser = require('../dist').MutableAntlrParser;
 const TinycLexer = require('./tinyc/TinycLexer').TinycLexer;
 const TinycParser = require('./tinyc/TinycParser').TinycParser;
 const tinycParser = require('./tinyc/tinycParser');
@@ -16,7 +14,7 @@ const factory = new AntlrFactoryBuilder()
 
 describe('Test Parser Token Positioning', function () {
     it('check at various positions for tokens', () => {
-        const parser = new AntlrParser(factory);
+        const parser = antlrHelper.createParser(factory);
         parser.parse('var = 10; \n if \n(b) { a = b; }');
 
         parser.getTokenAt(2, 0).getName().should.equal('STRING');

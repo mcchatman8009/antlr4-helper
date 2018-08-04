@@ -1,6 +1,6 @@
 {
   "name": "antlr4-helper",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A NPM library that assists in various Antlr4 parse, language analysis, and language manipulation tasks",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
