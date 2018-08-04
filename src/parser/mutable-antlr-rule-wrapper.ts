@@ -8,6 +8,18 @@ export class MutableAntlrRuleWrapper implements AntlrRuleWrapper {
     constructor(public rule: ParserRuleContext, private parser: MutableAntlrParser) {
     }
 
+    getChildren(): AntlrRuleWrapper[] {
+        const count = this.rule.getChildCount();
+        const list = [];
+
+        for (let i = 0; i < count; i++) {
+            const rule = this.rule.getChild(i);
+            list[i] = new MutableAntlrRuleWrapper(rule, this.parser);
+        }
+
+        return list;
+    }
+
     getRule(): ParserRuleContext {
         return this.rule;
     }

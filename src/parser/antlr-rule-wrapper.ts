@@ -15,5 +15,7 @@ export interface AntlrRuleWrapper {
 
     getParent(): AntlrRuleWrapper;
 
+    getChildren(): AntlrRuleWrapper[];
+
     getSiblings(): AntlrRuleWrapper[];
 }

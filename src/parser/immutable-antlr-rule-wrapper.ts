@@ -7,6 +7,18 @@ export class ImmutableAntlrRuleWrapper implements AntlrRuleWrapper {
     constructor(private rule: ParserRuleContext, private parser: AntlrParser) {
     }
 
+    getChildren(): AntlrRuleWrapper[] {
+        const count = this.rule.getChildCount();
+        const list = [];
+
+        for (let i = 0; i < count; i++) {
+            const rule = this.rule.getChild(i);
+            list[i] = new ImmutableAntlrRuleWrapper(rule, this.parser);
+        }
+
+        return list;
+    }
+
     getSiblings(): AntlrRuleWrapper[] {
         const siblings = this.parser.getSiblings(this.rule)
             .map((sibling) => new ImmutableAntlrRuleWrapper(sibling, this.parser));
