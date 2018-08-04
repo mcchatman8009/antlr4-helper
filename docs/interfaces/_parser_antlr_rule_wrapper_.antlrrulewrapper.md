@@ -15,6 +15,7 @@
 
 ### Methods
 
+* [getChildren](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#getchildren)
 * [getName](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#getname)
 * [getParent](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#getparent)
 * [getRange](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#getrange)
@@ -27,6 +28,15 @@
 
 ## Methods
 
+<a id="getchildren"></a>
+
+###  getChildren
+
+▸ **getChildren**(): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
 <a id="getname"></a>
 
 ###  getName

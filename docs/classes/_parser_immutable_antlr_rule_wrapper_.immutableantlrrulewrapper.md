@@ -23,6 +23,7 @@
 
 ### Methods
 
+* [getChildren](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#getchildren)
 * [getName](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#getname)
 * [getParent](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#getparent)
 * [getRange](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#getrange)
@@ -71,6 +72,15 @@ ___
 
 ## Methods
 
+<a id="getchildren"></a>
+
+###  getChildren
+
+▸ **getChildren**(): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
 <a id="getname"></a>
 
 ###  getName
