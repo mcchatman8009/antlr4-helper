@@ -47,7 +47,6 @@ export class MutableAntlrParser implements AntlrParser {
     private ruleTable: RuleTable;
     private tokenTable: TokenTable;
     private functionalRuleParser: FunctionalRuleParser;
-    private parser: AntlrParser;
 
     /**
      * Provide an AntlrFactory to construct
