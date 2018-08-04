@@ -1,4 +1,4 @@
-import {ParserRuleContext} from 'antlr4';
+import {ParserRuleContext, Token} from 'antlr4';
 import {AntlrParser} from './antlr-parser';
 import {AntlrRange} from '../';
 import {AntlrRuleWrapper} from './antlr-rule-wrapper';
@@ -12,6 +12,10 @@ export class ImmutableAntlrRuleWrapper implements AntlrRuleWrapper {
             .map((sibling) => new ImmutableAntlrRuleWrapper(sibling, this.parser));
 
         return siblings;
+    }
+
+    setText(text: string) {
+        throw new Error(`${this.getName()} is an immutable AntlrRuleWrapper`);
     }
 
     getParent(): AntlrRuleWrapper {

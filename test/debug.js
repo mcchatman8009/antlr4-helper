@@ -15,10 +15,8 @@ describe('Test Creating a Mutable Parser', function () {
             .rootRule((parser) => parser.program())
             .build();
 
-        const parser = antlrHelper.createMutableParser(factory);
+        const parser = antlrHelper.createParser(factory);
 
-
-        // parser.parse('variable = 10;\n = 111;');
         parser.parse('variable = 10;');
         let table = parser.getRulePositionTable();
 
@@ -27,12 +25,9 @@ describe('Test Creating a Mutable Parser', function () {
         table = parser.getRulePositionTable();
         const txt = rule.getText();
 
-        const functionalParser = antlrHelper.functionalParser(parser);
-
-        functionalParser
-            .filter((rule) => rule.getName() === 'expr')
+        parser.filter((rule) => rule.getName() === 'expr')
             .forEach((rule) => {
-                console.log(rule.getRuleName());
+                console.log(rule.getName());
             });
 
 

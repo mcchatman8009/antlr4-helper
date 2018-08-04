@@ -1,11 +1,8 @@
 const chai = require('chai');
-const textModule = require('../dist');
+const antlrHelper = require('../dist');
 const AntlrFactoryBuilder = require('../dist').AntlrFactoryBuilder;
-const BasicAntlrParser = require('../dist').BasicAntlrParser;
-const MutableAntlrParser = require('../dist').MutableAntlrParser;
 const TinycLexer = require('./tinyc/TinycLexer').TinycLexer;
 const TinycParser = require('./tinyc/TinycParser').TinycParser;
-const tinycParser = require('./tinyc/tinycParser');
 
 chai.should();
 
@@ -17,14 +14,10 @@ describe('Test Creating a Mutable Parser', function () {
             .rootRule((parser) => parser.program())
             .build();
 
-        const parser = new MutableAntlrParser(new BasicAntlrParser(factory));
-
-        parser.addExitRuleListener(tinycParser.IdContext, (rule) => {
-        });
+        const parser = antlrHelper.createParser(factory);
 
         // parser.parse('variable = 10;\n = 111;');
         parser.parse('variable = 10;');
-        let table = parser.getRulePositionTable();
 
         const rule = parser.getRuleAt(0, 0);
         rule.setText('apples');
@@ -41,17 +34,17 @@ describe('Test Creating a Mutable Parser', function () {
             .rootRule((parser) => parser.program())
             .build();
 
-        const parser = new MutableAntlrParser(new BasicAntlrParser(factory));
         let varName;
-
-        parser.addExitRuleListener(tinycParser.IdContext, (rule) => {
-            parser.setRuleText(rule, 'var');
-
-            // The rule change now be changed
-            varName = parser.getRuleText(rule);
-        });
-
+        const parser = antlrHelper.createParser(factory);
         parser.parse('a = 10;');
+
+        parser.filter((rule) => rule.getName() === 'id')
+            .forEach((rule) => {
+                rule.setText('var');
+                // The rule change now be changed
+                varName = rule.getText();
+            });
+
         parser.getText().should.equal('var = 10;');
         varName.should.equal('var');
     });

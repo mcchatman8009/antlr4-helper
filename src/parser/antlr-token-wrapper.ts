@@ -1,5 +1,4 @@
 import {Token} from 'antlr4';
-import {AntlrParser} from './antlr-parser';
 import {AntlrRange} from '../';
 
 export interface AntlrTokenWrapper {
@@ -20,6 +19,13 @@ export interface AntlrTokenWrapper {
      * @returns {string}
      */
     getText(): string;
+
+    /**
+     * Change the text of the token
+     *
+     * @param {string} text
+     */
+    setText(text: string): void;
 
     /**
      * The text range of the token

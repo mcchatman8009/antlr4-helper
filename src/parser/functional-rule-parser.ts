@@ -1,10 +1,10 @@
 import {
     AntlrParser, AntlrRuleWrapper, ImmutableAntlrRuleWrapper, MutableAntlrParser,
     MutableAntlrRuleWrapper
-} from '../';
+} from '../index';
 import {ParserRuleContext} from 'antlr4';
 
-export class FunctionalRuleParser<R extends AntlrRuleWrapper> {
+export class FunctionalRuleParser {
     private stackHasChanged: boolean;
     private _stack: ParserRuleContext[];
 
@@ -12,7 +12,7 @@ export class FunctionalRuleParser<R extends AntlrRuleWrapper> {
         this.resetStack();
     }
 
-    filter(filterFunction: (rule: R, index: number) => boolean): FunctionalRuleParser<any> {
+    filter(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): FunctionalRuleParser {
         const len = this.stack.length;
         this._stack = Array.from(this.stack);
 
@@ -32,7 +32,7 @@ export class FunctionalRuleParser<R extends AntlrRuleWrapper> {
         return this;
     }
 
-    forEach<T>(eachFunction: (rule: R, index: number) => void): void {
+    forEach<T>(eachFunction: (rule: AntlrRuleWrapper, index: number) => void): void {
         const len = this.stack.length;
 
         for (let i = 0; i < len; i++) {
@@ -43,7 +43,7 @@ export class FunctionalRuleParser<R extends AntlrRuleWrapper> {
         this.resetStack();
     }
 
-    map<T>(mapFunction: (rule: R, index: number) => T): T[] {
+    map<T>(mapFunction: (rule: AntlrRuleWrapper, index: number) => T): T[] {
         const len = this.stack.length;
         const results = [] as T[];
 
@@ -56,7 +56,7 @@ export class FunctionalRuleParser<R extends AntlrRuleWrapper> {
         return results;
     }
 
-    reduce<T>(reduceFunction: (acc: T, rule: R, index: number) => T, accumulator: T): T {
+    reduce<T>(reduceFunction: (acc: T, rule: AntlrRuleWrapper, index: number) => T, accumulator: T): T {
         const len = this.stack.length;
 
         for (let i = 0; i < len; i++) {
@@ -83,11 +83,11 @@ export class FunctionalRuleParser<R extends AntlrRuleWrapper> {
         this.stackHasChanged = false;
     }
 
-    private wrapRule(rule: ParserRuleContext): R {
+    private wrapRule(rule: ParserRuleContext): AntlrRuleWrapper {
         if (this.parser instanceof MutableAntlrParser) {
-            return new MutableAntlrRuleWrapper(rule, this.parser) as any;
+            return new MutableAntlrRuleWrapper(rule, this.parser);
         }
 
-        return new ImmutableAntlrRuleWrapper(rule, this.parser) as any;
+        return new ImmutableAntlrRuleWrapper(rule, this.parser);
     }
 }

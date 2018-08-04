@@ -1,5 +1,5 @@
 const chai = require('chai');
-const textModule = require('../dist');
+const antlrHelper = require('../dist');
 const AntlrFactoryBuilder = require('../dist').AntlrFactoryBuilder;
 const AntlrParser = require('../dist').AntlrParser;
 const MutableAntlrParser = require('../dist').MutableAntlrParser;
@@ -16,7 +16,7 @@ const factory = new AntlrFactoryBuilder()
 
 describe('Test Parser Rule Positioning', function () {
     it('Check various rule positions for rules', () => {
-        const parser = new AntlrParser(factory);
+        const parser = antlrHelper.createParser(factory);
         parser.parse('var = 10; \n if (b) { a = b; }');
 
 

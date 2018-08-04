@@ -281,4 +281,52 @@ export interface AntlrParser {
      * @returns {string}
      */
     getText(): string;
+
+    /**
+     *
+     * @param {Token} token
+     * @param {string} text
+     */
+    setTokenText(token: Token, text: string): void;
+
+    /**
+     * Set the text of rule
+     *
+     * @param {ParserRuleContext} rule
+     * @param {string} text
+     */
+    setRuleText(rule: ParserRuleContext, text: string): void;
+
+    /**
+     * Filter out rules before calling forEach, map, reduce, or another filter.
+     *
+     * @param {(rule: AntlrRuleWrapper, index: number) => boolean} filterFunction
+     * @returns {AntlrParser}
+     */
+    filter(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrParser;
+
+    /**
+     * Iterate over each rule parsed
+     *
+     * @param {(rule: AntlrRuleWrapper, index: number) => void} eachFunction
+     */
+    forEach<T>(eachFunction: (rule: AntlrRuleWrapper, index: number) => void): void;
+
+    /**
+     * Transform each rule to a value
+     *
+     * @param {(rule: AntlrRuleWrapper, index: number) => T} mapFunction
+     * @returns {T[]}
+     */
+    map<T>(mapFunction: (rule: AntlrRuleWrapper, index: number) => T): T[];
+
+    /**
+     * Reduces rules to a value which is the accumulated result of running each element
+     *
+     * @param {(acc: T, rule: AntlrRuleWrapper, index: number) => T} reduceFunction
+     * @param {T} accumulator
+     * @returns {T}
+     */
+    reduce<T>(reduceFunction: (acc: T, rule: AntlrRuleWrapper, index: number) => T, accumulator: T): T;
+
 }

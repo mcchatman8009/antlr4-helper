@@ -7,6 +7,8 @@ export interface AntlrRuleWrapper {
 
     getName(): string;
 
+    setText(text: string): void;
+
     getText(): string;
 
     getRange(): AntlrRange;

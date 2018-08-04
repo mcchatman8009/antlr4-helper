@@ -19,6 +19,7 @@ import {AntlrTokenWrapper} from './antlr-token-wrapper';
 import {AntlrParser} from './antlr-parser';
 import {ImmutableAntlrTokenWrapper} from './immutable-antlr-token-wrapper';
 import {ImmutableAntlrRuleWrapper} from './immutable-antlr-rule-wrapper';
+import {FunctionalRuleParser} from './functional-rule-parser';
 
 export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
 
@@ -34,6 +35,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
     private errorHandler: ErrorRuleHandler;
     private textBuffer: TextBuffer;
     private stack: ParserRuleContext[];
+    private functionalRuleParser: FunctionalRuleParser;
 
 
     /**
@@ -46,6 +48,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         this.exitRuleSubject = new Subject<ParserRuleContext>();
         this.customValidatorSubject = new Subject<ParserRuleContext>();
         this.parseCompleteSubject = new Subject<void>();
+
     }
 
     /**
@@ -56,6 +59,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
      */
     parse(input: string): ParserRuleContext {
         this.stack = [];
+        this.functionalRuleParser = new FunctionalRuleParser(this);
         this.inputStream = new InputStream(input);
         this.textBuffer = createBuffer(input);
         this.errorHandler = new ErrorRuleHandler(this, this.textBuffer);
@@ -442,4 +446,34 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         }
     }
 
+    setTokenText(token: Token, text: string) {
+        throw new Error('Cannot set token text on ImmutableAntlrParser');
+    }
+
+    setRuleText(rule: ParserRuleContext, text: string) {
+        throw new Error('Cannot set rule text on ImmutableAntlrParser');
+    }
+
+    filter(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrParser {
+        this.functionalRuleParser.filter(filterFunction);
+        return this;
+    }
+
+    forEach<T>(eachFunction: (rule: AntlrRuleWrapper, index: number) => void): void {
+        this.functionalRuleParser.forEach(eachFunction);
+        this.functionalRuleParser = new FunctionalRuleParser(this);
+    }
+
+    map<T>(mapFunction: (rule: AntlrRuleWrapper, index: number) => T): T[] {
+        const results = this.functionalRuleParser.map(mapFunction);
+        this.functionalRuleParser = new FunctionalRuleParser(this);
+        return results;
+
+    }
+
+    reduce<T>(reduceFunction: (acc: T, rule: AntlrRuleWrapper, index: number) => T, accumulator: T): T {
+        const results = this.functionalRuleParser.reduce(reduceFunction, accumulator);
+        this.functionalRuleParser = new FunctionalRuleParser(this);
+        return results;
+    }
 }
