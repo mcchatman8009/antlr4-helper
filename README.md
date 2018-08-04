@@ -36,8 +36,7 @@ parser.checkForErrors();
 //
 // Find only variables
 //
-parser
-    .filter((rule) => rule.getName() === 'id')
+parser.filter((rule) => rule.getName() === 'id')
     .forEach((rule) => {
         const ruleName = rule.getName();
         console.log(ruleName); // id
@@ -66,8 +65,7 @@ let varName;
 //
 // Change the variable name
 //
-parser
-    .filter((rule) => rule.getName() === 'id')
+parser.filter((rule) => rule.getName() === 'id')
     .forEach((rule) => {
         // Change the rule text
         rule.setText('var');
