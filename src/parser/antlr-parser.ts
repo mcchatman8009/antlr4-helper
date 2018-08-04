@@ -257,7 +257,7 @@ export interface AntlrParser {
      * @param {number} line
      * @returns {Set<ParserRuleContext>}
      */
-    getRulesInLine(line: number): Set<ParserRuleContext>;
+    getRulesInLine(line: number): Set<AntlrRuleWrapper>;
 
     /**
      * Get all the tokens in the line.

@@ -1,7 +1,11 @@
 import {ParserRuleContext} from 'antlr4';
 import {sortRange} from 'text-manipulation/dist/buffer/utils';
-import {TextBuffer} from 'text-manipulation';
+import {MutableTextRange, TextBuffer} from 'text-manipulation';
 import {AntlrRange} from '../';
+import {AntlrRuleWrapper} from './antlr-rule-wrapper';
+import {MutableAntlrRuleWrapper} from './mutable-antlr-rule-wrapper';
+import {MutableAntlrParser} from './mutable-antlr-parser';
+import {RuleAndRange} from './rule-and-range';
 
 export class RuleTable {
     ruleTable: ParserRuleContext[][];
@@ -13,6 +17,53 @@ export class RuleTable {
     getRuleAt(column: number, line: number): ParserRuleContext | undefined {
         return this.ruleTable[line][column];
     }
+
+    recomputeRanges(): RuleAndRange[] {
+        const ruleRanges = [];
+        let startCol = 0;
+        let startLine = 0;
+
+        let endCol = 0;
+        let endLine = 0;
+        let currentRule: ParserRuleContext;
+        const numOfLines = this.ruleTable.length;
+
+        for (let line = 0; line < numOfLines; line++) {
+            const numOfColumns = this.ruleTable[line].length;
+
+            for (let col = 0; col <= numOfColumns; col++) {
+                const rule = this.ruleTable[line][col];
+
+                if (currentRule === undefined && rule) {
+                    currentRule = rule;
+                    startCol = endCol = col;
+                    startLine = endLine = line;
+                }
+
+                if (currentRule !== rule) {
+                    const range = new MutableTextRange([{column: startCol, line: startLine}, {
+                        column: endCol + 1,
+                        line: endLine
+                    }], this.buffer);
+
+                    const ruleAndRange = new RuleAndRange(range, currentRule);
+                    ruleRanges.push(ruleAndRange);
+
+                    // Start new range
+                    startCol = endCol = col;
+                    startLine = endLine = line;
+                    currentRule = rule;
+                } else {
+                    endCol = col;
+                    endLine = line;
+                }
+            }
+
+        }
+
+        return ruleRanges;
+    }
+
 
     updateRule(originalRange: AntlrRange, newRange: AntlrRange, rule: ParserRuleContext) {
         this.clearRange(originalRange);

@@ -21,9 +21,13 @@ describe('Test Creating a Mutable Parser', function () {
         let table = parser.getRulePositionTable();
 
         const rule = parser.getRuleAt(0, 0);
-        rule.setText('apples');
+        rule.setText('apples\n');
         table = parser.getRulePositionTable();
         const txt = rule.getText();
+        const rules = Array.from(parser.getRulesInLine(0)).forEach((ruleWrapper) => {
+            const range = ruleWrapper.getRange();
+            return;
+        });
 
         parser.filter((rule) => rule.getName() === 'expr')
             .forEach((rule) => {

@@ -20,6 +20,7 @@ import {AntlrParser} from './antlr-parser';
 import {ImmutableAntlrTokenWrapper} from './immutable-antlr-token-wrapper';
 import {ImmutableAntlrRuleWrapper} from './immutable-antlr-rule-wrapper';
 import {FunctionalRuleParser} from './functional-rule-parser';
+import {MutableAntlrRuleWrapper} from './mutable-antlr-rule-wrapper';
 
 export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
 
@@ -235,15 +236,21 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
             });
     }
 
-    getRulesInLine(line: number): Set<ParserRuleContext> {
+    getRulesInLine(line: number): Set<AntlrRuleWrapper> {
         const table = this.getRulePositionTable();
 
         if (table[line]) {
-            const set = table[line].map((rule) => rule).filter((rule) => rule !== undefined);
-            return new Set<ParserRuleContext>(set);
+            const map = new Map<ParserRuleContext, AntlrRuleWrapper>();
+            const set = table[line]
+                .map((rule) => rule)
+                .filter((rule) => rule !== undefined);
+            const ruleSet = new Set(set);
+            const wrapperSet = Array.from(ruleSet).map((rule) => new ImmutableAntlrRuleWrapper(rule, this));
+
+            return new Set<AntlrRuleWrapper>(wrapperSet);
         }
 
-        return new Set<ParserRuleContext>([]);
+        return new Set<AntlrRuleWrapper>([]);
     }
 
     getTokensInLine(line: number): Set<Token> {

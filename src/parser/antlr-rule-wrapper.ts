@@ -1,6 +1,7 @@
-import {ParserRuleContext} from 'antlr4';
+import {ParserRuleContext, Token} from 'antlr4';
 import {AntlrParser} from './antlr-parser';
 import {AntlrRange} from '../';
+import {AntlrTokenWrapper} from './antlr-token-wrapper';
 
 export interface AntlrRuleWrapper {
     getRule(): ParserRuleContext;
@@ -18,4 +19,8 @@ export interface AntlrRuleWrapper {
     getChildren(): AntlrRuleWrapper[];
 
     getSiblings(): AntlrRuleWrapper[];
+
+    getTokens(tokenRuleName?: string): AntlrTokenWrapper[];
+
+    hasToken(tokenRuleName: string): boolean;
 }
