@@ -4,9 +4,9 @@
 
 ## Index
 
-### Classes
+### Interfaces
 
-* [AntlrRuleWrapper](../classes/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+* [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
 
 ---
 

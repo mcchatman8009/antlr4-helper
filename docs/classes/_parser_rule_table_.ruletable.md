@@ -20,7 +20,9 @@
 ### Methods
 
 * [addRule](_parser_rule_table_.ruletable.md#addrule)
+* [clearRange](_parser_rule_table_.ruletable.md#clearrange)
 * [getRuleAt](_parser_rule_table_.ruletable.md#getruleat)
+* [updateRule](_parser_rule_table_.ruletable.md#updaterule)
 
 ---
 
@@ -77,6 +79,21 @@ ___
 **Returns:** `void`
 
 ___
+<a id="clearrange"></a>
+
+### `<Private>` clearRange
+
+▸ **clearRange**(range: *[AntlrRange](../modules/_types_types_.md#antlrrange)*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| range | [AntlrRange](../modules/_types_types_.md#antlrrange) |
+
+**Returns:** `void`
+
+___
 <a id="getruleat"></a>
 
 ###  getRuleAt
@@ -91,6 +108,23 @@ ___
 | line | `number` |
 
 **Returns:**  `ParserRuleContext` &#124; `undefined`
+
+___
+<a id="updaterule"></a>
+
+###  updateRule
+
+▸ **updateRule**(originalRange: *[AntlrRange](../modules/_types_types_.md#antlrrange)*, newRange: *[AntlrRange](../modules/_types_types_.md#antlrrange)*, rule: *`ParserRuleContext`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| originalRange | [AntlrRange](../modules/_types_types_.md#antlrrange) |
+| newRange | [AntlrRange](../modules/_types_types_.md#antlrrange) |
+| rule | `ParserRuleContext` |
+
+**Returns:** `void`
 
 ___
 

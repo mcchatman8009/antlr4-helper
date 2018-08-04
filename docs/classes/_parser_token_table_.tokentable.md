@@ -20,7 +20,9 @@
 ### Methods
 
 * [addToken](_parser_token_table_.tokentable.md#addtoken)
+* [clearRange](_parser_token_table_.tokentable.md#clearrange)
 * [getTokenAt](_parser_token_table_.tokentable.md#gettokenat)
+* [updateToken](_parser_token_table_.tokentable.md#updatetoken)
 
 ---
 
@@ -77,6 +79,21 @@ ___
 **Returns:** `void`
 
 ___
+<a id="clearrange"></a>
+
+### `<Private>` clearRange
+
+▸ **clearRange**(range: *[AntlrRange](../modules/_types_types_.md#antlrrange)*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| range | [AntlrRange](../modules/_types_types_.md#antlrrange) |
+
+**Returns:** `void`
+
+___
 <a id="gettokenat"></a>
 
 ###  getTokenAt
@@ -91,6 +108,23 @@ ___
 | line | `number` |
 
 **Returns:**  `Token` &#124; `undefined`
+
+___
+<a id="updatetoken"></a>
+
+###  updateToken
+
+▸ **updateToken**(originalRange: *[AntlrRange](../modules/_types_types_.md#antlrrange)*, newRange: *[AntlrRange](../modules/_types_types_.md#antlrrange)*, token: *`Token`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| originalRange | [AntlrRange](../modules/_types_types_.md#antlrrange) |
+| newRange | [AntlrRange](../modules/_types_types_.md#antlrrange) |
+| token | `Token` |
+
+**Returns:** `void`
 
 ___
 

@@ -4,9 +4,9 @@
 
 ## Index
 
-### Classes
+### Interfaces
 
-* [AntlrParser](../classes/_parser_antlr_parser_.antlrparser.md)
+* [AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)
 
 ---
 

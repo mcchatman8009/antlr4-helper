@@ -4,9 +4,9 @@
 
 ## Index
 
-### Classes
+### Interfaces
 
-* [AntlrTokenWrapper](../classes/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)
+* [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)
 
 ---
 

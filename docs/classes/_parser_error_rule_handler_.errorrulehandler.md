@@ -48,13 +48,13 @@
 
 ###  constructor
 
-⊕ **new ErrorRuleHandler**(parser: *[AntlrParser](_parser_antlr_parser_.antlrparser.md)*, buffer: *`TextBuffer`*): [ErrorRuleHandler](_parser_error_rule_handler_.errorrulehandler.md)
+⊕ **new ErrorRuleHandler**(parser: *[AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)*, buffer: *`TextBuffer`*): [ErrorRuleHandler](_parser_error_rule_handler_.errorrulehandler.md)
 
 **Parameters:**
 
 | Param | Type |
 | ------ | ------ |
-| parser | [AntlrParser](_parser_antlr_parser_.antlrparser.md) |
+| parser | [AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md) |
 | buffer | `TextBuffer` |
 
 **Returns:** [ErrorRuleHandler](_parser_error_rule_handler_.errorrulehandler.md)
@@ -81,7 +81,7 @@ ___
 
 ### `<Private>` parser
 
-**● parser**: *[AntlrParser](_parser_antlr_parser_.antlrparser.md)*
+**● parser**: *[AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)*
 
 ___
 <a id="ruletable"></a>

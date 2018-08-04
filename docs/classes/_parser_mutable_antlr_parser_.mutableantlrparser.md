@@ -8,7 +8,7 @@ The MutableAntlrParser allows for text manipulation at the rule and token level.
 
 ```
 ...
-const parser = new MutableAntlrParser(factory);
+const parser = antlrHelper.createParser(factory);
 ...
 parser.addExitRuleListener(ExpressionContext, (rule)=>{
     parser.setRuleText(rule, 'replaced expression');
@@ -24,6 +24,10 @@ console.log(parser.getText());
 
 **MutableAntlrParser**
 
+## Implements
+
+* [AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)
+
 ## Index
 
 ### Constructors
@@ -34,20 +38,55 @@ console.log(parser.getText());
 
 * [changedRuleMap](_parser_mutable_antlr_parser_.mutableantlrparser.md#changedrulemap)
 * [changedTokenMap](_parser_mutable_antlr_parser_.mutableantlrparser.md#changedtokenmap)
+* [functionalRuleParser](_parser_mutable_antlr_parser_.mutableantlrparser.md#functionalruleparser)
 * [parser](_parser_mutable_antlr_parser_.mutableantlrparser.md#parser)
-* [textModel](_parser_mutable_antlr_parser_.mutableantlrparser.md#textmodel)
+* [ruleTable](_parser_mutable_antlr_parser_.mutableantlrparser.md#ruletable)
+* [textBuffer](_parser_mutable_antlr_parser_.mutableantlrparser.md#textbuffer)
+* [tokenTable](_parser_mutable_antlr_parser_.mutableantlrparser.md#tokentable)
 
 ### Methods
 
+* [addCustomRuleValidator](_parser_mutable_antlr_parser_.mutableantlrparser.md#addcustomrulevalidator)
 * [addEnterRuleListener](_parser_mutable_antlr_parser_.mutableantlrparser.md#addenterrulelistener)
 * [addExitRuleListener](_parser_mutable_antlr_parser_.mutableantlrparser.md#addexitrulelistener)
+* [addParserCompleteListener](_parser_mutable_antlr_parser_.mutableantlrparser.md#addparsercompletelistener)
+* [addTokenListener](_parser_mutable_antlr_parser_.mutableantlrparser.md#addtokenlistener)
+* [checkForErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#checkforerrors)
+* [createRuleError](_parser_mutable_antlr_parser_.mutableantlrparser.md#createruleerror)
+* [filter](_parser_mutable_antlr_parser_.mutableantlrparser.md#filter)
+* [forEach](_parser_mutable_antlr_parser_.mutableantlrparser.md#foreach)
+* [getColumnCount](_parser_mutable_antlr_parser_.mutableantlrparser.md#getcolumncount)
+* [getErrorRuleAt](_parser_mutable_antlr_parser_.mutableantlrparser.md#geterrorruleat)
+* [getErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#geterrors)
+* [getLine](_parser_mutable_antlr_parser_.mutableantlrparser.md#getline)
+* [getLineCount](_parser_mutable_antlr_parser_.mutableantlrparser.md#getlinecount)
+* [getRelevantError](_parser_mutable_antlr_parser_.mutableantlrparser.md#getrelevanterror)
+* [getRuleAt](_parser_mutable_antlr_parser_.mutableantlrparser.md#getruleat)
+* [getRuleBefore](_parser_mutable_antlr_parser_.mutableantlrparser.md#getrulebefore)
+* [getRuleName](_parser_mutable_antlr_parser_.mutableantlrparser.md#getrulename)
+* [getRuleParent](_parser_mutable_antlr_parser_.mutableantlrparser.md#getruleparent)
+* [getRulePositionTable](_parser_mutable_antlr_parser_.mutableantlrparser.md#getrulepositiontable)
+* [getRuleRange](_parser_mutable_antlr_parser_.mutableantlrparser.md#getrulerange)
+* [getRuleStack](_parser_mutable_antlr_parser_.mutableantlrparser.md#getrulestack)
 * [getRuleText](_parser_mutable_antlr_parser_.mutableantlrparser.md#getruletext)
+* [getRulesInLine](_parser_mutable_antlr_parser_.mutableantlrparser.md#getrulesinline)
+* [getSiblings](_parser_mutable_antlr_parser_.mutableantlrparser.md#getsiblings)
 * [getText](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettext)
+* [getTokenAt](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokenat)
+* [getTokenName](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokenname)
 * [getTokenRange](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokenrange)
 * [getTokenText](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokentext)
+* [getTokensInLine](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokensinline)
+* [getWarnings](_parser_mutable_antlr_parser_.mutableantlrparser.md#getwarnings)
+* [hasErrorNode](_parser_mutable_antlr_parser_.mutableantlrparser.md#haserrornode)
+* [hasErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#haserrors)
+* [hasWarnings](_parser_mutable_antlr_parser_.mutableantlrparser.md#haswarnings)
+* [map](_parser_mutable_antlr_parser_.mutableantlrparser.md#map)
 * [parse](_parser_mutable_antlr_parser_.mutableantlrparser.md#parse)
+* [reduce](_parser_mutable_antlr_parser_.mutableantlrparser.md#reduce)
 * [setRuleText](_parser_mutable_antlr_parser_.mutableantlrparser.md#setruletext)
 * [setTokenText](_parser_mutable_antlr_parser_.mutableantlrparser.md#settokentext)
+* [siblingsHaveNoErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#siblingshavenoerrors)
 
 ---
 
@@ -57,7 +96,7 @@ console.log(parser.getText());
 
 ###  constructor
 
-⊕ **new MutableAntlrParser**(parser: *[AntlrParser](_parser_antlr_parser_.antlrparser.md)*): [MutableAntlrParser](_parser_mutable_antlr_parser_.mutableantlrparser.md)
+⊕ **new MutableAntlrParser**(parser: *[AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)*): [MutableAntlrParser](_parser_mutable_antlr_parser_.mutableantlrparser.md)
 
 Provide an AntlrFactory to construct
 
@@ -65,7 +104,7 @@ Provide an AntlrFactory to construct
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| parser | [AntlrParser](_parser_antlr_parser_.antlrparser.md) |   |
+| parser | [AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md) |   |
 
 **Returns:** [MutableAntlrParser](_parser_mutable_antlr_parser_.mutableantlrparser.md)
 
@@ -87,23 +126,63 @@ ___
 **● changedTokenMap**: *`Map`<`Token`, `MutableTextRange`>*
 
 ___
+<a id="functionalruleparser"></a>
+
+### `<Private>` functionalRuleParser
+
+**● functionalRuleParser**: *[FunctionalRuleParser](_parser_functional_rule_parser_.functionalruleparser.md)*
+
+___
 <a id="parser"></a>
 
 ### `<Private>` parser
 
-**● parser**: *[AntlrParser](_parser_antlr_parser_.antlrparser.md)*
+**● parser**: *[AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)*
 
 ___
-<a id="textmodel"></a>
+<a id="ruletable"></a>
 
-### `<Private>` textModel
+### `<Private>` ruleTable
 
-**● textModel**: *`TextBuffer`*
+**● ruleTable**: *[RuleTable](_parser_rule_table_.ruletable.md)*
+
+___
+<a id="textbuffer"></a>
+
+### `<Private>` textBuffer
+
+**● textBuffer**: *`TextBuffer`*
+
+___
+<a id="tokentable"></a>
+
+### `<Private>` tokenTable
+
+**● tokenTable**: *[TokenTable](_parser_token_table_.tokentable.md)*
 
 ___
 
 ## Methods
 
+<a id="addcustomrulevalidator"></a>
+
+###  addCustomRuleValidator
+
+▸ **addCustomRuleValidator**T(ruleClass: *[AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`ParserRuleContext`>*, validator: *`function`*): `void`
+
+**Type parameters:**
+
+#### T :  `ParserRuleContext`
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleClass | [AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`ParserRuleContext`> |
+| validator | `function` |
+
+**Returns:** `void`
+
+___
 <a id="addenterrulelistener"></a>
 
 ###  addEnterRuleListener
@@ -163,6 +242,260 @@ parser.addExitRuleListener(ExpressionContext, (rule)=>{
 **Returns:** `void`
 
 ___
+<a id="addparsercompletelistener"></a>
+
+###  addParserCompleteListener
+
+▸ **addParserCompleteListener**(listener: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| listener | `function` |
+
+**Returns:** `void`
+
+___
+<a id="addtokenlistener"></a>
+
+###  addTokenListener
+
+▸ **addTokenListener**(listener: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| listener | `function` |
+
+**Returns:** `void`
+
+___
+<a id="checkforerrors"></a>
+
+###  checkForErrors
+
+▸ **checkForErrors**(): `void`
+
+**Returns:** `void`
+
+___
+<a id="createruleerror"></a>
+
+###  createRuleError
+
+▸ **createRuleError**(rule: *`ParserRuleContext`*): [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| rule | `ParserRuleContext` |
+
+**Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
+
+___
+<a id="filter"></a>
+
+###  filter
+
+▸ **filter**(filterFunction: *`function`*): [AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filterFunction | `function` |
+
+**Returns:** [AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)
+
+___
+<a id="foreach"></a>
+
+###  forEach
+
+▸ **forEach**T(eachFunction: *`function`*): `void`
+
+**Type parameters:**
+
+#### T 
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| eachFunction | `function` |
+
+**Returns:** `void`
+
+___
+<a id="getcolumncount"></a>
+
+###  getColumnCount
+
+▸ **getColumnCount**(line: *`number`*): `number`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| line | `number` |
+
+**Returns:** `number`
+
+___
+<a id="geterrorruleat"></a>
+
+###  getErrorRuleAt
+
+▸ **getErrorRuleAt**(column: *`number`*, line: *`number`*): `ParserRuleContext`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| column | `number` |
+| line | `number` |
+
+**Returns:** `ParserRuleContext`
+
+___
+<a id="geterrors"></a>
+
+###  getErrors
+
+▸ **getErrors**(): [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)[]
+
+**Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)[]
+
+___
+<a id="getline"></a>
+
+###  getLine
+
+▸ **getLine**(line: *`number`*): `string`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| line | `number` |
+
+**Returns:** `string`
+
+___
+<a id="getlinecount"></a>
+
+###  getLineCount
+
+▸ **getLineCount**(): `number`
+
+**Returns:** `number`
+
+___
+<a id="getrelevanterror"></a>
+
+###  getRelevantError
+
+▸ **getRelevantError**(): [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
+
+**Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
+
+___
+<a id="getruleat"></a>
+
+###  getRuleAt
+
+▸ **getRuleAt**(column: *`number`*, line: *`number`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| column | `number` |
+| line | `number` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
+<a id="getrulebefore"></a>
+
+###  getRuleBefore
+
+▸ **getRuleBefore**(rule: *`ParserRuleContext`*): `ParserRuleContext`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| rule | `ParserRuleContext` |
+
+**Returns:** `ParserRuleContext`
+
+___
+<a id="getrulename"></a>
+
+###  getRuleName
+
+▸ **getRuleName**(rule: *`ParserRuleContext`*): `string`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| rule | `ParserRuleContext` |
+
+**Returns:** `string`
+
+___
+<a id="getruleparent"></a>
+
+###  getRuleParent
+
+▸ **getRuleParent**(rule: *`ParserRuleContext`*): `ParserRuleContext`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| rule | `ParserRuleContext` |
+
+**Returns:** `ParserRuleContext`
+
+___
+<a id="getrulepositiontable"></a>
+
+###  getRulePositionTable
+
+▸ **getRulePositionTable**(): `ParserRuleContext`[][]
+
+**Returns:** `ParserRuleContext`[][]
+
+___
+<a id="getrulerange"></a>
+
+###  getRuleRange
+
+▸ **getRuleRange**(rule: *`ParserRuleContext`*): [AntlrRange](../modules/_types_types_.md#antlrrange)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| rule | `ParserRuleContext` |
+
+**Returns:** [AntlrRange](../modules/_types_types_.md#antlrrange)
+
+___
+<a id="getrulestack"></a>
+
+###  getRuleStack
+
+▸ **getRuleStack**(): `ReadonlyArray`<`ParserRuleContext`>
+
+**Returns:** `ReadonlyArray`<`ParserRuleContext`>
+
+___
 <a id="getruletext"></a>
 
 ###  getRuleText
@@ -180,6 +513,36 @@ Get the text of the completely parsed rule
 **Returns:** `string`
 
 ___
+<a id="getrulesinline"></a>
+
+###  getRulesInLine
+
+▸ **getRulesInLine**(line: *`number`*): `Set`<`ParserRuleContext`>
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| line | `number` |
+
+**Returns:** `Set`<`ParserRuleContext`>
+
+___
+<a id="getsiblings"></a>
+
+###  getSiblings
+
+▸ **getSiblings**(rule: *`ParserRuleContext`*): `ParserRuleContext`[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| rule | `ParserRuleContext` |
+
+**Returns:** `ParserRuleContext`[]
+
+___
 <a id="gettext"></a>
 
 ###  getText
@@ -191,11 +554,42 @@ Get the complete parsed and transformed text
 **Returns:** `string`
 
 ___
+<a id="gettokenat"></a>
+
+###  getTokenAt
+
+▸ **getTokenAt**(column: *`number`*, line: *`number`*):  [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md) &#124; `undefined`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| column | `number` |
+| line | `number` |
+
+**Returns:**  [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md) &#124; `undefined`
+
+___
+<a id="gettokenname"></a>
+
+###  getTokenName
+
+▸ **getTokenName**(token: *`Token`*): `string`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| token | `Token` |
+
+**Returns:** `string`
+
+___
 <a id="gettokenrange"></a>
 
 ###  getTokenRange
 
-▸ **getTokenRange**(token: *`Token`*): [`object`, `object`]
+▸ **getTokenRange**(token: *`Token`*): [AntlrRange](../modules/_types_types_.md#antlrrange)
 
 Get the range of a given token, where the first object is the start position and the last is the end position
 
@@ -205,8 +599,7 @@ Get the range of a given token, where the first object is the start position and
 | ------ | ------ | ------ |
 | token | `Token` |   |
 
-**Returns:** [`object`, `object`]
-, {column: number; line: number}]}
+**Returns:** [AntlrRange](../modules/_types_types_.md#antlrrange)
 
 ___
 <a id="gettokentext"></a>
@@ -226,6 +619,81 @@ Get the text of a given token
 **Returns:** `string`
 
 ___
+<a id="gettokensinline"></a>
+
+###  getTokensInLine
+
+▸ **getTokensInLine**(line: *`number`*): `Set`<`Token`>
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| line | `number` |
+
+**Returns:** `Set`<`Token`>
+
+___
+<a id="getwarnings"></a>
+
+###  getWarnings
+
+▸ **getWarnings**(): [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)[]
+
+**Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)[]
+
+___
+<a id="haserrornode"></a>
+
+###  hasErrorNode
+
+▸ **hasErrorNode**(ctx: *`ParserRuleContext`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ctx | `ParserRuleContext` |
+
+**Returns:** `boolean`
+
+___
+<a id="haserrors"></a>
+
+###  hasErrors
+
+▸ **hasErrors**(): `boolean`
+
+**Returns:** `boolean`
+
+___
+<a id="haswarnings"></a>
+
+###  hasWarnings
+
+▸ **hasWarnings**(): `boolean`
+
+**Returns:** `boolean`
+
+___
+<a id="map"></a>
+
+###  map
+
+▸ **map**T(mapFunction: *`function`*): `T`[]
+
+**Type parameters:**
+
+#### T 
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| mapFunction | `function` |
+
+**Returns:** `T`[]
+
+___
 <a id="parse"></a>
 
 ###  parse
@@ -242,6 +710,25 @@ Parse the input string (The internal text model is changed on each parse)
 
 **Returns:** `ParserRuleContext`
 - the invoked root rule
+
+___
+<a id="reduce"></a>
+
+###  reduce
+
+▸ **reduce**T(reduceFunction: *`function`*, accumulator: *`T`*): `T`
+
+**Type parameters:**
+
+#### T 
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| reduceFunction | `function` |
+| accumulator | `T` |
+
+**Returns:** `T`
 
 ___
 <a id="setruletext"></a>
@@ -278,6 +765,21 @@ Change the text of the token
 | text | `string` |   |
 
 **Returns:** `void`
+
+___
+<a id="siblingshavenoerrors"></a>
+
+###  siblingsHaveNoErrors
+
+▸ **siblingsHaveNoErrors**(rule: *`ParserRuleContext`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| rule | `ParserRuleContext` |
+
+**Returns:** `boolean`
 
 ___
 
