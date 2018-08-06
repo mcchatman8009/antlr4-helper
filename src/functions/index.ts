@@ -5,7 +5,7 @@ import {
 import {FunctionalRuleParser} from '../parser/functional-rule-parser';
 
 /**
- * Create an {@link AntlrFactoryBuilder}
+ * Creates an {@link AntlrFactoryBuilder}
  *
  * @returns {AntlrFactoryBuilder}
  */
@@ -14,7 +14,7 @@ export function createFactoryBuilder(): AntlrFactoryBuilder {
 }
 
 /**
- * Create a default Parser
+ * Creates a default Parser
  *
  * @param {AntlrFactory} factory
  * @returns {MutableAntlrParser}
@@ -24,7 +24,7 @@ export function createParser(factory: AntlrFactory): MutableAntlrParser {
 }
 
 /**
- * Create an Immutable Parser
+ * Creates an Immutable Parser
  *
  * @param {AntlrFactory} factory
  * @returns {AntlrParser}
