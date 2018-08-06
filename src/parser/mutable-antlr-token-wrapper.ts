@@ -3,6 +3,7 @@ import {AntlrParser} from './antlr-parser';
 import {AntlrRange} from '../';
 import {AntlrTokenWrapper} from './antlr-token-wrapper';
 import {MutableAntlrParser} from './mutable-antlr-parser';
+import {AntlrRuleError} from './antlr-rule-error';
 
 export class MutableAntlrTokenWrapper implements AntlrTokenWrapper {
     constructor(private token: Token, private parser: MutableAntlrParser) {

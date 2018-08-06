@@ -12,6 +12,68 @@ export class FunctionalRuleParser {
         this.resetStack();
     }
 
+    every(predicate: (rule: AntlrRuleWrapper, index: number) => boolean): boolean {
+        this.resetStack();
+        const n = this.stack.length;
+        const data = this.stack;
+
+        for (let i = 0; i < n; i++) {
+            const val = predicate(this.wrapRule(data[i]), i);
+            if (!val) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    findLast(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrRuleWrapper {
+        this.filter(filterFunction);
+        const list = [];
+
+        const n = this.stack.length;
+        const data = this.stack;
+
+        this.resetStack();
+
+        if (n > 0) {
+            return this.wrapRule(data[data.length - 1]);
+        } else {
+            return undefined;
+        }
+    }
+
+    find(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrRuleWrapper {
+        this.filter(filterFunction);
+        const list = [];
+
+        const n = this.stack.length;
+        const data = this.stack;
+
+        this.resetStack();
+
+        if (n > 0) {
+            return this.wrapRule(data[0]);
+        } else {
+            return undefined;
+        }
+    }
+
+    findAll(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrRuleWrapper[] {
+        this.filter(filterFunction);
+        const list = [];
+
+        const n = this.stack.length;
+        const data = this.stack;
+
+        for (let i = 0; i < n; i++) {
+            list.push(this.wrapRule(data[i]));
+        }
+
+        this.resetStack();
+
+        return list;
+    }
+
     filter(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): FunctionalRuleParser {
         const len = this.stack.length;
         this._stack = Array.from(this.stack);

@@ -5,6 +5,7 @@ import {AntlrRuleWrapper} from './antlr-rule-wrapper';
 import {AntlrTokenWrapper} from './antlr-token-wrapper';
 import {TerminalNode} from 'antlr4/tree/Tree';
 import {ImmutableAntlrTokenWrapper} from './immutable-antlr-token-wrapper';
+import {AntlrRuleError} from './antlr-rule-error';
 
 export class ImmutableAntlrRuleWrapper implements AntlrRuleWrapper {
 
@@ -68,6 +69,15 @@ export class ImmutableAntlrRuleWrapper implements AntlrRuleWrapper {
         return undefined;
     }
 
+    getToken(tokenRuleName?: string): AntlrTokenWrapper {
+        const tokens = this.getTokens(tokenRuleName);
+        if (tokens.length > 0) {
+            return tokens[0];
+        }
+
+        return undefined;
+    }
+
     getRule(): ParserRuleContext {
         return this.rule;
     }
@@ -82,5 +92,9 @@ export class ImmutableAntlrRuleWrapper implements AntlrRuleWrapper {
 
     getRange(): AntlrRange {
         return this.parser.getRuleRange(this.rule);
+    }
+
+    createRuleError(): AntlrRuleError {
+        return this.parser.createRuleError(this.getRule());
     }
 }

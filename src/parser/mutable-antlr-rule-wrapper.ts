@@ -5,6 +5,7 @@ import {AntlrRange} from '../';
 import {TerminalNode} from 'antlr4/tree/Tree';
 import {AntlrTokenWrapper} from './antlr-token-wrapper';
 import {MutableAntlrTokenWrapper} from './mutable-antlr-token-wrapper';
+import {AntlrRuleError} from './antlr-rule-error';
 
 export class MutableAntlrRuleWrapper implements AntlrRuleWrapper {
     constructor(public rule: ParserRuleContext, private parser: MutableAntlrParser) {
@@ -78,5 +79,19 @@ export class MutableAntlrRuleWrapper implements AntlrRuleWrapper {
             .map((sibling) => new MutableAntlrRuleWrapper(sibling, this.parser));
 
         return siblings;
+    }
+
+    getToken(tokenRuleName?: string): AntlrTokenWrapper {
+        const tokens = this.getTokens(tokenRuleName);
+
+        if (tokens.length > 0) {
+            return tokens[0];
+        }
+
+        return undefined;
+    }
+
+    createRuleError(): AntlrRuleError {
+        return this.parser.createRuleError(this.getRule());
     }
 }

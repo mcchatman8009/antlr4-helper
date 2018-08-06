@@ -36,12 +36,11 @@ console.log(parser.getText());
 
 ### Properties
 
-* [changedRuleMap](_parser_mutable_antlr_parser_.mutableantlrparser.md#changedrulemap)
-* [changedTokenMap](_parser_mutable_antlr_parser_.mutableantlrparser.md#changedtokenmap)
 * [functionalRuleParser](_parser_mutable_antlr_parser_.mutableantlrparser.md#functionalruleparser)
 * [parser](_parser_mutable_antlr_parser_.mutableantlrparser.md#parser)
 * [ruleTable](_parser_mutable_antlr_parser_.mutableantlrparser.md#ruletable)
 * [textBuffer](_parser_mutable_antlr_parser_.mutableantlrparser.md#textbuffer)
+* [textChanged](_parser_mutable_antlr_parser_.mutableantlrparser.md#textchanged)
 * [tokenTable](_parser_mutable_antlr_parser_.mutableantlrparser.md#tokentable)
 
 ### Methods
@@ -50,10 +49,18 @@ console.log(parser.getText());
 * [addEnterRuleListener](_parser_mutable_antlr_parser_.mutableantlrparser.md#addenterrulelistener)
 * [addExitRuleListener](_parser_mutable_antlr_parser_.mutableantlrparser.md#addexitrulelistener)
 * [addParserCompleteListener](_parser_mutable_antlr_parser_.mutableantlrparser.md#addparsercompletelistener)
+* [addParserStartListener](_parser_mutable_antlr_parser_.mutableantlrparser.md#addparserstartlistener)
 * [addTokenListener](_parser_mutable_antlr_parser_.mutableantlrparser.md#addtokenlistener)
+* [addValidator](_parser_mutable_antlr_parser_.mutableantlrparser.md#addvalidator)
 * [checkForErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#checkforerrors)
 * [createRuleError](_parser_mutable_antlr_parser_.mutableantlrparser.md#createruleerror)
+* [every](_parser_mutable_antlr_parser_.mutableantlrparser.md#every)
 * [filter](_parser_mutable_antlr_parser_.mutableantlrparser.md#filter)
+* [find](_parser_mutable_antlr_parser_.mutableantlrparser.md#find)
+* [findAll](_parser_mutable_antlr_parser_.mutableantlrparser.md#findall)
+* [findLast](_parser_mutable_antlr_parser_.mutableantlrparser.md#findlast)
+* [findRuleByName](_parser_mutable_antlr_parser_.mutableantlrparser.md#findrulebyname)
+* [findRulesByName](_parser_mutable_antlr_parser_.mutableantlrparser.md#findrulesbyname)
 * [forEach](_parser_mutable_antlr_parser_.mutableantlrparser.md#foreach)
 * [getColumnCount](_parser_mutable_antlr_parser_.mutableantlrparser.md#getcolumncount)
 * [getErrorRuleAt](_parser_mutable_antlr_parser_.mutableantlrparser.md#geterrorruleat)
@@ -74,16 +81,23 @@ console.log(parser.getText());
 * [getText](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettext)
 * [getTokenAt](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokenat)
 * [getTokenName](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokenname)
+* [getTokenPositionTable](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokenpositiontable)
 * [getTokenRange](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokenrange)
 * [getTokenText](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokentext)
 * [getTokensInLine](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokensinline)
 * [getWarnings](_parser_mutable_antlr_parser_.mutableantlrparser.md#getwarnings)
 * [hasErrorNode](_parser_mutable_antlr_parser_.mutableantlrparser.md#haserrornode)
 * [hasErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#haserrors)
+* [hasTextChanged](_parser_mutable_antlr_parser_.mutableantlrparser.md#hastextchanged)
 * [hasWarnings](_parser_mutable_antlr_parser_.mutableantlrparser.md#haswarnings)
 * [map](_parser_mutable_antlr_parser_.mutableantlrparser.md#map)
+* [onParseComplete](_parser_mutable_antlr_parser_.mutableantlrparser.md#onparsecomplete)
+* [onParseStart](_parser_mutable_antlr_parser_.mutableantlrparser.md#onparsestart)
+* [onRuleEnter](_parser_mutable_antlr_parser_.mutableantlrparser.md#onruleenter)
+* [onRuleExit](_parser_mutable_antlr_parser_.mutableantlrparser.md#onruleexit)
 * [parse](_parser_mutable_antlr_parser_.mutableantlrparser.md#parse)
 * [reduce](_parser_mutable_antlr_parser_.mutableantlrparser.md#reduce)
+* [reparse](_parser_mutable_antlr_parser_.mutableantlrparser.md#reparse)
 * [setRuleText](_parser_mutable_antlr_parser_.mutableantlrparser.md#setruletext)
 * [setTokenText](_parser_mutable_antlr_parser_.mutableantlrparser.md#settokentext)
 * [siblingsHaveNoErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#siblingshavenoerrors)
@@ -112,20 +126,6 @@ ___
 
 ## Properties
 
-<a id="changedrulemap"></a>
-
-### `<Private>` changedRuleMap
-
-**● changedRuleMap**: *`Map`<`ParserRuleContext`, `MutableTextRange`>*
-
-___
-<a id="changedtokenmap"></a>
-
-### `<Private>` changedTokenMap
-
-**● changedTokenMap**: *`Map`<`Token`, `MutableTextRange`>*
-
-___
 <a id="functionalruleparser"></a>
 
 ### `<Private>` functionalRuleParser
@@ -152,6 +152,13 @@ ___
 ### `<Private>` textBuffer
 
 **● textBuffer**: *`TextBuffer`*
+
+___
+<a id="textchanged"></a>
+
+### `<Private>` textChanged
+
+**● textChanged**: *`boolean`*
 
 ___
 <a id="tokentable"></a>
@@ -257,6 +264,21 @@ ___
 **Returns:** `void`
 
 ___
+<a id="addparserstartlistener"></a>
+
+###  addParserStartListener
+
+▸ **addParserStartListener**(listener: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| listener | `function` |
+
+**Returns:** `void`
+
+___
 <a id="addtokenlistener"></a>
 
 ###  addTokenListener
@@ -268,6 +290,22 @@ ___
 | Param | Type |
 | ------ | ------ |
 | listener | `function` |
+
+**Returns:** `void`
+
+___
+<a id="addvalidator"></a>
+
+###  addValidator
+
+▸ **addValidator**(ruleName: *`string`*, validator: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+| validator | `function` |
 
 **Returns:** `void`
 
@@ -296,6 +334,21 @@ ___
 **Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
 
 ___
+<a id="every"></a>
+
+###  every
+
+▸ **every**(predicate: *`function`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| predicate | `function` |
+
+**Returns:** `boolean`
+
+___
 <a id="filter"></a>
 
 ###  filter
@@ -309,6 +362,81 @@ ___
 | filterFunction | `function` |
 
 **Returns:** [AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)
+
+___
+<a id="find"></a>
+
+###  find
+
+▸ **find**(filterFunction: *`function`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filterFunction | `function` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
+<a id="findall"></a>
+
+###  findAll
+
+▸ **findAll**(filterFunction: *`function`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filterFunction | `function` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
+<a id="findlast"></a>
+
+###  findLast
+
+▸ **findLast**(filterFunction: *`function`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filterFunction | `function` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
+<a id="findrulebyname"></a>
+
+###  findRuleByName
+
+▸ **findRuleByName**(ruleName: *`string`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
+<a id="findrulesbyname"></a>
+
+###  findRulesByName
+
+▸ **findRulesByName**(ruleName: *`string`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
 
 ___
 <a id="foreach"></a>
@@ -517,7 +645,7 @@ ___
 
 ###  getRulesInLine
 
-▸ **getRulesInLine**(line: *`number`*): `Set`<`ParserRuleContext`>
+▸ **getRulesInLine**(line: *`number`*): `Set`<[AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)>
 
 **Parameters:**
 
@@ -525,7 +653,7 @@ ___
 | ------ | ------ |
 | line | `number` |
 
-**Returns:** `Set`<`ParserRuleContext`>
+**Returns:** `Set`<[AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)>
 
 ___
 <a id="getsiblings"></a>
@@ -583,6 +711,15 @@ ___
 | token | `Token` |
 
 **Returns:** `string`
+
+___
+<a id="gettokenpositiontable"></a>
+
+###  getTokenPositionTable
+
+▸ **getTokenPositionTable**(): `Token`[][]
+
+**Returns:** `Token`[][]
 
 ___
 <a id="gettokenrange"></a>
@@ -667,6 +804,15 @@ ___
 **Returns:** `boolean`
 
 ___
+<a id="hastextchanged"></a>
+
+###  hasTextChanged
+
+▸ **hasTextChanged**(): `boolean`
+
+**Returns:** `boolean`
+
+___
 <a id="haswarnings"></a>
 
 ###  hasWarnings
@@ -692,6 +838,68 @@ ___
 | mapFunction | `function` |
 
 **Returns:** `T`[]
+
+___
+<a id="onparsecomplete"></a>
+
+###  onParseComplete
+
+▸ **onParseComplete**(callback: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| callback | `function` |
+
+**Returns:** `void`
+
+___
+<a id="onparsestart"></a>
+
+###  onParseStart
+
+▸ **onParseStart**(callback: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| callback | `function` |
+
+**Returns:** `void`
+
+___
+<a id="onruleenter"></a>
+
+###  onRuleEnter
+
+▸ **onRuleEnter**(ruleName: *`string`*, callback: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+| callback | `function` |
+
+**Returns:** `void`
+
+___
+<a id="onruleexit"></a>
+
+###  onRuleExit
+
+▸ **onRuleExit**(ruleName: *`string`*, callback: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+| callback | `function` |
+
+**Returns:** `void`
 
 ___
 <a id="parse"></a>
@@ -729,6 +937,15 @@ ___
 | accumulator | `T` |
 
 **Returns:** `T`
+
+___
+<a id="reparse"></a>
+
+###  reparse
+
+▸ **reparse**(): `ParserRuleContext`
+
+**Returns:** `ParserRuleContext`
 
 ___
 <a id="setruletext"></a>

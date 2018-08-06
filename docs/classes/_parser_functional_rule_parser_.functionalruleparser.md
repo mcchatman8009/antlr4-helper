@@ -24,7 +24,11 @@
 
 ### Methods
 
+* [every](_parser_functional_rule_parser_.functionalruleparser.md#every)
 * [filter](_parser_functional_rule_parser_.functionalruleparser.md#filter)
+* [find](_parser_functional_rule_parser_.functionalruleparser.md#find)
+* [findAll](_parser_functional_rule_parser_.functionalruleparser.md#findall)
+* [findLast](_parser_functional_rule_parser_.functionalruleparser.md#findlast)
 * [forEach](_parser_functional_rule_parser_.functionalruleparser.md#foreach)
 * [map](_parser_functional_rule_parser_.functionalruleparser.md#map)
 * [reduce](_parser_functional_rule_parser_.functionalruleparser.md#reduce)
@@ -89,6 +93,21 @@ ___
 
 ## Methods
 
+<a id="every"></a>
+
+###  every
+
+▸ **every**(predicate: *`function`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| predicate | `function` |
+
+**Returns:** `boolean`
+
+___
 <a id="filter"></a>
 
 ###  filter
@@ -102,6 +121,51 @@ ___
 | filterFunction | `function` |
 
 **Returns:** [FunctionalRuleParser](_parser_functional_rule_parser_.functionalruleparser.md)
+
+___
+<a id="find"></a>
+
+###  find
+
+▸ **find**(filterFunction: *`function`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filterFunction | `function` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
+<a id="findall"></a>
+
+###  findAll
+
+▸ **findAll**(filterFunction: *`function`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filterFunction | `function` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
+<a id="findlast"></a>
+
+###  findLast
+
+▸ **findLast**(filterFunction: *`function`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filterFunction | `function` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
 
 ___
 <a id="foreach"></a>

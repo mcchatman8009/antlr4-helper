@@ -1,6 +1,5 @@
 import {ParserRuleContext, Token} from 'antlr4';
 import {AntlrRange, AntlrRuleClass} from '../';
-import {TerminalNode} from 'antlr4/tree/Tree';
 import {AntlrTokenWrapper} from './antlr-token-wrapper';
 import {AntlrRuleError} from './antlr-rule-error';
 import {AntlrRuleWrapper} from './antlr-rule-wrapper';
@@ -15,6 +14,15 @@ export interface AntlrParser {
      */
     parse(input: string): ParserRuleContext;
 
+    /**
+     * Parse using the existing Parser's text.
+     * (This is very useful if you've mutated or change
+     * the parser's rule or token text)
+     *
+     * @returns {ParserRuleContext}
+     */
+    reparse(): ParserRuleContext;
+
     getRuleStack(): ReadonlyArray<ParserRuleContext>;
 
     /**
@@ -26,10 +34,10 @@ export interface AntlrParser {
      * Get the range of a given token, where the first object
      * is the start position and the last is the end position
      *
-     * @param {Token | TerminalNode} token
+     * @param {Token} token
      * @returns {AntlrRange}
      */
-    getTokenRange(token: (Token | TerminalNode)): AntlrRange;
+    getTokenRange(token: Token): AntlrRange;
 
     /**
      * Retrieve a token a the specified position
@@ -43,10 +51,10 @@ export interface AntlrParser {
     /**
      * Get the text of a given token
      *
-     * @param {Token | TerminalNode} token
+     * @param {Token} token
      * @returns {string}
      */
-    getTokenText(token: (Token | TerminalNode)): string;
+    getTokenText(token: Token): string;
 
     /**
      * Get the complete text of a completely parsed rule
@@ -117,6 +125,18 @@ export interface AntlrParser {
      * @param {(rule: T) => (AntlrRuleError | undefined)} validator
      */
     addCustomRuleValidator<T extends ParserRuleContext>(ruleClass: AntlrRuleClass<ParserRuleContext>, validator: (rule: T) => AntlrRuleError | undefined): void;
+
+    addValidator(ruleName: string, validator: (rule: AntlrRuleWrapper) => AntlrRuleError | undefined): void;
+
+    onRuleEnter(ruleName: string, callback: (ruleWrapper: AntlrRuleWrapper) => void): void;
+
+    onRuleExit(ruleName: string, callback: (ruleWrapper: AntlrRuleWrapper) => void): void;
+
+    onParseComplete(callback: () => void): void;
+
+    onParseStart(callback: () => void): void;
+
+    addParserStartListener(listener: () => void): void;
 
     /**
      * Listen and watch for all visited tokens
@@ -283,6 +303,14 @@ export interface AntlrParser {
     getText(): string;
 
     /**
+     * Determines if a rule or token has been changed, since that last parse.
+     *
+     * (Useful for the {@link MutableAntlrParser})
+     * @returns {boolean}
+     */
+    hasTextChanged(): boolean;
+
+    /**
      *
      * @param {Token} token
      * @param {string} text
@@ -329,4 +357,15 @@ export interface AntlrParser {
      */
     reduce<T>(reduceFunction: (acc: T, rule: AntlrRuleWrapper, index: number) => T, accumulator: T): T;
 
+    find(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrRuleWrapper;
+
+    findLast(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrRuleWrapper;
+
+    findAll(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrRuleWrapper[];
+
+    every(predicate: (rule: AntlrRuleWrapper, index: number) => boolean): boolean;
+
+    findRuleByName(ruleName: string): AntlrRuleWrapper;
+
+    findRulesByName(ruleName: string): AntlrRuleWrapper[];
 }
