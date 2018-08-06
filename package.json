@@ -1,6 +1,6 @@
 {
   "name": "antlr4-helper",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A NPM library that assists in various Antlr4 parse, language analysis, and language manipulation tasks",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -46,7 +46,7 @@
     "antlr4": "^4.7.1",
     "lodash": "^4.17.10",
     "rxjs": "^6.2.2",
-    "text-manipulation": "^1.0.3"
+    "text-manipulation": "^1.0.4"
   },
   "devDependencies": {
     "antlr4-tool": "^1.0.16",
