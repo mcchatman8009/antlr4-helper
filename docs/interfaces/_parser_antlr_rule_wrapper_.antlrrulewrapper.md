@@ -15,6 +15,7 @@
 
 ### Methods
 
+* [createRuleError](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#createruleerror)
 * [getChildren](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#getchildren)
 * [getName](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#getname)
 * [getParent](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#getparent)
@@ -22,12 +23,24 @@
 * [getRule](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#getrule)
 * [getSiblings](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#getsiblings)
 * [getText](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#gettext)
+* [getToken](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#gettoken)
+* [getTokens](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#gettokens)
+* [hasToken](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#hastoken)
 * [setText](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#settext)
 
 ---
 
 ## Methods
 
+<a id="createruleerror"></a>
+
+###  createRuleError
+
+▸ **createRuleError**(): [AntlrRuleError](../classes/_parser_antlr_rule_error_.antlrruleerror.md)
+
+**Returns:** [AntlrRuleError](../classes/_parser_antlr_rule_error_.antlrruleerror.md)
+
+___
 <a id="getchildren"></a>
 
 ###  getChildren
@@ -89,6 +102,51 @@ ___
 ▸ **getText**(): `string`
 
 **Returns:** `string`
+
+___
+<a id="gettoken"></a>
+
+###  getToken
+
+▸ **getToken**(tokenRuleName?: *`string`*): [AntlrTokenWrapper](_parser_antlr_token_wrapper_.antlrtokenwrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| `Optional` tokenRuleName | `string` |
+
+**Returns:** [AntlrTokenWrapper](_parser_antlr_token_wrapper_.antlrtokenwrapper.md)
+
+___
+<a id="gettokens"></a>
+
+###  getTokens
+
+▸ **getTokens**(tokenRuleName?: *`string`*): [AntlrTokenWrapper](_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| `Optional` tokenRuleName | `string` |
+
+**Returns:** [AntlrTokenWrapper](_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
+
+___
+<a id="hastoken"></a>
+
+###  hasToken
+
+▸ **hasToken**(tokenRuleName: *`string`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| tokenRuleName | `string` |
+
+**Returns:** `boolean`
 
 ___
 <a id="settext"></a>

@@ -58,24 +58,18 @@ const factory = antlrHelper.createFactoryBuilder()
 
 const parser = antlrHelper.createParser(factory);
 parser.parse('a = 10;');
-parser.checkForErrors();
-
-let varName;
+parser.checkForErrors(); // No parse errors
 
 //
-// Change the variable name
+// Find the first rule
 //
-parser.filter((rule) => rule.getName() === 'id')
-    .forEach((rule) => {
-        // Change the rule text
-        rule.setText('var');
+const rule = parser.findRuleByName('id');
 
-        varName = rule.getText();
-    });
-
+rule.setText('var');
 console.log("The changed text:");
 console.log(parser.getText()); //var = 10;
 
 console.log("The replaced variable:");
+const varName = rule.getText();
 console.log(varName); //var;
 ```

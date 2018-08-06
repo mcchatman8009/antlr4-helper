@@ -1,11 +1,36 @@
 import {ParserRuleContext} from 'antlr4';
 import {MutableAntlrParser} from './mutable-antlr-parser';
 import {AntlrRuleWrapper} from './antlr-rule-wrapper';
-import {AntlrParser} from './antlr-parser';
 import {AntlrRange} from '../';
+import {TerminalNode} from 'antlr4/tree/Tree';
+import {AntlrTokenWrapper} from './antlr-token-wrapper';
+import {MutableAntlrTokenWrapper} from './mutable-antlr-token-wrapper';
+import {AntlrRuleError} from './antlr-rule-error';
 
 export class MutableAntlrRuleWrapper implements AntlrRuleWrapper {
     constructor(public rule: ParserRuleContext, private parser: MutableAntlrParser) {
+    }
+
+    getTokens(tokenRuleName?: string): AntlrTokenWrapper[] {
+        const count = this.rule.getChildCount();
+        const list = [];
+
+        for (let i = 0; i < count; i++) {
+            const token = this.rule.getChild(i);
+            if ((token instanceof TerminalNode)) {
+                const wrapper = new MutableAntlrTokenWrapper(token.symbol, this.parser);
+
+                if (tokenRuleName === undefined || wrapper.getName() === tokenRuleName) {
+                    list.push(wrapper);
+                }
+            }
+        }
+
+        return list;
+    }
+
+    hasToken(tokenRuleName: string): boolean {
+        return this.getTokens(tokenRuleName).length > 0;
     }
 
     getChildren(): AntlrRuleWrapper[] {
@@ -54,5 +79,19 @@ export class MutableAntlrRuleWrapper implements AntlrRuleWrapper {
             .map((sibling) => new MutableAntlrRuleWrapper(sibling, this.parser));
 
         return siblings;
+    }
+
+    getToken(tokenRuleName?: string): AntlrTokenWrapper {
+        const tokens = this.getTokens(tokenRuleName);
+
+        if (tokens.length > 0) {
+            return tokens[0];
+        }
+
+        return undefined;
+    }
+
+    createRuleError(): AntlrRuleError {
+        return this.parser.createRuleError(this.getRule());
     }
 }

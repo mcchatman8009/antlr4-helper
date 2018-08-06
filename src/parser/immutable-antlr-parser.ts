@@ -1,14 +1,13 @@
 import {AntlrFactory} from '../factory/antlr-factory';
-import {ParserRuleContext, CommonTokenStream, InputStream, Token, Recognizer} from 'antlr4';
+import {ParserRuleContext, CommonTokenStream, InputStream, Token} from 'antlr4';
 import {ErrorNode, ErrorNodeImpl, ParseTreeListener, TerminalNode} from 'antlr4/tree/Tree';
 import {Subject} from 'rxjs/index';
 import {filter} from 'rxjs/operators';
 import {AntlrRuleClass} from '../types/types';
-import {TextPosition} from 'text-manipulation/dist/buffer/text-position';
 import * as _ from 'lodash';
 import {AntlrParserWrapper} from './antlr-parser-wrapper';
 import {RuleTable} from './rule-table';
-import {createBuffer, TextBuffer} from 'text-manipulation';
+import {createBuffer, ImmutableTextRange, TextBuffer} from 'text-manipulation';
 import {ErrorRuleHandler} from './error-rule-handler';
 import {AntlrRuleError} from './antlr-rule-error';
 import {LexErrorHandler} from './lex-error-handler';
@@ -28,6 +27,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
     private enterRuleSubject: Subject<ParserRuleContext>;
     private exitRuleSubject: Subject<ParserRuleContext>;
     private parseCompleteSubject: Subject<void>;
+    private parseStartedSubject: Subject<void>;
     private customValidatorSubject: Subject<ParserRuleContext>;
     private parserWrapper: AntlrParserWrapper;
     private ruleTable: RuleTable;
@@ -43,12 +43,21 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
      * @param {AntlrFactory} factory
      */
     constructor(private factory: AntlrFactory) {
+        this.parseStartedSubject = new Subject<void>();
         this.tokenSubject = new Subject<Token>();
         this.enterRuleSubject = new Subject<ParserRuleContext>();
         this.exitRuleSubject = new Subject<ParserRuleContext>();
         this.customValidatorSubject = new Subject<ParserRuleContext>();
         this.parseCompleteSubject = new Subject<void>();
 
+    }
+
+    hasTextChanged(): boolean {
+        return false;
+    }
+
+    reparse(): ParserRuleContext {
+        return this.parse(this.getText());
     }
 
     /**
@@ -63,8 +72,8 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         this.inputStream = new InputStream(input);
         this.textBuffer = createBuffer(input);
         this.errorHandler = new ErrorRuleHandler(this, this.textBuffer);
-        this.ruleTable = new RuleTable(this.textBuffer);
-        this.tokenTable = new TokenTable(this.textBuffer);
+        this.ruleTable = new RuleTable(this.textBuffer, this);
+        this.tokenTable = new TokenTable(this.textBuffer, this);
 
         const lexer = this.factory.createLexer(this.inputStream);
         lexer.removeErrorListeners();
@@ -80,6 +89,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
 
         parser.addParseListener(this);
 
+        this.parseStartedSubject.next(null);
         const rootRule = this.factory.createAndInvokeRootRule(parser);
         this.parseCompleteSubject.next(null);
 
@@ -104,24 +114,22 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
      * Get the range of a given token, where the first object
      * is the start position and the last is the end position
      *
-     * @param {Token | TerminalNode} token
+     * @param {Token } token
      * @returns {AntlrRange}
      */
-    getTokenRange(token: (Token | TerminalNode)): AntlrRange {
-        let start: TextPosition;
-        let stop: TextPosition;
+    getTokenRange(token: (Token)): AntlrRange {
+        const text = token.text;
+        const table = text.split('\n');
+        const lineCount = table.length;
 
-        if (token instanceof TerminalNode) {
-            start = {column: token.symbol.column, line: token.symbol.line - 1};
-            stop = {column: token.symbol.column + token.symbol.text.length, line: token.symbol.line - 1};
-
-            return [start, stop];
-        }
-
-        start = {column: token.column, line: token.line - 1};
-        stop = {column: token.column + token.text.length, line: token.line - 1};
+        const start = {column: token.column, line: token.line - 1};
+        const stop = {
+            column: token.column + table[table.length - 1].length,
+            line: (token.line - 1) + (lineCount - 1)
+        };
 
         return [start, stop];
+
     }
 
     /**
@@ -144,15 +152,14 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
     /**
      * Get the text of a given token
      *
-     * @param {Token | TerminalNode} token
+     * @param {Token} token
      * @returns {string}
      */
-    getTokenText(token: (Token | TerminalNode)): string {
-        if (token instanceof TerminalNode) {
-            return token.symbol.text;
-        }
+    getTokenText(token: (Token)): string {
+        const range = this.getTokenRange(token);
+        const textRange = new ImmutableTextRange(range);
 
-        return token.text;
+        return this.textBuffer.getRangeText(textRange);
     }
 
     /**
@@ -194,6 +201,10 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
             rule.constructor.name === ruleClass.name;
     }
 
+    addParserStartListener(listener: () => void): void {
+        this.parseStartedSubject.asObservable().subscribe(listener);
+    }
+
     addParserCompleteListener(listener: () => void): void {
         this.parseCompleteSubject.asObservable().subscribe(listener);
     }
@@ -218,9 +229,27 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         }
     }
 
+    onParseStart(callback: () => void): void {
+        this.parseStartedSubject.asObservable().subscribe(callback);
+    }
+
     addTokenListener(listener: (token: Token) => void) {
         this.tokenSubject.asObservable().subscribe(listener);
 
+    }
+
+
+    addValidator(ruleName: string, validator: (rule: AntlrRuleWrapper) => AntlrRuleError | undefined): void {
+        this.customValidatorSubject.asObservable()
+            .pipe(filter(rule => this.getRuleName(rule) === ruleName))
+            .subscribe((rule) => {
+                const wrapper = new ImmutableAntlrRuleWrapper(rule, this);
+                const error = validator(wrapper);
+
+                if (!_.isNil(error)) {
+                    this.errorHandler.addError(error);
+                }
+            });
     }
 
     addCustomRuleValidator<T extends ParserRuleContext>(ruleClass: AntlrRuleClass<ParserRuleContext>, validator: (rule: T) => AntlrRuleError | undefined) {
@@ -235,15 +264,21 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
             });
     }
 
-    getRulesInLine(line: number): Set<ParserRuleContext> {
+    getRulesInLine(line: number): Set<AntlrRuleWrapper> {
         const table = this.getRulePositionTable();
 
         if (table[line]) {
-            const set = table[line].map((rule) => rule).filter((rule) => rule !== undefined);
-            return new Set<ParserRuleContext>(set);
+            const map = new Map<ParserRuleContext, AntlrRuleWrapper>();
+            const set = table[line]
+                .map((rule) => rule)
+                .filter((rule) => rule !== undefined);
+            const ruleSet = new Set(set);
+            const wrapperSet = Array.from(ruleSet).map((rule) => new ImmutableAntlrRuleWrapper(rule, this));
+
+            return new Set<AntlrRuleWrapper>(wrapperSet);
         }
 
-        return new Set<ParserRuleContext>([]);
+        return new Set<AntlrRuleWrapper>([]);
     }
 
     getTokensInLine(line: number): Set<Token> {
@@ -364,6 +399,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         const error = new AntlrRuleError();
 
         error.rule = rule;
+        error.ruleWrapper = new ImmutableAntlrRuleWrapper(rule, this);
         error.start = range[0];
         error.end = range[1];
         error.message = `Error matching the ${this.getRuleName(rule)} rule`;
@@ -403,7 +439,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
      * @param {TerminalNode} node
      */
     visitTerminal(node: TerminalNode): void {
-        this.tokenTable.addToken(node.symbol, this.getTokenRange(node.symbol));
+        this.tokenTable.addToken(node.symbol);
         this.tokenSubject.next(node.symbol);
     }
 
@@ -425,6 +461,29 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         this.enterRuleSubject.next(ctx);
     }
 
+    onRuleEnter(ruleName: string, callback: (ruleWrapper: AntlrRuleWrapper) => void): void {
+        this.enterRuleSubject.asObservable()
+            .pipe(filter((rule) => this.getRuleName(rule) === ruleName))
+            .subscribe((rule) => {
+                const wrapper = new ImmutableAntlrRuleWrapper(rule, this);
+                callback(wrapper);
+            });
+    }
+
+    onRuleExit(ruleName: string, callback: (ruleWrapper: AntlrRuleWrapper) => void): void {
+        this.exitRuleSubject.asObservable()
+            .pipe(filter((rule) => this.getRuleName(rule) === ruleName))
+            .subscribe((rule) => {
+                const wrapper = new ImmutableAntlrRuleWrapper(rule, this);
+                callback(wrapper);
+            });
+    }
+
+    onParseComplete(callback: () => void): void {
+        this.parseCompleteSubject.asObservable().subscribe(callback);
+    }
+
+
     /**
      * (For internal use only)
      *
@@ -438,7 +497,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
                 this.customValidatorSubject.next(ctx);
 
                 if (this.getErrors().length === 0) {
-                    this.ruleTable.addRule(ctx, this.getRuleRange(ctx));
+                    this.ruleTable.addRule(ctx);
                     this.exitRuleSubject.next(ctx);
                 }
             }
@@ -468,12 +527,44 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         const results = this.functionalRuleParser.map(mapFunction);
         this.functionalRuleParser = new FunctionalRuleParser(this);
         return results;
-
     }
 
     reduce<T>(reduceFunction: (acc: T, rule: AntlrRuleWrapper, index: number) => T, accumulator: T): T {
         const results = this.functionalRuleParser.reduce(reduceFunction, accumulator);
         this.functionalRuleParser = new FunctionalRuleParser(this);
         return results;
+    }
+
+    findLast(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrRuleWrapper {
+        const results = this.functionalRuleParser.findLast(filterFunction);
+        this.functionalRuleParser = new FunctionalRuleParser(this);
+        return results;
+    }
+
+    find(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrRuleWrapper {
+        const results = this.functionalRuleParser.find(filterFunction);
+        this.functionalRuleParser = new FunctionalRuleParser(this);
+        return results;
+    }
+
+    findAll(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrRuleWrapper[] {
+        const results = this.functionalRuleParser.findAll(filterFunction);
+        this.functionalRuleParser = new FunctionalRuleParser(this);
+        return results;
+    }
+
+    every(predicate: (rule: AntlrRuleWrapper, index: number) => boolean): boolean {
+        const results = this.functionalRuleParser.every(predicate);
+        this.functionalRuleParser = new FunctionalRuleParser(this);
+
+        return results;
+    }
+
+    findRuleByName(ruleName: string): AntlrRuleWrapper {
+        return this.find((rule) => rule.getName() === ruleName);
+    }
+
+    findRulesByName(ruleName: string): AntlrRuleWrapper[] {
+        return this.findAll((rule) => rule.getName() === ruleName);
     }
 }

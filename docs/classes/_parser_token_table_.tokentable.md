@@ -15,6 +15,8 @@
 ### Properties
 
 * [buffer](_parser_token_table_.tokentable.md#buffer)
+* [parser](_parser_token_table_.tokentable.md#parser)
+* [tokenMap](_parser_token_table_.tokentable.md#tokenmap)
 * [tokenTable](_parser_token_table_.tokentable.md#tokentable)
 
 ### Methods
@@ -22,6 +24,8 @@
 * [addToken](_parser_token_table_.tokentable.md#addtoken)
 * [clearRange](_parser_token_table_.tokentable.md#clearrange)
 * [getTokenAt](_parser_token_table_.tokentable.md#gettokenat)
+* [insertToken](_parser_token_table_.tokentable.md#inserttoken)
+* [recomputeRanges](_parser_token_table_.tokentable.md#recomputeranges)
 * [updateToken](_parser_token_table_.tokentable.md#updatetoken)
 
 ---
@@ -32,13 +36,14 @@
 
 ###  constructor
 
-⊕ **new TokenTable**(buffer: *`TextBuffer`*): [TokenTable](_parser_token_table_.tokentable.md)
+⊕ **new TokenTable**(buffer: *`TextBuffer`*, parser: *[AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)*): [TokenTable](_parser_token_table_.tokentable.md)
 
 **Parameters:**
 
 | Param | Type |
 | ------ | ------ |
 | buffer | `TextBuffer` |
+| parser | [AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md) |
 
 **Returns:** [TokenTable](_parser_token_table_.tokentable.md)
 
@@ -51,6 +56,20 @@ ___
 ### `<Private>` buffer
 
 **● buffer**: *`TextBuffer`*
+
+___
+<a id="parser"></a>
+
+### `<Private>` parser
+
+**● parser**: *[AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)*
+
+___
+<a id="tokenmap"></a>
+
+###  tokenMap
+
+**● tokenMap**: *`Map`<`Token`, `MutableTextRange`>*
 
 ___
 <a id="tokentable"></a>
@@ -67,14 +86,13 @@ ___
 
 ###  addToken
 
-▸ **addToken**(token: *`Token`*, range: *[AntlrRange](../modules/_types_types_.md#antlrrange)*): `void`
+▸ **addToken**(token: *`Token`*): `void`
 
 **Parameters:**
 
 | Param | Type |
 | ------ | ------ |
 | token | `Token` |
-| range | [AntlrRange](../modules/_types_types_.md#antlrrange) |
 
 **Returns:** `void`
 
@@ -83,7 +101,7 @@ ___
 
 ### `<Private>` clearRange
 
-▸ **clearRange**(range: *[AntlrRange](../modules/_types_types_.md#antlrrange)*): `void`
+▸ **clearRange**(range: *[AntlrRange](../modules/_types_types_.md#antlrrange)*): `object`
 
 **Parameters:**
 
@@ -91,7 +109,7 @@ ___
 | ------ | ------ |
 | range | [AntlrRange](../modules/_types_types_.md#antlrrange) |
 
-**Returns:** `void`
+**Returns:** `object`
 
 ___
 <a id="gettokenat"></a>
@@ -110,19 +128,46 @@ ___
 **Returns:**  `Token` &#124; `undefined`
 
 ___
+<a id="inserttoken"></a>
+
+### `<Private>` insertToken
+
+▸ **insertToken**(column: *`number`*, line: *`number`*, currentRuleText: *`string`*, token: *`Token`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| column | `number` |
+| line | `number` |
+| currentRuleText | `string` |
+| token | `Token` |
+
+**Returns:** `void`
+
+___
+<a id="recomputeranges"></a>
+
+### `<Private>` recomputeRanges
+
+▸ **recomputeRanges**(): `void`
+
+**Returns:** `void`
+
+___
 <a id="updatetoken"></a>
 
 ###  updateToken
 
-▸ **updateToken**(originalRange: *[AntlrRange](../modules/_types_types_.md#antlrrange)*, newRange: *[AntlrRange](../modules/_types_types_.md#antlrrange)*, token: *`Token`*): `void`
+▸ **updateToken**(originalRange: *[AntlrRange](../modules/_types_types_.md#antlrrange)*, token: *`Token`*, ruleText: *`string`*): `void`
 
 **Parameters:**
 
 | Param | Type |
 | ------ | ------ |
 | originalRange | [AntlrRange](../modules/_types_types_.md#antlrrange) |
-| newRange | [AntlrRange](../modules/_types_types_.md#antlrrange) |
 | token | `Token` |
+| ruleText | `string` |
 
 **Returns:** `void`
 

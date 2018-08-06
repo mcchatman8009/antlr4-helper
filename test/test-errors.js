@@ -34,18 +34,20 @@ describe('Test Parser Rule errors', function () {
     it('create error using custom validator', () => {
         const parser = antlrHelper.createParser(factory);
 
-        parser.addCustomRuleValidator(tinycParser.IdContext, (id) => {
-            const str = parser.getTokenText(id.STRING());
+        parser.addValidator('id', (id) => {
+            const token = id.getToken('STRING');
+            const str = token.getText();
 
-            const error = parser.createRuleError(id);
+            const error = id.createRuleError();
             error.message = `Please rename the variable ${str}`;
 
+            // return null;
             return error;
         });
 
         parser.parse('var = 10;');
 
-        parser.getRuleName(parser.getRelevantError().rule).should.equal('id');
-        parser.getRelevantError().message.should.equal("Please rename the variable var")
+        parser.getRelevantError().ruleWrapper.getName().should.equal('id');
+        parser.getRelevantError().message.should.equal("Please rename the variable var");
     });
 });

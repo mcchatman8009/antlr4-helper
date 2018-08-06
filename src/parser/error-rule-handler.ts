@@ -7,6 +7,7 @@ import {AntlrRuleError} from './antlr-rule-error';
 import {RuleTable} from './rule-table';
 import {AntlrRange} from '../';
 import {AntlrParser} from './antlr-parser';
+import {ImmutableAntlrRuleWrapper} from './immutable-antlr-rule-wrapper';
 
 const max = Math.max;
 
@@ -16,7 +17,7 @@ export class ErrorRuleHandler extends ErrorListener {
 
     constructor(private parser: AntlrParser, private buffer: TextBuffer) {
         super();
-        this.ruleTable = new RuleTable(buffer);
+        this.ruleTable = new RuleTable(buffer, this.parser);
         this.errors = new Map<ParserRuleContext, AntlrRuleError>();
     }
 
@@ -51,7 +52,7 @@ export class ErrorRuleHandler extends ErrorListener {
 
     addError(error: AntlrRuleError) {
         this.errors.set(error.rule, error);
-        this.ruleTable.addRule(error.rule, [error.start, error.end]);
+        this.ruleTable.addRule(error.rule, this.getRuleRangeSafely(error.rule));
     }
 
     /**
@@ -121,6 +122,7 @@ export class ErrorRuleHandler extends ErrorListener {
         error.start = range[0];
         error.end = range[1];
         error.rule = rule;
+        error.ruleWrapper = new ImmutableAntlrRuleWrapper(rule, this.parser);
         error.exception = rule.exception;
         error.message = `Error matching the ${this.parser.getRuleName(rule)} rule`;
 

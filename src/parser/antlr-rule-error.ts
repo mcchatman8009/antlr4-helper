@@ -1,5 +1,6 @@
 import {RecognitionException} from 'antlr4/error';
 import {ParserRuleContext} from 'antlr4';
+import {AntlrRuleWrapper} from './antlr-rule-wrapper';
 
 export type Severity = 'error' | 'warning' | null;
 
@@ -9,5 +10,6 @@ export class AntlrRuleError {
     message: string;
     exception: RecognitionException;
     rule: ParserRuleContext;
+    ruleWrapper: AntlrRuleWrapper;
     severity: Severity = 'error';
 }

@@ -1,13 +1,14 @@
 {
   "name": "antlr4-helper",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A NPM library that assists in various Antlr4 parse, language analysis, and language manipulation tasks",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "mocha",
     "build-docs": "typedoc --theme markdown --mdHideSources --out docs --includes ./src",
-    "build-samples": "antlr4-tool -o ./samples/tinyc/parser grammars/tinyc/Tinyc.g4",
+    "build-tinyc-sample": "antlr4-tool -o ./samples/tinyc/parser grammars/tinyc/Tinyc.g4",
+    "build-json-sample": "antlr4-tool -o ./samples/json/parser grammars/json/JSON.g4 ",
     "clean": "rm -rf dist",
     "lint": "tslint -p . -c tslint.json 'src/**/*.ts'",
     "build": "tsc && antlr4-tool -o ./test/tinyc grammars/tinyc/Tinyc.g4"
@@ -40,7 +41,7 @@
     "antlr4": "^4.7.1",
     "lodash": "^4.17.10",
     "rxjs": "^6.2.2",
-    "text-manipulation": "^1.0.1"
+    "text-manipulation": "^1.0.3"
   },
   "devDependencies": {
     "antlr4-tool": "^1.0.16",

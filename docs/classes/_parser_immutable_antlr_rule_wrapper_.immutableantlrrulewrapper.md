@@ -23,6 +23,7 @@
 
 ### Methods
 
+* [createRuleError](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#createruleerror)
 * [getChildren](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#getchildren)
 * [getName](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#getname)
 * [getParent](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#getparent)
@@ -30,6 +31,9 @@
 * [getRule](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#getrule)
 * [getSiblings](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#getsiblings)
 * [getText](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#gettext)
+* [getToken](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#gettoken)
+* [getTokens](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#gettokens)
+* [hasToken](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#hastoken)
 * [setText](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#settext)
 
 ---
@@ -72,6 +76,15 @@ ___
 
 ## Methods
 
+<a id="createruleerror"></a>
+
+###  createRuleError
+
+▸ **createRuleError**(): [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
+
+**Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
+
+___
 <a id="getchildren"></a>
 
 ###  getChildren
@@ -133,6 +146,51 @@ ___
 ▸ **getText**(): `string`
 
 **Returns:** `string`
+
+___
+<a id="gettoken"></a>
+
+###  getToken
+
+▸ **getToken**(tokenRuleName?: *`string`*): [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| `Optional` tokenRuleName | `string` |
+
+**Returns:** [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)
+
+___
+<a id="gettokens"></a>
+
+###  getTokens
+
+▸ **getTokens**(tokenRuleName?: *`string`*): [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| `Optional` tokenRuleName | `string` |
+
+**Returns:** [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
+
+___
+<a id="hastoken"></a>
+
+###  hasToken
+
+▸ **hasToken**(tokenRuleName: *`string`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| tokenRuleName | `string` |
+
+**Returns:** `boolean`
 
 ___
 <a id="settext"></a>

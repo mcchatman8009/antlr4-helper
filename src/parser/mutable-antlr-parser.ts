@@ -1,6 +1,5 @@
 import {AntlrFactory} from '../factory/antlr-factory';
 import {ParserRuleContext, Token} from 'antlr4';
-import {TerminalNode} from 'antlr4/tree/Tree';
 import {createBuffer, MutableTextRange, TextBuffer} from 'text-manipulation';
 import {AntlrParser} from './antlr-parser';
 import {AntlrRange, AntlrRuleClass} from '../';
@@ -11,6 +10,7 @@ import {AntlrTokenWrapper} from './antlr-token-wrapper';
 import {AntlrRuleError} from './antlr-rule-error';
 import {TokenTable} from './token-table';
 import {FunctionalRuleParser} from './functional-rule-parser';
+import {MutableAntlrTokenWrapper} from './mutable-antlr-token-wrapper';
 
 /**
  * The MutableAntlrParser allows for text manipulation at the rule and token level.
@@ -42,29 +42,34 @@ import {FunctionalRuleParser} from './functional-rule-parser';
  */
 export class MutableAntlrParser implements AntlrParser {
     private textBuffer: TextBuffer;
-    private changedRuleMap: Map<ParserRuleContext, MutableTextRange>;
-    private changedTokenMap: Map<Token, MutableTextRange>;
     private ruleTable: RuleTable;
     private tokenTable: TokenTable;
     private functionalRuleParser: FunctionalRuleParser;
+    private textChanged: boolean;
 
     /**
      * Provide an AntlrFactory to construct
      * @param {AntlrFactory | AntlrParser} parser
      */
     constructor(private parser: AntlrParser) {
-        this.changedRuleMap = new Map<ParserRuleContext, MutableTextRange>();
-        this.changedTokenMap = new Map<Token, MutableTextRange>();
+        this.textChanged = false;
 
         this.parser.addExitRuleListener(null, (rule) => {
-            this.ruleTable.addRule(rule, this.parser.getRuleRange(rule));
+            this.ruleTable.addRule(rule);
         });
 
         this.parser.addTokenListener((token) => {
-            this.tokenTable.addToken(token, this.parser.getTokenRange(token));
+            this.tokenTable.addToken(token);
         });
     }
 
+    hasTextChanged(): boolean {
+        return this.textChanged;
+    }
+
+    reparse(): ParserRuleContext {
+        return this.parse(this.getText());
+    }
 
     /**
      * Parse the input string
@@ -75,13 +80,12 @@ export class MutableAntlrParser implements AntlrParser {
      */
     parse(input: string): ParserRuleContext {
         // clear rule & token change maps
-        this.changedRuleMap.clear();
-        this.changedTokenMap.clear();
         this.functionalRuleParser = new FunctionalRuleParser(this);
+        this.textChanged = false;
 
         this.textBuffer = createBuffer(input);
-        this.ruleTable = new RuleTable(this.textBuffer);
-        this.tokenTable = new TokenTable(this.textBuffer);
+        this.ruleTable = new RuleTable(this.textBuffer, this);
+        this.tokenTable = new TokenTable(this.textBuffer, this);
 
         return this.parser.parse(input);
     }
@@ -89,23 +93,17 @@ export class MutableAntlrParser implements AntlrParser {
     /**
      * Change the text of the token
      *
-     * @param {Token | TerminalNode} token
+     * @param {Token} token
      * @param {string} text
      */
     setTokenText(token: Token, text: string) {
-        let range = new MutableTextRange(this.getTokenRange(token), this.textBuffer);
-
-        if (this.changedTokenMap.has(token)) {
-            range = this.changedTokenMap.get(token);
-        }
-
+        const range = new MutableTextRange(this.getTokenRange(token), this.textBuffer);
+        this.textChanged = true;
         const originalRange = [range.start, range.end];
 
         range.setText(text);
 
-        this.tokenTable.updateToken(originalRange as any, [range.start, range.end], token);
-
-        this.changedTokenMap.set(token, range);
+        this.tokenTable.updateToken(originalRange as any, token, text);
     }
 
     /**
@@ -117,12 +115,11 @@ export class MutableAntlrParser implements AntlrParser {
      * @returns {AntlrRange}
      */
     getTokenRange(token: Token): AntlrRange {
-        if (this.changedTokenMap.has(token)) {
-            const range = this.changedTokenMap.get(token);
-            return [range.start, range.end];
+        const range = this.tokenTable.tokenMap.get(token);
+        if (range === undefined) {
+            return this.parser.getTokenRange(token);
         }
-
-        return this.parser.getTokenRange(token);
+        return [range.start, range.end];
     }
 
     /**
@@ -132,13 +129,8 @@ export class MutableAntlrParser implements AntlrParser {
      * @returns {string}
      */
     getTokenText(token: Token): string {
-        let range = new MutableTextRange(this.getTokenRange(token), this.textBuffer);
-
-        if (this.changedTokenMap.has(token)) {
-            range = this.changedTokenMap.get(token);
-        }
-
-        return range.getText();
+        const res = this.tokenTable.tokenMap.get(token);
+        return res.getText();
     }
 
     /**
@@ -148,13 +140,7 @@ export class MutableAntlrParser implements AntlrParser {
      * @returns {string}
      */
     getRuleText(rule: ParserRuleContext): string {
-        let range = new MutableTextRange(this.parser.getRuleRange(rule), this.textBuffer);
-
-        if (this.changedRuleMap.has(rule)) {
-            range = this.changedRuleMap.get(rule);
-        }
-
-        return range.getText();
+        return this.ruleTable.ruleMap.get(rule).getText();
     }
 
     /**
@@ -164,18 +150,14 @@ export class MutableAntlrParser implements AntlrParser {
      * @param {string} text
      */
     setRuleText(rule: ParserRuleContext, text: string) {
-        let range = new MutableTextRange(this.parser.getRuleRange(rule), this.textBuffer);
-
-        if (this.changedRuleMap.has(rule)) {
-            range = this.changedRuleMap.get(rule);
-        }
+        this.textChanged = true;
+        const range = this.ruleTable.ruleMap.get(rule);
 
         const originalRange = [range.start, range.end];
-
         range.setText(text);
 
-        this.changedRuleMap.set(rule, range);
-        this.ruleTable.updateRule(originalRange as any, [range.start, range.end], rule);
+        this.ruleTable.updateRule(originalRange as AntlrRange, rule, text);
+        return;
     }
 
     getRuleAt(column: number, line: number): AntlrRuleWrapper {
@@ -186,6 +168,10 @@ export class MutableAntlrParser implements AntlrParser {
         }
 
         return undefined;
+    }
+
+    getTokenPositionTable(): Token[][] {
+        return this.tokenTable.tokenTable;
     }
 
     getRulePositionTable(): ParserRuleContext[][] {
@@ -242,8 +228,38 @@ export class MutableAntlrParser implements AntlrParser {
         this.parser.addExitRuleListener(ruleClass, listener);
     }
 
+    addValidator(ruleName: string, validator: (rule: AntlrRuleWrapper) => AntlrRuleError | undefined): void {
+        this.parser.addValidator(ruleName, (wrapper) => {
+            return validator(new MutableAntlrRuleWrapper(wrapper.getRule(), this));
+        });
+    }
+
     addCustomRuleValidator<T extends ParserRuleContext>(ruleClass: AntlrRuleClass<ParserRuleContext>, validator: (rule: T) => (AntlrRuleError | undefined)) {
         this.parser.addCustomRuleValidator(ruleClass, validator);
+    }
+
+    onRuleEnter(ruleName: string, callback: (ruleWrapper: AntlrRuleWrapper) => void): void {
+        this.parser.onRuleEnter(ruleName, (ruleWrapper) => {
+            callback(new MutableAntlrRuleWrapper(ruleWrapper.getRule(), this));
+        });
+    }
+
+    onRuleExit(ruleName: string, callback: (ruleWrapper: AntlrRuleWrapper) => void): void {
+        this.parser.onRuleExit(ruleName, (ruleWrapper) => {
+            callback(new MutableAntlrRuleWrapper(ruleWrapper.getRule(), this));
+        });
+    }
+
+    onParseComplete(callback: () => void): void {
+        this.parser.onParseComplete(callback);
+    }
+
+    onParseStart(callback: () => void): void {
+        this.parser.onParseStart(callback);
+    }
+
+    addParserStartListener(listener: () => void): void {
+        this.parser.addParserStartListener(listener);
     }
 
     addTokenListener(listener: (token: Token) => void): void {
@@ -280,17 +296,22 @@ export class MutableAntlrParser implements AntlrParser {
     }
 
     getTokenAt(column: number, line: number): AntlrTokenWrapper | undefined {
-        return this.parser.getTokenAt(column, line);
+        const token = this.parser.getTokenAt(column, line);
+
+        if (token) {
+            return new MutableAntlrTokenWrapper(token.getToken(), this);
+        }
+
+        return undefined;
     }
 
     getRuleRange(rule: ParserRuleContext): AntlrRange {
-        if (this.changedRuleMap.has(rule)) {
-            const range = this.changedRuleMap.get(rule);
+        const range = this.ruleTable.ruleMap.get(rule);
+        if (range) {
             return [range.start, range.end];
+        } else {
+            return this.parser.getRuleRange(rule);
         }
-
-        // Use the unchanged range
-        return this.parser.getRuleRange(rule);
     }
 
     getErrors(): AntlrRuleError[] {
@@ -349,16 +370,23 @@ export class MutableAntlrParser implements AntlrParser {
         return this.textBuffer.getLine(line);
     }
 
-    getRulesInLine(line: number): Set<ParserRuleContext> {
+    getRulesInLine(line: number): Set<AntlrRuleWrapper> {
         const table = this.getRulePositionTable();
 
         if (table[line]) {
-            const set = table[line].map((rule) => rule).filter((rule) => rule !== undefined);
-            return new Set<ParserRuleContext>(set);
+            const map = new Map<ParserRuleContext, AntlrRuleWrapper>();
+            const set = table[line]
+                .map((rule) => rule)
+                .filter((rule) => rule !== undefined);
+            const ruleSet = new Set(set);
+            const wrapperSet = Array.from(ruleSet).map((rule) => new MutableAntlrRuleWrapper(rule, this));
+
+            return new Set<AntlrRuleWrapper>(wrapperSet);
         }
 
-        return new Set<ParserRuleContext>([]);
+        return new Set<AntlrRuleWrapper>([]);
     }
+
 
     getTokensInLine(line: number): Set<Token> {
         return new Set<Token>([]);
@@ -388,5 +416,38 @@ export class MutableAntlrParser implements AntlrParser {
         const results = this.functionalRuleParser.reduce(reduceFunction, accumulator);
         this.functionalRuleParser = new FunctionalRuleParser(this);
         return results;
+    }
+
+    every(predicate: (rule: AntlrRuleWrapper, index: number) => boolean): boolean {
+        const results = this.functionalRuleParser.every(predicate);
+        this.functionalRuleParser = new FunctionalRuleParser(this);
+
+        return results;
+    }
+
+    findLast(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrRuleWrapper {
+        const results = this.functionalRuleParser.findLast(filterFunction);
+        this.functionalRuleParser = new FunctionalRuleParser(this);
+        return results;
+    }
+
+    find(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrRuleWrapper {
+        const results = this.functionalRuleParser.find(filterFunction);
+        this.functionalRuleParser = new FunctionalRuleParser(this);
+        return results;
+    }
+
+    findAll(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrRuleWrapper[] {
+        const results = this.functionalRuleParser.findAll(filterFunction);
+        this.functionalRuleParser = new FunctionalRuleParser(this);
+        return results;
+    }
+
+    findRuleByName(ruleName: string): AntlrRuleWrapper {
+        return this.find((rule) => rule.getName() === ruleName);
+    }
+
+    findRulesByName(ruleName: string): AntlrRuleWrapper[] {
+        return this.findAll((rule) => rule.getName() === ruleName);
     }
 }

@@ -1,5 +1,6 @@
 import {Token} from 'antlr4';
 import {AntlrRange} from '../';
+import {AntlrRuleError} from './antlr-rule-error';
 
 export interface AntlrTokenWrapper {
     /**

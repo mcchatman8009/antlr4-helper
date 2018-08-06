@@ -42,6 +42,7 @@ Important Interfaces and Classes
 * ["parser/mutable-antlr-parser"](modules/_parser_mutable_antlr_parser_.md)
 * ["parser/mutable-antlr-rule-wrapper"](modules/_parser_mutable_antlr_rule_wrapper_.md)
 * ["parser/mutable-antlr-token-wrapper"](modules/_parser_mutable_antlr_token_wrapper_.md)
+* ["parser/rule-and-range"](modules/_parser_rule_and_range_.md)
 * ["parser/rule-table"](modules/_parser_rule_table_.md)
 * ["parser/token-table"](modules/_parser_token_table_.md)
 * ["types/types"](modules/_types_types_.md)

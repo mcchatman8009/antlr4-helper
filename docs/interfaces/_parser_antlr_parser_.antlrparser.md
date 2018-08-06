@@ -19,10 +19,18 @@
 * [addEnterRuleListener](_parser_antlr_parser_.antlrparser.md#addenterrulelistener)
 * [addExitRuleListener](_parser_antlr_parser_.antlrparser.md#addexitrulelistener)
 * [addParserCompleteListener](_parser_antlr_parser_.antlrparser.md#addparsercompletelistener)
+* [addParserStartListener](_parser_antlr_parser_.antlrparser.md#addparserstartlistener)
 * [addTokenListener](_parser_antlr_parser_.antlrparser.md#addtokenlistener)
+* [addValidator](_parser_antlr_parser_.antlrparser.md#addvalidator)
 * [checkForErrors](_parser_antlr_parser_.antlrparser.md#checkforerrors)
 * [createRuleError](_parser_antlr_parser_.antlrparser.md#createruleerror)
+* [every](_parser_antlr_parser_.antlrparser.md#every)
 * [filter](_parser_antlr_parser_.antlrparser.md#filter)
+* [find](_parser_antlr_parser_.antlrparser.md#find)
+* [findAll](_parser_antlr_parser_.antlrparser.md#findall)
+* [findLast](_parser_antlr_parser_.antlrparser.md#findlast)
+* [findRuleByName](_parser_antlr_parser_.antlrparser.md#findrulebyname)
+* [findRulesByName](_parser_antlr_parser_.antlrparser.md#findrulesbyname)
 * [forEach](_parser_antlr_parser_.antlrparser.md#foreach)
 * [getColumnCount](_parser_antlr_parser_.antlrparser.md#getcolumncount)
 * [getErrorRuleAt](_parser_antlr_parser_.antlrparser.md#geterrorruleat)
@@ -48,10 +56,16 @@
 * [getWarnings](_parser_antlr_parser_.antlrparser.md#getwarnings)
 * [hasErrorNode](_parser_antlr_parser_.antlrparser.md#haserrornode)
 * [hasErrors](_parser_antlr_parser_.antlrparser.md#haserrors)
+* [hasTextChanged](_parser_antlr_parser_.antlrparser.md#hastextchanged)
 * [hasWarnings](_parser_antlr_parser_.antlrparser.md#haswarnings)
 * [map](_parser_antlr_parser_.antlrparser.md#map)
+* [onParseComplete](_parser_antlr_parser_.antlrparser.md#onparsecomplete)
+* [onParseStart](_parser_antlr_parser_.antlrparser.md#onparsestart)
+* [onRuleEnter](_parser_antlr_parser_.antlrparser.md#onruleenter)
+* [onRuleExit](_parser_antlr_parser_.antlrparser.md#onruleexit)
 * [parse](_parser_antlr_parser_.antlrparser.md#parse)
 * [reduce](_parser_antlr_parser_.antlrparser.md#reduce)
+* [reparse](_parser_antlr_parser_.antlrparser.md#reparse)
 * [setRuleText](_parser_antlr_parser_.antlrparser.md#setruletext)
 * [setTokenText](_parser_antlr_parser_.antlrparser.md#settokentext)
 * [siblingsHaveNoErrors](_parser_antlr_parser_.antlrparser.md#siblingshavenoerrors)
@@ -157,6 +171,21 @@ ___
 **Returns:** `void`
 
 ___
+<a id="addparserstartlistener"></a>
+
+###  addParserStartListener
+
+▸ **addParserStartListener**(listener: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| listener | `function` |
+
+**Returns:** `void`
+
+___
 <a id="addtokenlistener"></a>
 
 ###  addTokenListener
@@ -170,6 +199,22 @@ Listen and watch for all visited tokens
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | listener | `function` |   |
+
+**Returns:** `void`
+
+___
+<a id="addvalidator"></a>
+
+###  addValidator
+
+▸ **addValidator**(ruleName: *`string`*, validator: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+| validator | `function` |
 
 **Returns:** `void`
 
@@ -202,6 +247,21 @@ Create a basic [AntlrRuleError](../classes/_parser_antlr_rule_error_.antlrruleer
 **Returns:** [AntlrRuleError](../classes/_parser_antlr_rule_error_.antlrruleerror.md)
 
 ___
+<a id="every"></a>
+
+###  every
+
+▸ **every**(predicate: *`function`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| predicate | `function` |
+
+**Returns:** `boolean`
+
+___
 <a id="filter"></a>
 
 ###  filter
@@ -217,6 +277,81 @@ Filter out rules before calling forEach, map, reduce, or another filter.
 | filterFunction | `function` |  - |
 
 **Returns:** [AntlrParser](_parser_antlr_parser_.antlrparser.md)
+
+___
+<a id="find"></a>
+
+###  find
+
+▸ **find**(filterFunction: *`function`*): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filterFunction | `function` |
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
+<a id="findall"></a>
+
+###  findAll
+
+▸ **findAll**(filterFunction: *`function`*): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filterFunction | `function` |
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
+<a id="findlast"></a>
+
+###  findLast
+
+▸ **findLast**(filterFunction: *`function`*): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| filterFunction | `function` |
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
+<a id="findrulebyname"></a>
+
+###  findRuleByName
+
+▸ **findRuleByName**(ruleName: *`string`*): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
+<a id="findrulesbyname"></a>
+
+###  findRulesByName
+
+▸ **findRulesByName**(ruleName: *`string`*): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
 
 ___
 <a id="foreach"></a>
@@ -440,7 +575,7 @@ ___
 
 ###  getRulesInLine
 
-▸ **getRulesInLine**(line: *`number`*): `Set`<`ParserRuleContext`>
+▸ **getRulesInLine**(line: *`number`*): `Set`<[AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)>
 
 Get all the rules in a line
 
@@ -450,7 +585,7 @@ Get all the rules in a line
 | ------ | ------ | ------ |
 | line | `number` |  - |
 
-**Returns:** `Set`<`ParserRuleContext`>
+**Returns:** `Set`<[AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)>
 
 ___
 <a id="getsiblings"></a>
@@ -520,7 +655,7 @@ ___
 
 ###  getTokenRange
 
-▸ **getTokenRange**(token: * `Token` &#124; `TerminalNode`*): [AntlrRange](../modules/_types_types_.md#antlrrange)
+▸ **getTokenRange**(token: *`Token`*): [AntlrRange](../modules/_types_types_.md#antlrrange)
 
 Get the range of a given token, where the first object is the start position and the last is the end position
 
@@ -528,7 +663,7 @@ Get the range of a given token, where the first object is the start position and
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| token |  `Token` &#124; `TerminalNode`|  - |
+| token | `Token` |  - |
 
 **Returns:** [AntlrRange](../modules/_types_types_.md#antlrrange)
 
@@ -537,7 +672,7 @@ ___
 
 ###  getTokenText
 
-▸ **getTokenText**(token: * `Token` &#124; `TerminalNode`*): `string`
+▸ **getTokenText**(token: *`Token`*): `string`
 
 Get the text of a given token
 
@@ -545,7 +680,7 @@ Get the text of a given token
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| token |  `Token` &#124; `TerminalNode`|  - |
+| token | `Token` |  - |
 
 **Returns:** `string`
 
@@ -606,6 +741,19 @@ Checks if any errors exist
 **Returns:** `boolean`
 
 ___
+<a id="hastextchanged"></a>
+
+###  hasTextChanged
+
+▸ **hasTextChanged**(): `boolean`
+
+Determines if a rule or token has been changed, since that last parse.
+
+(Useful for the [MutableAntlrParser](../classes/_parser_mutable_antlr_parser_.mutableantlrparser.md))
+
+**Returns:** `boolean`
+
+___
 <a id="haswarnings"></a>
 
 ###  hasWarnings
@@ -635,6 +783,68 @@ Transform each rule to a value
 | mapFunction | `function` |  - |
 
 **Returns:** `T`[]
+
+___
+<a id="onparsecomplete"></a>
+
+###  onParseComplete
+
+▸ **onParseComplete**(callback: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| callback | `function` |
+
+**Returns:** `void`
+
+___
+<a id="onparsestart"></a>
+
+###  onParseStart
+
+▸ **onParseStart**(callback: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| callback | `function` |
+
+**Returns:** `void`
+
+___
+<a id="onruleenter"></a>
+
+###  onRuleEnter
+
+▸ **onRuleEnter**(ruleName: *`string`*, callback: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+| callback | `function` |
+
+**Returns:** `void`
+
+___
+<a id="onruleexit"></a>
+
+###  onRuleExit
+
+▸ **onRuleExit**(ruleName: *`string`*, callback: *`function`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+| callback | `function` |
+
+**Returns:** `void`
 
 ___
 <a id="parse"></a>
@@ -674,6 +884,17 @@ Reduces rules to a value which is the accumulated result of running each element
 | accumulator | `T` |  - |
 
 **Returns:** `T`
+
+___
+<a id="reparse"></a>
+
+###  reparse
+
+▸ **reparse**(): `ParserRuleContext`
+
+Parse using the existing Parser's text. (This is very useful if you've mutated or change the parser's rule or token text)
+
+**Returns:** `ParserRuleContext`
 
 ___
 <a id="setruletext"></a>

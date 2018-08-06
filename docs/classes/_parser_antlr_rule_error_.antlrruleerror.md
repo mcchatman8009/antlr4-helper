@@ -14,6 +14,7 @@
 * [exception](_parser_antlr_rule_error_.antlrruleerror.md#exception)
 * [message](_parser_antlr_rule_error_.antlrruleerror.md#message)
 * [rule](_parser_antlr_rule_error_.antlrruleerror.md#rule)
+* [ruleWrapper](_parser_antlr_rule_error_.antlrruleerror.md#rulewrapper)
 * [severity](_parser_antlr_rule_error_.antlrruleerror.md#severity)
 * [start](_parser_antlr_rule_error_.antlrruleerror.md#start)
 
@@ -53,6 +54,13 @@ ___
 ###  rule
 
 **● rule**: *`ParserRuleContext`*
+
+___
+<a id="rulewrapper"></a>
+
+###  ruleWrapper
+
+**● ruleWrapper**: *[AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)*
 
 ___
 <a id="severity"></a>
