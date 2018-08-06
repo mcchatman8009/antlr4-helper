@@ -20,7 +20,7 @@
 
 ▸ **createFactoryBuilder**(): [AntlrFactoryBuilder](../classes/_factory_antlr_factory_.antlrfactorybuilder.md)
 
-Create an [AntlrFactoryBuilder](../classes/_factory_antlr_factory_.antlrfactorybuilder.md)
+Creates an [AntlrFactoryBuilder](../classes/_factory_antlr_factory_.antlrfactorybuilder.md)
 
 **Returns:** [AntlrFactoryBuilder](../classes/_factory_antlr_factory_.antlrfactorybuilder.md)
 
@@ -31,7 +31,7 @@ ___
 
 ▸ **createImmutableParser**(factory: *[AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md)*): [AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)
 
-Create an Immutable Parser
+Creates an Immutable Parser
 
 **Parameters:**
 
@@ -48,7 +48,7 @@ ___
 
 ▸ **createParser**(factory: *[AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md)*): [MutableAntlrParser](../classes/_parser_mutable_antlr_parser_.mutableantlrparser.md)
 
-Create a default Parser
+Creates a default Parser
 
 **Parameters:**
 
