@@ -15,6 +15,7 @@
 
 ### Methods
 
+* [exists](_parser_antlr_token_wrapper_.antlrtokenwrapper.md#exists)
 * [getName](_parser_antlr_token_wrapper_.antlrtokenwrapper.md#getname)
 * [getRange](_parser_antlr_token_wrapper_.antlrtokenwrapper.md#getrange)
 * [getText](_parser_antlr_token_wrapper_.antlrtokenwrapper.md#gettext)
@@ -25,6 +26,15 @@
 
 ## Methods
 
+<a id="exists"></a>
+
+###  exists
+
+▸ **exists**(): `boolean`
+
+**Returns:** `boolean`
+
+___
 <a id="getname"></a>
 
 ###  getName

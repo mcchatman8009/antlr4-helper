@@ -9,6 +9,10 @@ export class MutableAntlrTokenWrapper implements AntlrTokenWrapper {
     constructor(private token: Token, private parser: MutableAntlrParser) {
     }
 
+    exists(): boolean {
+        return this.parser.doesTokenExist(this.token);
+    }
+
     getToken(): Token {
         return this.token;
     }

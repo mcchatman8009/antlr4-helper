@@ -28,4 +28,6 @@ export interface AntlrRuleWrapper {
     hasToken(tokenRuleName: string): boolean;
 
     createRuleError(): AntlrRuleError;
+
+    exists(): boolean;
 }

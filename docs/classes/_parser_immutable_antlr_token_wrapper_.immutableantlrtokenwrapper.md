@@ -23,6 +23,7 @@
 
 ### Methods
 
+* [exists](_parser_immutable_antlr_token_wrapper_.immutableantlrtokenwrapper.md#exists)
 * [getName](_parser_immutable_antlr_token_wrapper_.immutableantlrtokenwrapper.md#getname)
 * [getRange](_parser_immutable_antlr_token_wrapper_.immutableantlrtokenwrapper.md#getrange)
 * [getText](_parser_immutable_antlr_token_wrapper_.immutableantlrtokenwrapper.md#gettext)
@@ -69,6 +70,15 @@ ___
 
 ## Methods
 
+<a id="exists"></a>
+
+###  exists
+
+▸ **exists**(): `boolean`
+
+**Returns:** `boolean`
+
+___
 <a id="getname"></a>
 
 ###  getName

@@ -7,6 +7,10 @@ export class ImmutableAntlrTokenWrapper implements AntlrTokenWrapper {
     constructor(private token: Token, private parser: AntlrParser) {
     }
 
+    exists(): boolean {
+        return this.parser.doesTokenExist(this.token);
+    }
+
     setText(text: string): void {
         throw new Error(`${this.getName()} is an immutable AntlrTokenWrapper`);
     }

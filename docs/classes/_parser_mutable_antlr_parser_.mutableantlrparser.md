@@ -54,6 +54,8 @@ console.log(parser.getText());
 * [addValidator](_parser_mutable_antlr_parser_.mutableantlrparser.md#addvalidator)
 * [checkForErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#checkforerrors)
 * [createRuleError](_parser_mutable_antlr_parser_.mutableantlrparser.md#createruleerror)
+* [doesRuleExist](_parser_mutable_antlr_parser_.mutableantlrparser.md#doesruleexist)
+* [doesTokenExist](_parser_mutable_antlr_parser_.mutableantlrparser.md#doestokenexist)
 * [every](_parser_mutable_antlr_parser_.mutableantlrparser.md#every)
 * [filter](_parser_mutable_antlr_parser_.mutableantlrparser.md#filter)
 * [find](_parser_mutable_antlr_parser_.mutableantlrparser.md#find)
@@ -332,6 +334,36 @@ ___
 | rule | `ParserRuleContext` |
 
 **Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
+
+___
+<a id="doesruleexist"></a>
+
+###  doesRuleExist
+
+▸ **doesRuleExist**(rule: *`ParserRuleContext`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| rule | `ParserRuleContext` |
+
+**Returns:** `boolean`
+
+___
+<a id="doestokenexist"></a>
+
+###  doesTokenExist
+
+▸ **doesTokenExist**(token: *`Token`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| token | `Token` |
+
+**Returns:** `boolean`
 
 ___
 <a id="every"></a>

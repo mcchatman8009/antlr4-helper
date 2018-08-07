@@ -11,6 +11,10 @@ export class MutableAntlrRuleWrapper implements AntlrRuleWrapper {
     constructor(public rule: ParserRuleContext, private parser: MutableAntlrParser) {
     }
 
+    exists(): boolean {
+        return this.parser.doesRuleExist(this.rule);
+    }
+
     getTokens(tokenRuleName?: string): AntlrTokenWrapper[] {
         const count = this.rule.getChildCount();
         const list = [];

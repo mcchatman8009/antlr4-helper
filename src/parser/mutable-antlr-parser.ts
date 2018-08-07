@@ -63,6 +63,14 @@ export class MutableAntlrParser implements AntlrParser {
         });
     }
 
+    doesRuleExist(rule: ParserRuleContext): boolean {
+        return this.ruleTable.ruleMap.has(rule);
+    }
+
+    doesTokenExist(token: Token): boolean {
+        return this.tokenTable.tokenMap.has(token);
+    }
+
     hasTextChanged(): boolean {
         return this.textChanged;
     }

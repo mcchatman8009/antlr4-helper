@@ -23,6 +23,10 @@ export interface AntlrParser {
      */
     reparse(): ParserRuleContext;
 
+    doesRuleExist(rule: ParserRuleContext): boolean;
+
+    doesTokenExist(token: Token): boolean;
+
     getRuleStack(): ReadonlyArray<ParserRuleContext>;
 
     /**

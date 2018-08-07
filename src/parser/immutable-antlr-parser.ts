@@ -60,6 +60,14 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         return this.parse(this.getText());
     }
 
+    doesRuleExist(rule: ParserRuleContext): boolean {
+        return this.ruleTable.ruleMap.has(rule);
+    }
+
+    doesTokenExist(token: Token): boolean {
+        return this.tokenTable.tokenMap.has(token);
+    }
+
     /**
      * Parse the input string
      *

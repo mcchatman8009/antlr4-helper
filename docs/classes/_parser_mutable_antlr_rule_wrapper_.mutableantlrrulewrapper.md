@@ -24,6 +24,7 @@
 ### Methods
 
 * [createRuleError](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#createruleerror)
+* [exists](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#exists)
 * [getChildren](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#getchildren)
 * [getName](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#getname)
 * [getParent](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#getparent)
@@ -83,6 +84,15 @@ ___
 ▸ **createRuleError**(): [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
 
 **Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
+
+___
+<a id="exists"></a>
+
+###  exists
+
+▸ **exists**(): `boolean`
+
+**Returns:** `boolean`
 
 ___
 <a id="getchildren"></a>

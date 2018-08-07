@@ -33,4 +33,6 @@ export interface AntlrTokenWrapper {
      * @returns {AntlrRange}
      */
     getRange(): AntlrRange;
+
+    exists(): boolean;
 }

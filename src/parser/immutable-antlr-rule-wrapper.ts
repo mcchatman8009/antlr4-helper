@@ -12,6 +12,10 @@ export class ImmutableAntlrRuleWrapper implements AntlrRuleWrapper {
     constructor(private rule: ParserRuleContext, private parser: AntlrParser) {
     }
 
+    exists(): boolean {
+        return this.parser.doesRuleExist(this.rule);
+    }
+
     getTokens(tokenRuleName?: string): AntlrTokenWrapper[] {
         const count = this.rule.getChildCount();
         const list = [];

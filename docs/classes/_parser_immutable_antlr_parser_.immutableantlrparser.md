@@ -46,7 +46,9 @@
 * [addValidator](_parser_immutable_antlr_parser_.immutableantlrparser.md#addvalidator)
 * [checkForErrors](_parser_immutable_antlr_parser_.immutableantlrparser.md#checkforerrors)
 * [createRuleError](_parser_immutable_antlr_parser_.immutableantlrparser.md#createruleerror)
+* [doesRuleExist](_parser_immutable_antlr_parser_.immutableantlrparser.md#doesruleexist)
 * [doesRuleMatchClass](_parser_immutable_antlr_parser_.immutableantlrparser.md#doesrulematchclass)
+* [doesTokenExist](_parser_immutable_antlr_parser_.immutableantlrparser.md#doestokenexist)
 * [enterEveryRule](_parser_immutable_antlr_parser_.immutableantlrparser.md#entereveryrule)
 * [every](_parser_immutable_antlr_parser_.immutableantlrparser.md#every)
 * [exitEveryRule](_parser_immutable_antlr_parser_.immutableantlrparser.md#exiteveryrule)
@@ -374,6 +376,21 @@ ___
 **Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
 
 ___
+<a id="doesruleexist"></a>
+
+###  doesRuleExist
+
+▸ **doesRuleExist**(rule: *`ParserRuleContext`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| rule | `ParserRuleContext` |
+
+**Returns:** `boolean`
+
+___
 <a id="doesrulematchclass"></a>
 
 ###  doesRuleMatchClass
@@ -388,6 +405,21 @@ Checks if a rule matches the ruleClass given
 | ------ | ------ | ------ |
 | rule | `ParserRuleContext` |  - |
 | ruleClass | [AntlrRuleClass](../modules/_types_types_.md#antlrruleclass)<`any`> |  - |
+
+**Returns:** `boolean`
+
+___
+<a id="doestokenexist"></a>
+
+###  doesTokenExist
+
+▸ **doesTokenExist**(token: *`Token`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| token | `Token` |
 
 **Returns:** `boolean`
 
