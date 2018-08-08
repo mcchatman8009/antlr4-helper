@@ -447,8 +447,12 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
      * @param {TerminalNode} node
      */
     visitTerminal(node: TerminalNode): void {
-        this.tokenTable.addToken(node.symbol);
-        this.tokenSubject.next(node.symbol);
+        const token = node.symbol;
+
+        if (token.start !== -1 && token.stop !== -1) {
+            this.tokenTable.addToken(token);
+            this.tokenSubject.next(token);
+        }
     }
 
     /**

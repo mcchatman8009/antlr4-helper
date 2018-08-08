@@ -146,7 +146,7 @@ export class ErrorRuleHandler extends ErrorListener {
             const to = {column: rule.stop.column + len, line: rule.stop.line - 1};
 
             return sortRange([from, to]);
-        } else if (rule.start) {
+        } else if (rule && rule.start) {
             let from, to;
             const token = rule.start;
 
@@ -157,7 +157,7 @@ export class ErrorRuleHandler extends ErrorListener {
                 from = {column: start.column + start.text.length, line: start.line - 1};
                 to = {column: token.column, line: token.line - 1};
 
-            } else if (rule.exception) {
+            } else if (rule && rule.exception) {
                 const offendingToken = rule.exception.offendingToken;
                 from = {column: max(token.column - 1, 0), line: token.line - 1};
                 to = {column: offendingToken.column + offendingToken.text.length, line: offendingToken.line - 1};
