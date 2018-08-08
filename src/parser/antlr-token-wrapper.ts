@@ -35,4 +35,6 @@ export interface AntlrTokenWrapper {
     getRange(): AntlrRange;
 
     exists(): boolean;
+
+    inRange(pos: { column: number, line: number }): boolean;
 }

@@ -399,6 +399,9 @@ export class MutableAntlrParser implements AntlrParser {
         return new Set<AntlrRuleWrapper>([]);
     }
 
+    comparePositions(a: { column: number, line: number }, b: { column: number, line: number }): number {
+        return this.parser.comparePositions(a, b);
+    }
 
     getTokensInLine(line: number): Set<Token> {
         return new Set<Token>([]);

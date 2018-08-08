@@ -384,6 +384,10 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         return [];
     }
 
+    comparePositions(a: { column: number, line: number }, b: { column: number, line: number }): number {
+        return (a.line - b.line) || (a.column - b.column);
+    }
+
     getTokenPositionTable(): Token[][] {
         return this.tokenTable.tokenTable;
     }

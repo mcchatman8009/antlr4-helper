@@ -9,6 +9,16 @@ export class MutableAntlrTokenWrapper implements AntlrTokenWrapper {
     constructor(private token: Token, private parser: MutableAntlrParser) {
     }
 
+    inRange(pos: { column: number, line: number }): boolean {
+        const [start, end] = this.getRange();
+
+        if (this.exists()) {
+            return this.parser.comparePositions(start, pos) <= 0 && this.parser.comparePositions(pos, end) <= 0;
+        }
+
+        return false;
+    }
+
     exists(): boolean {
         return this.parser.doesTokenExist(this.token);
     }

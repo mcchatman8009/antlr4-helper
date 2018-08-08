@@ -45,6 +45,7 @@
 * [addTokenListener](_parser_immutable_antlr_parser_.immutableantlrparser.md#addtokenlistener)
 * [addValidator](_parser_immutable_antlr_parser_.immutableantlrparser.md#addvalidator)
 * [checkForErrors](_parser_immutable_antlr_parser_.immutableantlrparser.md#checkforerrors)
+* [comparePositions](_parser_immutable_antlr_parser_.immutableantlrparser.md#comparepositions)
 * [createRuleError](_parser_immutable_antlr_parser_.immutableantlrparser.md#createruleerror)
 * [doesRuleExist](_parser_immutable_antlr_parser_.immutableantlrparser.md#doesruleexist)
 * [doesRuleMatchClass](_parser_immutable_antlr_parser_.immutableantlrparser.md#doesrulematchclass)
@@ -359,6 +360,22 @@ ___
 ▸ **checkForErrors**(): `void`
 
 **Returns:** `void`
+
+___
+<a id="comparepositions"></a>
+
+###  comparePositions
+
+▸ **comparePositions**(a: *`object`*, b: *`object`*): `number`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| a | `object` |
+| b | `object` |
+
+**Returns:** `number`
 
 ___
 <a id="createruleerror"></a>

@@ -27,6 +27,7 @@
 * [getToken](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#gettoken)
 * [getTokens](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#gettokens)
 * [hasToken](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#hastoken)
+* [inRange](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#inrange)
 * [setText](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#settext)
 
 ---
@@ -155,6 +156,21 @@ ___
 | Param | Type |
 | ------ | ------ |
 | tokenRuleName | `string` |
+
+**Returns:** `boolean`
+
+___
+<a id="inrange"></a>
+
+###  inRange
+
+▸ **inRange**(point: *`object`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| point | `object` |
 
 **Returns:** `boolean`
 

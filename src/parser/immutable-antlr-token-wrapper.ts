@@ -11,6 +11,16 @@ export class ImmutableAntlrTokenWrapper implements AntlrTokenWrapper {
         return this.parser.doesTokenExist(this.token);
     }
 
+    inRange(pos: { column: number, line: number }): boolean {
+        const [start, end] = this.getRange();
+
+        if (this.exists()) {
+            return this.parser.comparePositions(start, pos) <= 0 && this.parser.comparePositions(pos, end) <= 0;
+        }
+
+        return false;
+    }
+
     setText(text: string): void {
         throw new Error(`${this.getName()} is an immutable AntlrTokenWrapper`);
     }

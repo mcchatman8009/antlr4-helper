@@ -29,5 +29,7 @@ export interface AntlrRuleWrapper {
 
     createRuleError(): AntlrRuleError;
 
+    inRange(point: { column: number, line: number }): boolean;
+
     exists(): boolean;
 }

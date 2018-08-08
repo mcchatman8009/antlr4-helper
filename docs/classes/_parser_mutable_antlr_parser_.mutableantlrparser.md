@@ -53,6 +53,7 @@ console.log(parser.getText());
 * [addTokenListener](_parser_mutable_antlr_parser_.mutableantlrparser.md#addtokenlistener)
 * [addValidator](_parser_mutable_antlr_parser_.mutableantlrparser.md#addvalidator)
 * [checkForErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#checkforerrors)
+* [comparePositions](_parser_mutable_antlr_parser_.mutableantlrparser.md#comparepositions)
 * [createRuleError](_parser_mutable_antlr_parser_.mutableantlrparser.md#createruleerror)
 * [doesRuleExist](_parser_mutable_antlr_parser_.mutableantlrparser.md#doesruleexist)
 * [doesTokenExist](_parser_mutable_antlr_parser_.mutableantlrparser.md#doestokenexist)
@@ -319,6 +320,22 @@ ___
 ▸ **checkForErrors**(): `void`
 
 **Returns:** `void`
+
+___
+<a id="comparepositions"></a>
+
+###  comparePositions
+
+▸ **comparePositions**(a: *`object`*, b: *`object`*): `number`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| a | `object` |
+| b | `object` |
+
+**Returns:** `number`
 
 ___
 <a id="createruleerror"></a>

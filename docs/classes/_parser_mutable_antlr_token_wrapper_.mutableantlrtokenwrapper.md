@@ -28,6 +28,7 @@
 * [getRange](_parser_mutable_antlr_token_wrapper_.mutableantlrtokenwrapper.md#getrange)
 * [getText](_parser_mutable_antlr_token_wrapper_.mutableantlrtokenwrapper.md#gettext)
 * [getToken](_parser_mutable_antlr_token_wrapper_.mutableantlrtokenwrapper.md#gettoken)
+* [inRange](_parser_mutable_antlr_token_wrapper_.mutableantlrtokenwrapper.md#inrange)
 * [setText](_parser_mutable_antlr_token_wrapper_.mutableantlrtokenwrapper.md#settext)
 
 ---
@@ -113,6 +114,21 @@ ___
 ▸ **getToken**(): `Token`
 
 **Returns:** `Token`
+
+___
+<a id="inrange"></a>
+
+###  inRange
+
+▸ **inRange**(pos: *`object`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| pos | `object` |
+
+**Returns:** `boolean`
 
 ___
 <a id="settext"></a>

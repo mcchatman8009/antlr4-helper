@@ -35,6 +35,7 @@
 * [getToken](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#gettoken)
 * [getTokens](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#gettokens)
 * [hasToken](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#hastoken)
+* [inRange](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#inrange)
 * [setText](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#settext)
 
 ---
@@ -199,6 +200,21 @@ ___
 | Param | Type |
 | ------ | ------ |
 | tokenRuleName | `string` |
+
+**Returns:** `boolean`
+
+___
+<a id="inrange"></a>
+
+###  inRange
+
+▸ **inRange**(pos: *`object`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| pos | `object` |
 
 **Returns:** `boolean`
 

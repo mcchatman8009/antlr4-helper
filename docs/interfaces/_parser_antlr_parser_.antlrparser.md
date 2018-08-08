@@ -23,6 +23,7 @@
 * [addTokenListener](_parser_antlr_parser_.antlrparser.md#addtokenlistener)
 * [addValidator](_parser_antlr_parser_.antlrparser.md#addvalidator)
 * [checkForErrors](_parser_antlr_parser_.antlrparser.md#checkforerrors)
+* [comparePositions](_parser_antlr_parser_.antlrparser.md#comparepositions)
 * [createRuleError](_parser_antlr_parser_.antlrparser.md#createruleerror)
 * [doesRuleExist](_parser_antlr_parser_.antlrparser.md#doesruleexist)
 * [doesTokenExist](_parser_antlr_parser_.antlrparser.md#doestokenexist)
@@ -230,6 +231,24 @@ ___
 throws Error if errors found
 
 **Returns:** `void`
+
+___
+<a id="comparepositions"></a>
+
+###  comparePositions
+
+▸ **comparePositions**(a: *`object`*, b: *`object`*): `number`
+
+Compare two positions, return 0 if they are the same, a negative number when a is less, and a positive number otherwise.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| a | `object` |  - |
+| b | `object` |  - |
+
+**Returns:** `number`
 
 ___
 <a id="createruleerror"></a>

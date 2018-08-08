@@ -16,6 +16,18 @@ export class ImmutableAntlrRuleWrapper implements AntlrRuleWrapper {
         return this.parser.doesRuleExist(this.rule);
     }
 
+
+    inRange(pos: { column: number, line: number }): boolean {
+        const [start, end] = this.getRange();
+
+        if (this.exists()) {
+            return this.parser.comparePositions(start, pos) <= 0 && this.parser.comparePositions(pos, end) <= 0;
+        }
+
+        return false;
+    }
+
+
     getTokens(tokenRuleName?: string): AntlrTokenWrapper[] {
         const count = this.rule.getChildCount();
         const list = [];

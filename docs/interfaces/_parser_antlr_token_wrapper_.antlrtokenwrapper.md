@@ -20,6 +20,7 @@
 * [getRange](_parser_antlr_token_wrapper_.antlrtokenwrapper.md#getrange)
 * [getText](_parser_antlr_token_wrapper_.antlrtokenwrapper.md#gettext)
 * [getToken](_parser_antlr_token_wrapper_.antlrtokenwrapper.md#gettoken)
+* [inRange](_parser_antlr_token_wrapper_.antlrtokenwrapper.md#inrange)
 * [setText](_parser_antlr_token_wrapper_.antlrtokenwrapper.md#settext)
 
 ---
@@ -77,6 +78,21 @@ ___
 The raw Antlr Token Object
 
 **Returns:** `Token`
+
+___
+<a id="inrange"></a>
+
+###  inRange
+
+▸ **inRange**(pos: *`object`*): `boolean`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| pos | `object` |
+
+**Returns:** `boolean`
 
 ___
 <a id="settext"></a>

@@ -372,4 +372,14 @@ export interface AntlrParser {
     findRuleByName(ruleName: string): AntlrRuleWrapper;
 
     findRulesByName(ruleName: string): AntlrRuleWrapper[];
+
+    /**
+     * Compare two positions, return 0 if they are the same, a negative
+     * number when a is less, and a positive number otherwise.
+     *
+     * @param {{column: number; line: number}} a
+     * @param {{column: number; line: number}} b
+     * @returns {number}
+     */
+    comparePositions(a: { column: number, line: number }, b: { column: number, line: number }): number;
 }
