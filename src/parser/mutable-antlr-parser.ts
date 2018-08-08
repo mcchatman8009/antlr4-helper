@@ -288,7 +288,11 @@ export class MutableAntlrParser implements AntlrParser {
      * @returns {string}
      */
     getText(): string {
-        return this.textBuffer.getText();
+        if (this.textBuffer) {
+            return this.textBuffer.getText();
+        } else {
+            return '';
+        }
     }
 
     getLineCount(): number {

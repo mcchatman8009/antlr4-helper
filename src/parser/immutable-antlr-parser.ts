@@ -361,15 +361,27 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
     }
 
     getText(): string {
-        return this.textBuffer.getText();
+        if (this.textBuffer) {
+            return this.textBuffer.getText();
+        } else {
+            return '';
+        }
     }
 
     getErrors(): AntlrRuleError[] {
-        return this.errorHandler.getErrors().filter((err) => err.severity === 'error');
+        if (this.errorHandler) {
+            return this.errorHandler.getErrors().filter((err) => err.severity === 'error');
+        }
+
+        return [];
     }
 
     getWarnings(): AntlrRuleError[] {
-        return this.errorHandler.getErrors().filter((err) => err.severity === 'warning');
+        if (this.errorHandler) {
+            return this.errorHandler.getErrors().filter((err) => err.severity === 'warning');
+        }
+
+        return [];
     }
 
     getTokenPositionTable(): Token[][] {
