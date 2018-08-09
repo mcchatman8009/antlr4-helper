@@ -52,6 +52,14 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
 
     }
 
+    getAllRules(): AntlrRuleWrapper[] {
+        return this.getRuleStack().map((rule) => new ImmutableAntlrRuleWrapper(rule, this));
+    }
+
+    getAllTokens(): AntlrTokenWrapper[] {
+        return Array.from(this.tokenTable.tokenMap.keys()).map((token) => new ImmutableAntlrTokenWrapper(token, this));
+    }
+
     hasTextChanged(): boolean {
         return false;
     }

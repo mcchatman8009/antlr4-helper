@@ -60,6 +60,8 @@
 * [findRuleByName](_parser_immutable_antlr_parser_.immutableantlrparser.md#findrulebyname)
 * [findRulesByName](_parser_immutable_antlr_parser_.immutableantlrparser.md#findrulesbyname)
 * [forEach](_parser_immutable_antlr_parser_.immutableantlrparser.md#foreach)
+* [getAllRules](_parser_immutable_antlr_parser_.immutableantlrparser.md#getallrules)
+* [getAllTokens](_parser_immutable_antlr_parser_.immutableantlrparser.md#getalltokens)
 * [getColumnCount](_parser_immutable_antlr_parser_.immutableantlrparser.md#getcolumncount)
 * [getErrorRuleAt](_parser_immutable_antlr_parser_.immutableantlrparser.md#geterrorruleat)
 * [getErrorRuleTable](_parser_immutable_antlr_parser_.immutableantlrparser.md#geterrorruletable)
@@ -596,6 +598,24 @@ ___
 | eachFunction | `function` |
 
 **Returns:** `void`
+
+___
+<a id="getallrules"></a>
+
+###  getAllRules
+
+▸ **getAllRules**(): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
+<a id="getalltokens"></a>
+
+###  getAllTokens
+
+▸ **getAllTokens**(): [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
+
+**Returns:** [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
 
 ___
 <a id="getcolumncount"></a>

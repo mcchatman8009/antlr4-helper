@@ -373,6 +373,10 @@ export interface AntlrParser {
 
     findRulesByName(ruleName: string): AntlrRuleWrapper[];
 
+    getAllRules(): AntlrRuleWrapper[];
+
+    getAllTokens(): AntlrTokenWrapper[];
+
     /**
      * Compare two positions, return 0 if they are the same, a negative
      * number when a is less, and a positive number otherwise.

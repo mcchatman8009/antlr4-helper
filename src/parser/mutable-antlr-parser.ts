@@ -63,6 +63,14 @@ export class MutableAntlrParser implements AntlrParser {
         });
     }
 
+    getAllRules(): AntlrRuleWrapper[] {
+        return this.getRuleStack().map((rule) => new MutableAntlrRuleWrapper(rule, this));
+    }
+
+    getAllTokens(): AntlrTokenWrapper[] {
+        return Array.from(this.tokenTable.tokenMap.keys()).map((token) => new MutableAntlrTokenWrapper(token, this));
+    }
+
     doesRuleExist(rule: ParserRuleContext): boolean {
         return this.ruleTable.ruleMap.has(rule);
     }

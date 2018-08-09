@@ -65,6 +65,8 @@ console.log(parser.getText());
 * [findRuleByName](_parser_mutable_antlr_parser_.mutableantlrparser.md#findrulebyname)
 * [findRulesByName](_parser_mutable_antlr_parser_.mutableantlrparser.md#findrulesbyname)
 * [forEach](_parser_mutable_antlr_parser_.mutableantlrparser.md#foreach)
+* [getAllRules](_parser_mutable_antlr_parser_.mutableantlrparser.md#getallrules)
+* [getAllTokens](_parser_mutable_antlr_parser_.mutableantlrparser.md#getalltokens)
 * [getColumnCount](_parser_mutable_antlr_parser_.mutableantlrparser.md#getcolumncount)
 * [getErrorRuleAt](_parser_mutable_antlr_parser_.mutableantlrparser.md#geterrorruleat)
 * [getErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#geterrors)
@@ -504,6 +506,24 @@ ___
 | eachFunction | `function` |
 
 **Returns:** `void`
+
+___
+<a id="getallrules"></a>
+
+###  getAllRules
+
+▸ **getAllRules**(): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
+<a id="getalltokens"></a>
+
+###  getAllTokens
+
+▸ **getAllTokens**(): [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
+
+**Returns:** [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
 
 ___
 <a id="getcolumncount"></a>

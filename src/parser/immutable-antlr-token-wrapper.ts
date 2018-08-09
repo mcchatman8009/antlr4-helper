@@ -15,7 +15,7 @@ export class ImmutableAntlrTokenWrapper implements AntlrTokenWrapper {
         const [start, end] = this.getRange();
 
         if (this.exists()) {
-            return this.parser.comparePositions(start, pos) <= 0 && this.parser.comparePositions(pos, end) <= 0;
+            return this.parser.comparePositions(start, pos) <= 0 && this.parser.comparePositions(pos, end) < 0;
         }
 
         return false;

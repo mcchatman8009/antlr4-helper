@@ -35,6 +35,8 @@
 * [findRuleByName](_parser_antlr_parser_.antlrparser.md#findrulebyname)
 * [findRulesByName](_parser_antlr_parser_.antlrparser.md#findrulesbyname)
 * [forEach](_parser_antlr_parser_.antlrparser.md#foreach)
+* [getAllRules](_parser_antlr_parser_.antlrparser.md#getallrules)
+* [getAllTokens](_parser_antlr_parser_.antlrparser.md#getalltokens)
 * [getColumnCount](_parser_antlr_parser_.antlrparser.md#getcolumncount)
 * [getErrorRuleAt](_parser_antlr_parser_.antlrparser.md#geterrorruleat)
 * [getErrors](_parser_antlr_parser_.antlrparser.md#geterrors)
@@ -423,6 +425,24 @@ Iterate over each rule parsed
 | eachFunction | `function` |   |
 
 **Returns:** `void`
+
+___
+<a id="getallrules"></a>
+
+###  getAllRules
+
+▸ **getAllRules**(): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
+<a id="getalltokens"></a>
+
+###  getAllTokens
+
+▸ **getAllTokens**(): [AntlrTokenWrapper](_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
+
+**Returns:** [AntlrTokenWrapper](_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
 
 ___
 <a id="getcolumncount"></a>
