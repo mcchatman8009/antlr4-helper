@@ -53,7 +53,10 @@ export class MutableAntlrRuleWrapper implements AntlrRuleWrapper {
 
         for (let i = 0; i < count; i++) {
             const rule = this.rule.getChild(i);
-            list[i] = new MutableAntlrRuleWrapper(rule, this.parser);
+
+            if (!(rule instanceof TerminalNode)) {
+                list.push(new MutableAntlrRuleWrapper(rule, this.parser));
+            }
         }
 
         return list;

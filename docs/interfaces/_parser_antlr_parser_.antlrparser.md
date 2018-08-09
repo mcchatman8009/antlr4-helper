@@ -466,7 +466,7 @@ ___
 
 ###  getErrorRuleAt
 
-▸ **getErrorRuleAt**(column: *`number`*, line: *`number`*): `ParserRuleContext`
+▸ **getErrorRuleAt**(column: *`number`*, line: *`number`*): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
 
 Get the erroneous rule at the column and line position
 
@@ -477,7 +477,7 @@ Get the erroneous rule at the column and line position
 | column | `number` |  - |
 | line | `number` |  - |
 
-**Returns:** `ParserRuleContext`
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
 
 ___
 <a id="geterrors"></a>

@@ -637,7 +637,7 @@ ___
 
 ###  getErrorRuleAt
 
-▸ **getErrorRuleAt**(column: *`number`*, line: *`number`*): `ParserRuleContext`
+▸ **getErrorRuleAt**(column: *`number`*, line: *`number`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
 
 **Parameters:**
 
@@ -646,7 +646,7 @@ ___
 | column | `number` |
 | line | `number` |
 
-**Returns:** `ParserRuleContext`
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
 
 ___
 <a id="geterrorruletable"></a>

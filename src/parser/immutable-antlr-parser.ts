@@ -109,6 +109,10 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         const rootRule = this.factory.createAndInvokeRootRule(parser);
         this.parseCompleteSubject.next(null);
 
+        this.getErrors().forEach((err) => {
+            this.ruleTable.addToRuleMap(err.rule, [err.start, err.end]);
+        });
+
         return rootRule;
     }
 
@@ -404,8 +408,14 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         return this.ruleTable.ruleTable;
     }
 
-    getErrorRuleAt(column: number, line: number): ParserRuleContext {
-        return this.errorHandler.getErrorRuleAt(column, line);
+    getErrorRuleAt(column: number, line: number): AntlrRuleWrapper {
+        const rule = this.errorHandler.getErrorRuleAt(column, line);
+
+        if (rule) {
+            return new ImmutableAntlrRuleWrapper(this.errorHandler.getErrorRuleAt(column, line), this);
+        }
+
+        return undefined;
     }
 
     getErrorRuleTable(): ParserRuleContext[][] {

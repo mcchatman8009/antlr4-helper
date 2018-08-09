@@ -102,7 +102,7 @@ ___
 ___
 <a id="addtorulemap"></a>
 
-### `<Private>` addToRuleMap
+###  addToRuleMap
 
 ▸ **addToRuleMap**(rule: *`ParserRuleContext`*, range: *[AntlrRange](../modules/_types_types_.md#antlrrange)*): `void`
 

@@ -16,7 +16,11 @@ export class TokenTable {
     }
 
     getTokenAt(column: number, line: number): Token | undefined {
-        return this.tokenTable[line][column];
+        if (this.tokenTable[line]) {
+            return this.tokenTable[line][column];
+        }
+
+        return undefined;
     }
 
     addToken(token: Token) {

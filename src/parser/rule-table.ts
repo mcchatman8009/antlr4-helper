@@ -16,7 +16,11 @@ export class RuleTable {
     }
 
     getRuleAt(column: number, line: number): ParserRuleContext | undefined {
-        return this.ruleTable[line][column];
+        if (this.ruleTable[line]) {
+            return this.ruleTable[line][column];
+        }
+
+        return undefined;
     }
 
     private recomputeRanges(): RuleAndRange[] {
@@ -175,7 +179,7 @@ export class RuleTable {
         }
     }
 
-    private addToRuleMap(rule: ParserRuleContext, range: AntlrRange) {
+    addToRuleMap(rule: ParserRuleContext, range: AntlrRange) {
         this.ruleMap.set(rule, new MutableTextRange(range, this.buffer));
     }
 

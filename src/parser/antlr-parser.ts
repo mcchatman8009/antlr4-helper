@@ -240,7 +240,7 @@ export interface AntlrParser {
      * @param {number} line
      * @returns {ParserRuleContext}
      */
-    getErrorRuleAt(column: number, line: number): ParserRuleContext;
+    getErrorRuleAt(column: number, line: number): AntlrRuleWrapper;
 
     /**
      * Get the siblings for the rule
