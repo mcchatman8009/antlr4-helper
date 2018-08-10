@@ -559,6 +559,10 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         throw new Error('Cannot set rule text on ImmutableAntlrParser');
     }
 
+    replaceRange(range: AntlrRange, text: string): AntlrRange {
+        throw new Error('Cannot replace range text on ImmutableAntlrParser');
+    }
+
     filter(filterFunction: (rule: AntlrRuleWrapper, index: number) => boolean): AntlrParser {
         this.functionalRuleParser.filter(filterFunction);
         return this;

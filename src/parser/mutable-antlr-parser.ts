@@ -1,6 +1,6 @@
 import {AntlrFactory} from '../factory/antlr-factory';
 import {ParserRuleContext, Token} from 'antlr4';
-import {createBuffer, MutableTextRange, TextBuffer} from 'text-manipulation';
+import {createBuffer, createTextRange, MutableTextRange, TextBuffer} from 'text-manipulation';
 import {AntlrParser} from './antlr-parser';
 import {AntlrRange, AntlrRuleClass} from '../';
 import {RuleTable} from './rule-table';
@@ -191,6 +191,13 @@ export class MutableAntlrParser implements AntlrParser {
 
             this.ruleTable.updateRule(originalRange as AntlrRange, rule, text);
         }
+    }
+
+    replaceRange(range: AntlrRange, text: string): AntlrRange {
+        const textRange = createTextRange(range[0], range[1]);
+        const newRange = this.textBuffer.replaceRange(textRange, text);
+
+        return [newRange.start, newRange.end];
     }
 
     getRuleAt(column: number, line: number): AntlrRuleWrapper {

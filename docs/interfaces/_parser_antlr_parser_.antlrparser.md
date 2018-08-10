@@ -71,6 +71,7 @@
 * [parse](_parser_antlr_parser_.antlrparser.md#parse)
 * [reduce](_parser_antlr_parser_.antlrparser.md#reduce)
 * [reparse](_parser_antlr_parser_.antlrparser.md#reparse)
+* [replaceRange](_parser_antlr_parser_.antlrparser.md#replacerange)
 * [setRuleText](_parser_antlr_parser_.antlrparser.md#setruletext)
 * [setTokenText](_parser_antlr_parser_.antlrparser.md#settokentext)
 * [siblingsHaveNoErrors](_parser_antlr_parser_.antlrparser.md#siblingshavenoerrors)
@@ -966,6 +967,22 @@ ___
 Parse using the existing Parser's text. (This is very useful if you've mutated or change the parser's rule or token text)
 
 **Returns:** `ParserRuleContext`
+
+___
+<a id="replacerange"></a>
+
+###  replaceRange
+
+▸ **replaceRange**(range: *[AntlrRange](../modules/_types_types_.md#antlrrange)*, text: *`string`*): [AntlrRange](../modules/_types_types_.md#antlrrange)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| range | [AntlrRange](../modules/_types_types_.md#antlrrange) |
+| text | `string` |
+
+**Returns:** [AntlrRange](../modules/_types_types_.md#antlrrange)
 
 ___
 <a id="setruletext"></a>

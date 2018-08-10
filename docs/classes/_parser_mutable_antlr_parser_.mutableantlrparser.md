@@ -103,6 +103,7 @@ console.log(parser.getText());
 * [parse](_parser_mutable_antlr_parser_.mutableantlrparser.md#parse)
 * [reduce](_parser_mutable_antlr_parser_.mutableantlrparser.md#reduce)
 * [reparse](_parser_mutable_antlr_parser_.mutableantlrparser.md#reparse)
+* [replaceRange](_parser_mutable_antlr_parser_.mutableantlrparser.md#replacerange)
 * [setRuleText](_parser_mutable_antlr_parser_.mutableantlrparser.md#setruletext)
 * [setTokenText](_parser_mutable_antlr_parser_.mutableantlrparser.md#settokentext)
 * [siblingsHaveNoErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#siblingshavenoerrors)
@@ -1015,6 +1016,22 @@ ___
 ▸ **reparse**(): `ParserRuleContext`
 
 **Returns:** `ParserRuleContext`
+
+___
+<a id="replacerange"></a>
+
+###  replaceRange
+
+▸ **replaceRange**(range: *[AntlrRange](../modules/_types_types_.md#antlrrange)*, text: *`string`*): [AntlrRange](../modules/_types_types_.md#antlrrange)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| range | [AntlrRange](../modules/_types_types_.md#antlrrange) |
+| text | `string` |
+
+**Returns:** [AntlrRange](../modules/_types_types_.md#antlrrange)
 
 ___
 <a id="setruletext"></a>
