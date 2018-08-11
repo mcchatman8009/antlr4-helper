@@ -168,13 +168,13 @@ export class TokenTable {
             //
             // Case 1: This rule only ranges on a single line
             //
-            if (!this.tokenTable[0]) {
+            if (!this.tokenTable[line]) {
                 this.tokenTable = [];
             }
 
             for (let i = 0; i < buffer.getColumnCount(0); i++) {
                 // Insert at starting range column
-                this.tokenTable[0].splice(column + i, 0, token);
+                this.tokenTable[line].splice(column + i, 0, token);
             }
         }
 

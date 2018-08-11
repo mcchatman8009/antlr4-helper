@@ -240,13 +240,13 @@ export class RuleTable {
             //
             // Case 1: This rule only ranges on a single line
             //
-            if (!this.ruleTable[0]) {
+            if (!this.ruleTable[line]) {
                 this.ruleTable = [];
             }
 
             for (let i = 0; i < buffer.getColumnCount(0); i++) {
                 // Insert at starting range column
-                this.ruleTable[0].splice(column + i, 0, rule);
+                this.ruleTable[line].splice(column + i, 0, rule);
             }
         }
 
