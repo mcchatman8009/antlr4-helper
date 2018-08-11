@@ -92,19 +92,23 @@ export class TokenTable {
         let prefixTokens: Token[] = [];
 
         for (let i = start.line; i <= end.line; i++) {
+
+            if (i > start.line) {
+                //
+                // Remove the previous line if empty, as we continue further in the range
+                //
+                if (this.tokenTable[line].length === 0) {
+                    this.tokenTable.splice(line, 1);
+                }
+            }
+
             const colEnd = (i === end.line) ? end.column : this.tokenTable[line].length;
 
             for (let col = startCol; col < colEnd; col++) {
                 this.tokenTable[line].splice(startCol, 1);
             }
 
-            if (this.tokenTable[line].length === 0) {
-                const singleLine = i === end.line && i === 0;
-
-                if (!singleLine) {
-                    this.tokenTable.splice(line, 1);
-                }
-            } else {
+            if (this.tokenTable[line].length !== 0) {
                 if (i !== end.line) {
                     prefixTokens = this.tokenTable[line];
                     this.tokenTable.splice(line, 1);

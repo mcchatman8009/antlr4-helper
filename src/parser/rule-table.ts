@@ -107,19 +107,23 @@ export class RuleTable {
         let prefixRules: ParserRuleContext[] = [];
 
         for (let i = start.line; i <= end.line; i++) {
+
+            if (i > start.line) {
+                //
+                // Remove the previous line if empty, as we continue further in the range
+                //
+                if (this.ruleTable[line].length === 0) {
+                    this.ruleTable.splice(line, 1);
+                }
+            }
+
             const colEnd = (i === end.line) ? end.column : this.ruleTable[line].length;
 
             for (let col = startCol; col < colEnd; col++) {
                 this.ruleTable[line].splice(startCol, 1);
             }
 
-            if (this.ruleTable[line].length === 0) {
-                const singleLine = i === end.line && i === 0;
-
-                if (!singleLine) {
-                    this.ruleTable.splice(line, 1);
-                }
-            } else {
+            if (this.ruleTable[line].length !== 0) {
                 if (i !== end.line) {
                     prefixRules = this.ruleTable[line];
                     this.ruleTable.splice(line, 1);
