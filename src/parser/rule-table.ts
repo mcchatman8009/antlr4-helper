@@ -173,8 +173,9 @@ export class RuleTable {
 
                     if (newVal >= oldVal) {
                         this.ruleTable[i][j] = rule;
-                        this.addToRuleMap(rule, range);
                     }
+
+                    this.addToRuleMap(rule, range);
                 } else {
                     this.ruleTable[i][j] = rule;
                     this.addToRuleMap(rule, range);
