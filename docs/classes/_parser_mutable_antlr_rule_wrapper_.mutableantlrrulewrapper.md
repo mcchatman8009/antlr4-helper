@@ -18,6 +18,7 @@
 
 ### Properties
 
+* [fixedRange](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#fixedrange)
 * [parser](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#parser)
 * [rule](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md#rule)
 
@@ -46,7 +47,7 @@
 
 ###  constructor
 
-⊕ **new MutableAntlrRuleWrapper**(rule: *`ParserRuleContext`*, parser: *[MutableAntlrParser](_parser_mutable_antlr_parser_.mutableantlrparser.md)*): [MutableAntlrRuleWrapper](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md)
+⊕ **new MutableAntlrRuleWrapper**(rule: *`ParserRuleContext`*, parser: *[MutableAntlrParser](_parser_mutable_antlr_parser_.mutableantlrparser.md)*, fixedRange?: *[AntlrRange](../modules/_types_types_.md#antlrrange)*): [MutableAntlrRuleWrapper](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md)
 
 **Parameters:**
 
@@ -54,6 +55,7 @@
 | ------ | ------ |
 | rule | `ParserRuleContext` |
 | parser | [MutableAntlrParser](_parser_mutable_antlr_parser_.mutableantlrparser.md) |
+| `Optional` fixedRange | [AntlrRange](../modules/_types_types_.md#antlrrange) |
 
 **Returns:** [MutableAntlrRuleWrapper](_parser_mutable_antlr_rule_wrapper_.mutableantlrrulewrapper.md)
 
@@ -61,6 +63,13 @@ ___
 
 ## Properties
 
+<a id="fixedrange"></a>
+
+### `<Private>``<Optional>` fixedRange
+
+**● fixedRange**: *[AntlrRange](../modules/_types_types_.md#antlrrange)*
+
+___
 <a id="parser"></a>
 
 ### `<Private>` parser

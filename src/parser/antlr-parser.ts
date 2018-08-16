@@ -388,4 +388,6 @@ export interface AntlrParser {
     comparePositions(a: { column: number, line: number }, b: { column: number, line: number }): number;
 
     replaceRange(range: AntlrRange, text: string): AntlrRange;
+
+    getTextRange(range: AntlrRange): string;
 }

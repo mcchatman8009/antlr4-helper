@@ -18,6 +18,7 @@
 
 ### Properties
 
+* [fixedRange](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#fixedrange)
 * [parser](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#parser)
 * [rule](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#rule)
 
@@ -46,7 +47,7 @@
 
 ###  constructor
 
-⊕ **new ImmutableAntlrRuleWrapper**(rule: *`ParserRuleContext`*, parser: *[AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)*): [ImmutableAntlrRuleWrapper](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md)
+⊕ **new ImmutableAntlrRuleWrapper**(rule: *`ParserRuleContext`*, parser: *[AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md)*, fixedRange?: *[AntlrRange](../modules/_types_types_.md#antlrrange)*): [ImmutableAntlrRuleWrapper](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md)
 
 **Parameters:**
 
@@ -54,6 +55,7 @@
 | ------ | ------ |
 | rule | `ParserRuleContext` |
 | parser | [AntlrParser](../interfaces/_parser_antlr_parser_.antlrparser.md) |
+| `Optional` fixedRange | [AntlrRange](../modules/_types_types_.md#antlrrange) |
 
 **Returns:** [ImmutableAntlrRuleWrapper](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md)
 
@@ -61,6 +63,13 @@ ___
 
 ## Properties
 
+<a id="fixedrange"></a>
+
+### `<Private>``<Optional>` fixedRange
+
+**● fixedRange**: *[AntlrRange](../modules/_types_types_.md#antlrrange)*
+
+___
 <a id="parser"></a>
 
 ### `<Private>` parser

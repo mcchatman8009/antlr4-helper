@@ -51,6 +51,10 @@ export class ErrorRuleHandler extends ErrorListener {
     }
 
     addError(error: AntlrRuleError) {
+        if (this.errors.has(error.rule)) {
+            error.message = this.errors.get(error.rule).message;
+        }
+
         this.errors.set(error.rule, error);
         this.ruleTable.addRule(error.rule, this.getRuleRangeSafely(error.rule));
     }
@@ -122,7 +126,7 @@ export class ErrorRuleHandler extends ErrorListener {
         error.start = range[0];
         error.end = range[1];
         error.rule = rule;
-        error.ruleWrapper = new ImmutableAntlrRuleWrapper(rule, this.parser);
+        error.ruleWrapper = new ImmutableAntlrRuleWrapper(rule, this.parser, range);
         error.exception = rule.exception;
         error.message = `Error matching the ${this.parser.getRuleName(rule)} rule`;
 
@@ -142,7 +146,7 @@ export class ErrorRuleHandler extends ErrorListener {
         if (rule && rule.start && rule.stop) {
             // Return a correct rule
             const from = {column: rule.start.column, line: rule.start.line - 1};
-            const len = max((rule.stop.text.length), 0);
+            const len = (rule.stop.type === -1) ? 0 : max((rule.stop.text.length), 0);
             const to = {column: rule.stop.column + len, line: rule.stop.line - 1};
 
             return sortRange([from, to]);

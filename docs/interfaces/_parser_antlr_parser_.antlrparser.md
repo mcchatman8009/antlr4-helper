@@ -53,6 +53,7 @@
 * [getRulesInLine](_parser_antlr_parser_.antlrparser.md#getrulesinline)
 * [getSiblings](_parser_antlr_parser_.antlrparser.md#getsiblings)
 * [getText](_parser_antlr_parser_.antlrparser.md#gettext)
+* [getTextRange](_parser_antlr_parser_.antlrparser.md#gettextrange)
 * [getTokenAt](_parser_antlr_parser_.antlrparser.md#gettokenat)
 * [getTokenName](_parser_antlr_parser_.antlrparser.md#gettokenname)
 * [getTokenRange](_parser_antlr_parser_.antlrparser.md#gettokenrange)
@@ -684,6 +685,21 @@ ___
 ▸ **getText**(): `string`
 
 The complete parsed text
+
+**Returns:** `string`
+
+___
+<a id="gettextrange"></a>
+
+###  getTextRange
+
+▸ **getTextRange**(range: *[AntlrRange](../modules/_types_types_.md#antlrrange)*): `string`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| range | [AntlrRange](../modules/_types_types_.md#antlrrange) |
 
 **Returns:** `string`
 

@@ -7,7 +7,7 @@ import {AntlrRuleClass} from '../types/types';
 import * as _ from 'lodash';
 import {AntlrParserWrapper} from './antlr-parser-wrapper';
 import {RuleTable} from './rule-table';
-import {createBuffer, ImmutableTextRange, TextBuffer} from 'text-manipulation';
+import {createBuffer, createTextRange, ImmutableTextRange, TextBuffer} from 'text-manipulation';
 import {ErrorRuleHandler} from './error-rule-handler';
 import {AntlrRuleError} from './antlr-rule-error';
 import {LexErrorHandler} from './lex-error-handler';
@@ -111,6 +111,9 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
 
         this.getErrors().forEach((err) => {
             this.ruleTable.addToRuleMap(err.rule, [err.start, err.end]);
+            if (err.rule) {
+                this.errorHandler.processRuleWithError(err.rule);
+            }
         });
 
         return rootRule;
@@ -150,6 +153,10 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
 
         return [start, stop];
 
+    }
+
+    getTextRange(range: AntlrRange): string {
+        return this.textBuffer.getRangeText(createTextRange(range[0], range[1]));
     }
 
     /**
@@ -333,10 +340,21 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
     }
 
     getRuleBefore(rule: ParserRuleContext): ParserRuleContext {
-        const siblings = this.getSiblings(rule);
+        const parent = rule.parentCtx;
+        let choice: ParserRuleContext;
 
-        if (siblings.length > 0) {
-            return siblings[0];
+        if (parent && parent.getChildCount() > 0) {
+            for (let i = 0; i < parent.getChildCount(); i++) {
+                const child = parent.getChild(i);
+
+                if (child && child === rule) {
+                    return choice;
+                }
+
+                if (rule !== child && child instanceof ParserRuleContext) {
+                    choice = rule;
+                }
+            }
         }
 
         return undefined;
