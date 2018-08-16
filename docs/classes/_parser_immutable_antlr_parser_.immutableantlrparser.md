@@ -80,6 +80,7 @@
 * [getRulesInLine](_parser_immutable_antlr_parser_.immutableantlrparser.md#getrulesinline)
 * [getSiblings](_parser_immutable_antlr_parser_.immutableantlrparser.md#getsiblings)
 * [getText](_parser_immutable_antlr_parser_.immutableantlrparser.md#gettext)
+* [getTextRange](_parser_immutable_antlr_parser_.immutableantlrparser.md#gettextrange)
 * [getTokenAt](_parser_immutable_antlr_parser_.immutableantlrparser.md#gettokenat)
 * [getTokenName](_parser_immutable_antlr_parser_.immutableantlrparser.md#gettokenname)
 * [getTokenPositionTable](_parser_immutable_antlr_parser_.immutableantlrparser.md#gettokenpositiontable)
@@ -849,6 +850,21 @@ ___
 ###  getText
 
 ▸ **getText**(): `string`
+
+**Returns:** `string`
+
+___
+<a id="gettextrange"></a>
+
+###  getTextRange
+
+▸ **getTextRange**(range: *[AntlrRange](../modules/_types_types_.md#antlrrange)*): `string`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| range | [AntlrRange](../modules/_types_types_.md#antlrrange) |
 
 **Returns:** `string`
 

@@ -8,7 +8,7 @@ import {MutableAntlrTokenWrapper} from './mutable-antlr-token-wrapper';
 import {AntlrRuleError} from './antlr-rule-error';
 
 export class MutableAntlrRuleWrapper implements AntlrRuleWrapper {
-    constructor(public rule: ParserRuleContext, private parser: MutableAntlrParser) {
+    constructor(public rule: ParserRuleContext, private parser: MutableAntlrParser, private fixedRange?: AntlrRange) {
     }
 
     exists(): boolean {
@@ -67,10 +67,15 @@ export class MutableAntlrRuleWrapper implements AntlrRuleWrapper {
     }
 
     getText(): string {
+        if (this.fixedRange) {
+            return this.parser.getTextRange(this.fixedRange);
+        }
+
         return this.parser.getRuleText(this.rule);
     }
 
     setText(text: string): void {
+        this.fixedRange = undefined;
         return this.parser.setRuleText(this.rule, text);
     }
 
@@ -79,6 +84,10 @@ export class MutableAntlrRuleWrapper implements AntlrRuleWrapper {
     }
 
     getRange(): AntlrRange {
+        if (this.fixedRange) {
+            return this.fixedRange;
+        }
+
         return this.parser.getRuleRange(this.rule);
     }
 

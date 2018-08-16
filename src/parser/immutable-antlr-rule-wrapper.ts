@@ -9,7 +9,7 @@ import {AntlrRuleError} from './antlr-rule-error';
 
 export class ImmutableAntlrRuleWrapper implements AntlrRuleWrapper {
 
-    constructor(private rule: ParserRuleContext, private parser: AntlrParser) {
+    constructor(private rule: ParserRuleContext, private parser: AntlrParser, private fixedRange?: AntlrRange) {
     }
 
     exists(): boolean {
@@ -103,10 +103,17 @@ export class ImmutableAntlrRuleWrapper implements AntlrRuleWrapper {
     }
 
     getText(): string {
+        if (this.fixedRange) {
+            return this.parser.getTextRange(this.fixedRange);
+        }
         return this.parser.getRuleText(this.rule);
     }
 
     getRange(): AntlrRange {
+        if (this.fixedRange) {
+            return this.fixedRange;
+        }
+
         return this.parser.getRuleRange(this.rule);
     }
 

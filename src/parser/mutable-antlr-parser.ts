@@ -161,6 +161,10 @@ export class MutableAntlrParser implements AntlrParser {
         return this.parser.getTokenText(token);
     }
 
+    getTextRange(range: AntlrRange): string {
+        return this.textBuffer.getRangeText(createTextRange(range[0], range[1]));
+    }
+
     /**
      * Get the text of the completely parsed rule
      *
@@ -442,7 +446,7 @@ export class MutableAntlrParser implements AntlrParser {
     getErrorRuleAt(column: number, line: number): AntlrRuleWrapper {
         const rule = this.parser.getErrorRuleAt(column, line);
         if (rule) {
-            return new MutableAntlrRuleWrapper(rule.getRule(), this);
+            return new MutableAntlrRuleWrapper(rule.getRule(), this, rule.getRange());
         }
 
         return undefined;

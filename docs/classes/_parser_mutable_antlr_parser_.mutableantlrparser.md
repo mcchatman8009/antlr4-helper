@@ -84,6 +84,7 @@ console.log(parser.getText());
 * [getRulesInLine](_parser_mutable_antlr_parser_.mutableantlrparser.md#getrulesinline)
 * [getSiblings](_parser_mutable_antlr_parser_.mutableantlrparser.md#getsiblings)
 * [getText](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettext)
+* [getTextRange](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettextrange)
 * [getTokenAt](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokenat)
 * [getTokenName](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokenname)
 * [getTokenPositionTable](_parser_mutable_antlr_parser_.mutableantlrparser.md#gettokenpositiontable)
@@ -748,6 +749,21 @@ ___
 ▸ **getText**(): `string`
 
 Get the complete parsed and transformed text
+
+**Returns:** `string`
+
+___
+<a id="gettextrange"></a>
+
+###  getTextRange
+
+▸ **getTextRange**(range: *[AntlrRange](../modules/_types_types_.md#antlrrange)*): `string`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| range | [AntlrRange](../modules/_types_types_.md#antlrrange) |
 
 **Returns:** `string`
 
