@@ -216,11 +216,11 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
             const end = {column: rule.stop.column + rule.stop.text.length, line: rule.stop.line - 1};
             return [start, end];
         } else if (rule.start) {
-            const start = {column: rule.start.column, line: rule.start.line - 1};
-            const end = {column: rule.start.column + rule.start.text.length, line: rule.start.line - 1};
+            const start = {column: 0, line: rule.start.line - 1};
+            const end = {column: rule.start.column, line: rule.start.line - 1};
             return [start, end];
         } else if (rule.stop) {
-            const start = {column: rule.stop.column, line: rule.stop.line - 1};
+            const start = {column: 0, line: rule.stop.line - 1};
             const end = {column: rule.stop.column + rule.stop.text.length, line: rule.stop.line - 1};
             return [start, end];
         } else {
