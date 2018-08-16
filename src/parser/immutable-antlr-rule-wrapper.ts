@@ -6,10 +6,14 @@ import {AntlrTokenWrapper} from './antlr-token-wrapper';
 import {TerminalNode} from 'antlr4/tree/Tree';
 import {ImmutableAntlrTokenWrapper} from './immutable-antlr-token-wrapper';
 import {AntlrRuleError} from './antlr-rule-error';
+import {sortRange} from 'text-manipulation/dist/buffer/utils';
 
 export class ImmutableAntlrRuleWrapper implements AntlrRuleWrapper {
 
     constructor(private rule: ParserRuleContext, private parser: AntlrParser, private fixedRange?: AntlrRange) {
+        if (fixedRange) {
+            this.fixedRange = sortRange(fixedRange);
+        }
     }
 
     exists(): boolean {
