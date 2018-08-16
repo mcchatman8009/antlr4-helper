@@ -446,7 +446,10 @@ export class MutableAntlrParser implements AntlrParser {
     getErrorRuleAt(column: number, line: number): AntlrRuleWrapper {
         const rule = this.parser.getErrorRuleAt(column, line);
         if (rule) {
-            return new MutableAntlrRuleWrapper(rule.getRule(), this, rule.getRange());
+            try {
+                return new MutableAntlrRuleWrapper(rule.getRule(), this, rule.getRange());
+            } catch (e) {
+            }
         }
 
         return undefined;
