@@ -210,10 +210,23 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
      * @returns {AntlrRange}
      */
     getRuleRange(rule: ParserRuleContext): AntlrRange {
-        const start = {column: rule.start.column, line: rule.start.line - 1};
-        const end = {column: rule.stop.column + rule.stop.text.length, line: rule.stop.line - 1};
+        if (rule.start && rule.stop) {
 
-        return [start, end];
+            const start = {column: rule.start.column, line: rule.start.line - 1};
+            const end = {column: rule.stop.column + rule.stop.text.length, line: rule.stop.line - 1};
+            return [start, end];
+        } else if (rule.start) {
+            const start = {column: rule.start.column, line: rule.start.line - 1};
+            const end = {column: rule.start.column + rule.start.text.length, line: rule.start.line - 1};
+            return [start, end];
+        } else if (rule.stop) {
+            const start = {column: rule.stop.column, line: rule.stop.line - 1};
+            const end = {column: rule.stop.column + rule.stop.text.length, line: rule.stop.line - 1};
+            return [start, end];
+        } else {
+            const start = {column: 0, line: 0};
+            return [start, start];
+        }
     }
 
     /**
