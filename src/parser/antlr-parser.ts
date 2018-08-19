@@ -1,10 +1,15 @@
 import {ParserRuleContext, Token} from 'antlr4';
-import {AntlrRange, AntlrRuleClass} from '../';
+import {AntlrFactory, AntlrRange, AntlrRuleClass} from '../';
 import {AntlrTokenWrapper} from './antlr-token-wrapper';
 import {AntlrRuleError} from './antlr-rule-error';
 import {AntlrRuleWrapper} from './antlr-rule-wrapper';
 
 export interface AntlrParser {
+
+    getFactory(): AntlrFactory;
+
+    getRoot(): AntlrRuleWrapper;
+
 
     /**
      * Parse the input string
@@ -372,6 +377,10 @@ export interface AntlrParser {
     findRuleByName(ruleName: string): AntlrRuleWrapper;
 
     findRulesByName(ruleName: string): AntlrRuleWrapper[];
+
+    findRulesByPath(xpath: string): AntlrRuleWrapper[];
+
+    findRuleByPath(xpath: string): AntlrRuleWrapper;
 
     getAllRules(): AntlrRuleWrapper[];
 

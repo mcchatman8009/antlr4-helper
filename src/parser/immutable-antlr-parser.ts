@@ -19,6 +19,7 @@ import {AntlrParser} from './antlr-parser';
 import {ImmutableAntlrTokenWrapper} from './immutable-antlr-token-wrapper';
 import {ImmutableAntlrRuleWrapper} from './immutable-antlr-rule-wrapper';
 import {FunctionalRuleParser} from './functional-rule-parser';
+import {XPath} from '../xpath/xpath';
 
 export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
 
@@ -36,6 +37,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
     private textBuffer: TextBuffer;
     private stack: ParserRuleContext[];
     private functionalRuleParser: FunctionalRuleParser;
+    private rootRule: ParserRuleContext;
 
 
     /**
@@ -50,6 +52,14 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         this.customValidatorSubject = new Subject<ParserRuleContext>();
         this.parseCompleteSubject = new Subject<void>();
 
+    }
+
+    getFactory(): AntlrFactory {
+        return this.factory;
+    }
+
+    getRoot(): AntlrRuleWrapper {
+        return new ImmutableAntlrRuleWrapper(this.rootRule, this);
     }
 
     getAllRules(): AntlrRuleWrapper[] {
@@ -115,6 +125,8 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
                 this.errorHandler.processRuleWithError(err.rule);
             }
         });
+
+        this.rootRule = rootRule;
 
         return rootRule;
     }
@@ -648,4 +660,20 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
     findRulesByName(ruleName: string): AntlrRuleWrapper[] {
         return this.findAll((rule) => rule.getName() === ruleName);
     }
+
+    findRulesByPath(path: string): AntlrRuleWrapper[] {
+        const xpath = new XPath(this.getRoot());
+        return xpath.findRulesByPath(path);
+    }
+
+    findRuleByPath(path: string): AntlrRuleWrapper {
+        const rules = this.findRulesByPath(path);
+
+        if (rules.length > 0) {
+            return rules[0];
+        }
+
+        return undefined;
+    }
+
 }

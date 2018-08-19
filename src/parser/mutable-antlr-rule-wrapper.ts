@@ -7,6 +7,7 @@ import {AntlrTokenWrapper} from './antlr-token-wrapper';
 import {MutableAntlrTokenWrapper} from './mutable-antlr-token-wrapper';
 import {AntlrRuleError} from './antlr-rule-error';
 import {sortRange} from 'text-manipulation/dist/buffer/utils';
+import {XPath} from '../xpath/xpath';
 
 export class MutableAntlrRuleWrapper implements AntlrRuleWrapper {
     constructor(public rule: ParserRuleContext, private parser: MutableAntlrParser, private fixedRange?: AntlrRange) {
@@ -123,5 +124,56 @@ export class MutableAntlrRuleWrapper implements AntlrRuleWrapper {
 
     createRuleError(): AntlrRuleError {
         return this.parser.createRuleError(this.getRule());
+    }
+
+    findRulesByName(ruleName: string): AntlrRuleWrapper[] {
+        const stack = [this] as AntlrRuleWrapper[];
+        const results = []as AntlrRuleWrapper[];
+
+        while (stack.length > 0) {
+            const root = stack.pop();
+            if (root !== this && root.getName() === ruleName) {
+                results.push(root);
+            }
+
+            root.getChildren().forEach((child) => {
+                stack.push(child);
+            });
+        }
+
+        return results;
+    }
+
+    findRuleByName(ruleName: string): AntlrRuleWrapper {
+        const stack = [this] as AntlrRuleWrapper[];
+
+        while (stack.length > 0) {
+            const root = stack.pop();
+
+            if (root !== this && root.getName() === ruleName) {
+                return root;
+            }
+
+            root.getChildren().forEach((child) => {
+                stack.push(child);
+            });
+        }
+
+        return undefined;
+    }
+
+    findRuleByPath(path: string): AntlrRuleWrapper {
+        const rules = this.findRulesByPath(path);
+
+        if (rules.length > 0) {
+            return rules[0];
+        }
+
+        return undefined;
+    }
+
+    findRulesByPath(path: string): AntlrRuleWrapper[] {
+        const xpath = new XPath(this);
+        return xpath.findRulesByPath(path);
     }
 }

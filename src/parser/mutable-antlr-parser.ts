@@ -11,6 +11,7 @@ import {AntlrRuleError} from './antlr-rule-error';
 import {TokenTable} from './token-table';
 import {FunctionalRuleParser} from './functional-rule-parser';
 import {MutableAntlrTokenWrapper} from './mutable-antlr-token-wrapper';
+import {XPath} from '../xpath/xpath';
 
 /**
  * The MutableAntlrParser allows for text manipulation at the rule and token level.
@@ -67,6 +68,14 @@ export class MutableAntlrParser implements AntlrParser {
                 this.ruleTable.addToRuleMap(err.rule, [err.start, err.end]);
             });
         });
+    }
+
+    getRoot(): AntlrRuleWrapper {
+        return new MutableAntlrRuleWrapper(this.parser.getRoot().getRule(), this);
+    }
+
+    getFactory(): AntlrFactory {
+        return this.parser.getFactory();
     }
 
     getAllRules(): AntlrRuleWrapper[] {
@@ -508,5 +517,20 @@ export class MutableAntlrParser implements AntlrParser {
 
     findRulesByName(ruleName: string): AntlrRuleWrapper[] {
         return this.findAll((rule) => rule.getName() === ruleName);
+    }
+
+    findRulesByPath(path: string): AntlrRuleWrapper[] {
+        const xpath = new XPath(this.getRoot());
+        return xpath.findRulesByPath(path);
+    }
+
+    findRuleByPath(path: string): AntlrRuleWrapper {
+        const rules = this.findRulesByPath(path);
+
+        if (rules.length > 0) {
+            return rules[0];
+        }
+
+        return undefined;
     }
 }

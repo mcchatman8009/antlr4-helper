@@ -32,4 +32,12 @@ export interface AntlrRuleWrapper {
     inRange(point: { column: number, line: number }): boolean;
 
     exists(): boolean;
+
+    findRulesByName(ruleName: string): AntlrRuleWrapper[];
+
+    findRuleByName(ruleName: string): AntlrRuleWrapper;
+
+    findRuleByPath(xpath: string): AntlrRuleWrapper;
+
+    findRulesByPath(xpath: string): AntlrRuleWrapper[];
 }
