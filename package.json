@@ -1,6 +1,6 @@
 {
   "name": "antlr4-helper",
-  "version": "1.0.44",
+  "version": "1.0.45",
   "description": "A NPM library that assists in various Antlr4 parse, language analysis, and language manipulation tasks",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,7 +10,7 @@
     "build-tinyc-sample": "antlr4-tool -o ./samples/tinyc/parser grammars/tinyc/Tinyc.g4",
     "build-json-sample": "antlr4-tool -o ./samples/json/parser grammars/json/JSON.g4 ",
     "clean": "rm -rf dist",
-    "lint": "tslint -p . -c tslint.json 'src/**/*.ts'",
+    "lint": "tslint -p . -c tslint.json -e 'src/xpath/parser/*.ts' 'src/**/*.ts'",
     "build": "tsc && antlr4-tool -o ./test/tinyc grammars/tinyc/Tinyc.g4 && antlr4-tool -o ./dist/xpath/parser grammars/xpath/xpath.g4 && antlr4-tool -o ./src/xpath/parser grammars/xpath/xpath.g4"
   },
   "files": [

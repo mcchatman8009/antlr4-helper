@@ -88,6 +88,6 @@ export class PathExpr {
     }
 
     private isSelectAll(token: AntlrTokenWrapper): boolean {
-        return token.getText().trim() == '//';
+        return token.getText().trim() === '//';
     }
 }

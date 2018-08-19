@@ -26,6 +26,10 @@
 
 * [createRuleError](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#createruleerror)
 * [exists](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#exists)
+* [findRuleByName](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#findrulebyname)
+* [findRuleByPath](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#findrulebypath)
+* [findRulesByName](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#findrulesbyname)
+* [findRulesByPath](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#findrulesbypath)
 * [getChildren](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#getchildren)
 * [getName](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#getname)
 * [getParent](_parser_immutable_antlr_rule_wrapper_.immutableantlrrulewrapper.md#getparent)
@@ -103,6 +107,66 @@ ___
 ▸ **exists**(): `boolean`
 
 **Returns:** `boolean`
+
+___
+<a id="findrulebyname"></a>
+
+###  findRuleByName
+
+▸ **findRuleByName**(ruleName: *`string`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
+<a id="findrulebypath"></a>
+
+###  findRuleByPath
+
+▸ **findRuleByPath**(path: *`string`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| path | `string` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
+<a id="findrulesbyname"></a>
+
+###  findRulesByName
+
+▸ **findRulesByName**(ruleName: *`string`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
+<a id="findrulesbypath"></a>
+
+###  findRulesByPath
+
+▸ **findRulesByPath**(path: *`string`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| path | `string` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
 
 ___
 <a id="getchildren"></a>

@@ -17,6 +17,10 @@
 
 * [createRuleError](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#createruleerror)
 * [exists](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#exists)
+* [findRuleByName](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#findrulebyname)
+* [findRuleByPath](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#findrulebypath)
+* [findRulesByName](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#findrulesbyname)
+* [findRulesByPath](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#findrulesbypath)
 * [getChildren](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#getchildren)
 * [getName](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#getname)
 * [getParent](_parser_antlr_rule_wrapper_.antlrrulewrapper.md#getparent)
@@ -50,6 +54,66 @@ ___
 ▸ **exists**(): `boolean`
 
 **Returns:** `boolean`
+
+___
+<a id="findrulebyname"></a>
+
+###  findRuleByName
+
+▸ **findRuleByName**(ruleName: *`string`*): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
+<a id="findrulebypath"></a>
+
+###  findRuleByPath
+
+▸ **findRuleByPath**(xpath: *`string`*): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| xpath | `string` |
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
+<a id="findrulesbyname"></a>
+
+###  findRulesByName
+
+▸ **findRulesByName**(ruleName: *`string`*): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| ruleName | `string` |
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
+<a id="findrulesbypath"></a>
+
+###  findRulesByPath
+
+▸ **findRulesByPath**(xpath: *`string`*): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| xpath | `string` |
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
 
 ___
 <a id="getchildren"></a>

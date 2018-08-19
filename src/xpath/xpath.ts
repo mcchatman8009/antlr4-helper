@@ -73,10 +73,10 @@ export class XPath {
                                 return lastNode.findRulesByName(node.name);
                             }
                         })
-                            .filter((lastNodes) => !!lastNodes)
-                            .map((lastNodes) => {
-                                const n = lastNodes.length;
-                                const children = lastNodes.filter((rule, i) => node.testNodeWithPredicate(rule, i, n));
+                            .filter((rules) => !!rules)
+                            .map((rules) => {
+                                const n = rules.length;
+                                const children = rules.filter((rule, i) => node.testNodeWithPredicate(rule, i, n));
                                 return children;
                             }));
                     } else {
@@ -84,19 +84,19 @@ export class XPath {
                         // Select all child nodes
                         //
                         const nodeList = lastNodes
-                            .map((lastNode) => {
+                            .map((rules) => {
                                 if (node.isParent) {
-                                    if (lastNode.getParent()) {
-                                        return lastNode.getParent().getChildren();
+                                    if (rules.getParent()) {
+                                        return rules.getParent().getChildren();
                                     }
                                 } else {
-                                    return lastNode.getChildren();
+                                    return rules.getChildren();
                                 }
                             })
-                            .filter((lastNodes) => !!lastNodes)
-                            .map((lastNodes) => {
-                                const n = lastNodes.length;
-                                const children = lastNodes.filter((rule, i) => node.testNodeWithPredicate(rule, i, n));
+                            .filter((rules) => !!rules)
+                            .map((rules) => {
+                                const n = rules.length;
+                                const children = rules.filter((rule, i) => node.testNodeWithPredicate(rule, i, n));
                                 return children;
                             });
                         childNodes = _.flatten(nodeList);
@@ -111,7 +111,7 @@ export class XPath {
                     });
 
                     lastNodes = nodes;
-                } else if (node.isSingleDot || node.name == '*') {
+                } else if (node.isSingleDot || node.name === '*') {
                     //
                     // If the first path node is a dot, then select the root rules
                     //

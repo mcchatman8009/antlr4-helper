@@ -33,16 +33,20 @@
 * [findAll](_parser_antlr_parser_.antlrparser.md#findall)
 * [findLast](_parser_antlr_parser_.antlrparser.md#findlast)
 * [findRuleByName](_parser_antlr_parser_.antlrparser.md#findrulebyname)
+* [findRuleByPath](_parser_antlr_parser_.antlrparser.md#findrulebypath)
 * [findRulesByName](_parser_antlr_parser_.antlrparser.md#findrulesbyname)
+* [findRulesByPath](_parser_antlr_parser_.antlrparser.md#findrulesbypath)
 * [forEach](_parser_antlr_parser_.antlrparser.md#foreach)
 * [getAllRules](_parser_antlr_parser_.antlrparser.md#getallrules)
 * [getAllTokens](_parser_antlr_parser_.antlrparser.md#getalltokens)
 * [getColumnCount](_parser_antlr_parser_.antlrparser.md#getcolumncount)
 * [getErrorRuleAt](_parser_antlr_parser_.antlrparser.md#geterrorruleat)
 * [getErrors](_parser_antlr_parser_.antlrparser.md#geterrors)
+* [getFactory](_parser_antlr_parser_.antlrparser.md#getfactory)
 * [getLine](_parser_antlr_parser_.antlrparser.md#getline)
 * [getLineCount](_parser_antlr_parser_.antlrparser.md#getlinecount)
 * [getRelevantError](_parser_antlr_parser_.antlrparser.md#getrelevanterror)
+* [getRoot](_parser_antlr_parser_.antlrparser.md#getroot)
 * [getRuleAt](_parser_antlr_parser_.antlrparser.md#getruleat)
 * [getRuleBefore](_parser_antlr_parser_.antlrparser.md#getrulebefore)
 * [getRuleName](_parser_antlr_parser_.antlrparser.md#getrulename)
@@ -394,6 +398,21 @@ ___
 **Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
 
 ___
+<a id="findrulebypath"></a>
+
+###  findRuleByPath
+
+▸ **findRuleByPath**(xpath: *`string`*): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| xpath | `string` |
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
 <a id="findrulesbyname"></a>
 
 ###  findRulesByName
@@ -405,6 +424,21 @@ ___
 | Param | Type |
 | ------ | ------ |
 | ruleName | `string` |
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
+<a id="findrulesbypath"></a>
+
+###  findRulesByPath
+
+▸ **findRulesByPath**(xpath: *`string`*): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| xpath | `string` |
 
 **Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
 
@@ -493,6 +527,15 @@ All the reported errors found after the a parse occurred
 **Returns:** [AntlrRuleError](../classes/_parser_antlr_rule_error_.antlrruleerror.md)[]
 
 ___
+<a id="getfactory"></a>
+
+###  getFactory
+
+▸ **getFactory**(): [AntlrFactory](_factory_antlr_factory_.antlrfactory.md)
+
+**Returns:** [AntlrFactory](_factory_antlr_factory_.antlrfactory.md)
+
+___
 <a id="getline"></a>
 
 ###  getLine
@@ -530,6 +573,15 @@ ___
 Retrieves the most relevant error found in parsing.
 
 **Returns:** [AntlrRuleError](../classes/_parser_antlr_rule_error_.antlrruleerror.md)
+
+___
+<a id="getroot"></a>
+
+###  getRoot
+
+▸ **getRoot**(): [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Returns:** [AntlrRuleWrapper](_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
 
 ___
 <a id="getruleat"></a>

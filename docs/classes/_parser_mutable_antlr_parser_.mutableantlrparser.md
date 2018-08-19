@@ -63,16 +63,20 @@ console.log(parser.getText());
 * [findAll](_parser_mutable_antlr_parser_.mutableantlrparser.md#findall)
 * [findLast](_parser_mutable_antlr_parser_.mutableantlrparser.md#findlast)
 * [findRuleByName](_parser_mutable_antlr_parser_.mutableantlrparser.md#findrulebyname)
+* [findRuleByPath](_parser_mutable_antlr_parser_.mutableantlrparser.md#findrulebypath)
 * [findRulesByName](_parser_mutable_antlr_parser_.mutableantlrparser.md#findrulesbyname)
+* [findRulesByPath](_parser_mutable_antlr_parser_.mutableantlrparser.md#findrulesbypath)
 * [forEach](_parser_mutable_antlr_parser_.mutableantlrparser.md#foreach)
 * [getAllRules](_parser_mutable_antlr_parser_.mutableantlrparser.md#getallrules)
 * [getAllTokens](_parser_mutable_antlr_parser_.mutableantlrparser.md#getalltokens)
 * [getColumnCount](_parser_mutable_antlr_parser_.mutableantlrparser.md#getcolumncount)
 * [getErrorRuleAt](_parser_mutable_antlr_parser_.mutableantlrparser.md#geterrorruleat)
 * [getErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#geterrors)
+* [getFactory](_parser_mutable_antlr_parser_.mutableantlrparser.md#getfactory)
 * [getLine](_parser_mutable_antlr_parser_.mutableantlrparser.md#getline)
 * [getLineCount](_parser_mutable_antlr_parser_.mutableantlrparser.md#getlinecount)
 * [getRelevantError](_parser_mutable_antlr_parser_.mutableantlrparser.md#getrelevanterror)
+* [getRoot](_parser_mutable_antlr_parser_.mutableantlrparser.md#getroot)
 * [getRuleAt](_parser_mutable_antlr_parser_.mutableantlrparser.md#getruleat)
 * [getRuleBefore](_parser_mutable_antlr_parser_.mutableantlrparser.md#getrulebefore)
 * [getRuleName](_parser_mutable_antlr_parser_.mutableantlrparser.md#getrulename)
@@ -477,6 +481,21 @@ ___
 **Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
 
 ___
+<a id="findrulebypath"></a>
+
+###  findRuleByPath
+
+▸ **findRuleByPath**(path: *`string`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| path | `string` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
 <a id="findrulesbyname"></a>
 
 ###  findRulesByName
@@ -488,6 +507,21 @@ ___
 | Param | Type |
 | ------ | ------ |
 | ruleName | `string` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
+<a id="findrulesbypath"></a>
+
+###  findRulesByPath
+
+▸ **findRulesByPath**(path: *`string`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| path | `string` |
 
 **Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
 
@@ -568,6 +602,15 @@ ___
 **Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)[]
 
 ___
+<a id="getfactory"></a>
+
+###  getFactory
+
+▸ **getFactory**(): [AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md)
+
+**Returns:** [AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md)
+
+___
 <a id="getline"></a>
 
 ###  getLine
@@ -599,6 +642,15 @@ ___
 ▸ **getRelevantError**(): [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
 
 **Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
+
+___
+<a id="getroot"></a>
+
+###  getRoot
+
+▸ **getRoot**(): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
 
 ___
 <a id="getruleat"></a>

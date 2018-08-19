@@ -46,6 +46,10 @@ Important Interfaces and Classes
 * ["parser/rule-table"](modules/_parser_rule_table_.md)
 * ["parser/token-table"](modules/_parser_token_table_.md)
 * ["types/types"](modules/_types_types_.md)
+* ["xpath/expr-evaluator"](modules/_xpath_expr_evaluator_.md)
+* ["xpath/path-expr"](modules/_xpath_path_expr_.md)
+* ["xpath/path-node"](modules/_xpath_path_node_.md)
+* ["xpath/xpath"](modules/_xpath_xpath_.md)
 
 ---
 

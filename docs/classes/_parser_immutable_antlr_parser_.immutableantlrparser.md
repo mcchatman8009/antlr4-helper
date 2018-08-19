@@ -29,6 +29,7 @@
 * [parseCompleteSubject](_parser_immutable_antlr_parser_.immutableantlrparser.md#parsecompletesubject)
 * [parseStartedSubject](_parser_immutable_antlr_parser_.immutableantlrparser.md#parsestartedsubject)
 * [parserWrapper](_parser_immutable_antlr_parser_.immutableantlrparser.md#parserwrapper)
+* [rootRule](_parser_immutable_antlr_parser_.immutableantlrparser.md#rootrule)
 * [ruleTable](_parser_immutable_antlr_parser_.immutableantlrparser.md#ruletable)
 * [stack](_parser_immutable_antlr_parser_.immutableantlrparser.md#stack)
 * [textBuffer](_parser_immutable_antlr_parser_.immutableantlrparser.md#textbuffer)
@@ -58,7 +59,9 @@
 * [findAll](_parser_immutable_antlr_parser_.immutableantlrparser.md#findall)
 * [findLast](_parser_immutable_antlr_parser_.immutableantlrparser.md#findlast)
 * [findRuleByName](_parser_immutable_antlr_parser_.immutableantlrparser.md#findrulebyname)
+* [findRuleByPath](_parser_immutable_antlr_parser_.immutableantlrparser.md#findrulebypath)
 * [findRulesByName](_parser_immutable_antlr_parser_.immutableantlrparser.md#findrulesbyname)
+* [findRulesByPath](_parser_immutable_antlr_parser_.immutableantlrparser.md#findrulesbypath)
 * [forEach](_parser_immutable_antlr_parser_.immutableantlrparser.md#foreach)
 * [getAllRules](_parser_immutable_antlr_parser_.immutableantlrparser.md#getallrules)
 * [getAllTokens](_parser_immutable_antlr_parser_.immutableantlrparser.md#getalltokens)
@@ -66,9 +69,11 @@
 * [getErrorRuleAt](_parser_immutable_antlr_parser_.immutableantlrparser.md#geterrorruleat)
 * [getErrorRuleTable](_parser_immutable_antlr_parser_.immutableantlrparser.md#geterrorruletable)
 * [getErrors](_parser_immutable_antlr_parser_.immutableantlrparser.md#geterrors)
+* [getFactory](_parser_immutable_antlr_parser_.immutableantlrparser.md#getfactory)
 * [getLine](_parser_immutable_antlr_parser_.immutableantlrparser.md#getline)
 * [getLineCount](_parser_immutable_antlr_parser_.immutableantlrparser.md#getlinecount)
 * [getRelevantError](_parser_immutable_antlr_parser_.immutableantlrparser.md#getrelevanterror)
+* [getRoot](_parser_immutable_antlr_parser_.immutableantlrparser.md#getroot)
 * [getRuleAt](_parser_immutable_antlr_parser_.immutableantlrparser.md#getruleat)
 * [getRuleBefore](_parser_immutable_antlr_parser_.immutableantlrparser.md#getrulebefore)
 * [getRuleName](_parser_immutable_antlr_parser_.immutableantlrparser.md#getrulename)
@@ -199,6 +204,13 @@ ___
 ### `<Private>` parserWrapper
 
 **● parserWrapper**: *[AntlrParserWrapper](_parser_antlr_parser_wrapper_.antlrparserwrapper.md)*
+
+___
+<a id="rootrule"></a>
+
+### `<Private>` rootRule
+
+**● rootRule**: *`ParserRuleContext`*
 
 ___
 <a id="ruletable"></a>
@@ -569,6 +581,21 @@ ___
 **Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
 
 ___
+<a id="findrulebypath"></a>
+
+###  findRuleByPath
+
+▸ **findRuleByPath**(path: *`string`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| path | `string` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+___
 <a id="findrulesbyname"></a>
 
 ###  findRulesByName
@@ -580,6 +607,21 @@ ___
 | Param | Type |
 | ------ | ------ |
 | ruleName | `string` |
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+___
+<a id="findrulesbypath"></a>
+
+###  findRulesByPath
+
+▸ **findRulesByPath**(path: *`string`*): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| path | `string` |
 
 **Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]
 
@@ -669,6 +711,15 @@ ___
 **Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)[]
 
 ___
+<a id="getfactory"></a>
+
+###  getFactory
+
+▸ **getFactory**(): [AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md)
+
+**Returns:** [AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md)
+
+___
 <a id="getline"></a>
 
 ###  getLine
@@ -700,6 +751,15 @@ ___
 ▸ **getRelevantError**(): [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
 
 **Returns:** [AntlrRuleError](_parser_antlr_rule_error_.antlrruleerror.md)
+
+___
+<a id="getroot"></a>
+
+###  getRoot
+
+▸ **getRoot**(): [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
+
+**Returns:** [AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)
 
 ___
 <a id="getruleat"></a>
