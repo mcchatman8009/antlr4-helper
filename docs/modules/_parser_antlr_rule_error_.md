@@ -20,7 +20,7 @@
 
 ###  Severity
 
-**ΤSeverity**: * "error" &#124; "warning" &#124; `null`
+**Ƭ Severity**: * "error" &#124; "warning" &#124; `null`
 *
 
 ___

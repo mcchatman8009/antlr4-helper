@@ -223,6 +223,10 @@ export class MutableAntlrParser implements AntlrParser {
         return undefined;
     }
 
+    getCharacterAt(column: number, line: number): string {
+        return this.textBuffer.charAt(column, line);
+    }
+
     getTokenPositionTable(): Token[][] {
         return this.tokenTable.tokenTable;
     }

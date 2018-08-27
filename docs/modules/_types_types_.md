@@ -17,7 +17,7 @@
 
 ###  AntlrRange
 
-**ΤAntlrRange**: *[`object`, `object`]*
+**Ƭ AntlrRange**: *[`object`, `object`]*
 
 A simple list that represents:
 
@@ -30,7 +30,7 @@ ___
 
 ###  AntlrRuleClass
 
-**ΤAntlrRuleClass**: *`object`*
+**Ƭ AntlrRuleClass**: *`object`*
 
 The class/constructor of the ParserRuleContext
 

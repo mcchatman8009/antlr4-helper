@@ -69,6 +69,7 @@ console.log(parser.getText());
 * [forEach](_parser_mutable_antlr_parser_.mutableantlrparser.md#foreach)
 * [getAllRules](_parser_mutable_antlr_parser_.mutableantlrparser.md#getallrules)
 * [getAllTokens](_parser_mutable_antlr_parser_.mutableantlrparser.md#getalltokens)
+* [getCharacterAt](_parser_mutable_antlr_parser_.mutableantlrparser.md#getcharacterat)
 * [getColumnCount](_parser_mutable_antlr_parser_.mutableantlrparser.md#getcolumncount)
 * [getErrorRuleAt](_parser_mutable_antlr_parser_.mutableantlrparser.md#geterrorruleat)
 * [getErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#geterrors)
@@ -560,6 +561,22 @@ ___
 ▸ **getAllTokens**(): [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
 
 **Returns:** [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
+
+___
+<a id="getcharacterat"></a>
+
+###  getCharacterAt
+
+▸ **getCharacterAt**(column: *`number`*, line: *`number`*): `string`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| column | `number` |
+| line | `number` |
+
+**Returns:** `string`
 
 ___
 <a id="getcolumncount"></a>

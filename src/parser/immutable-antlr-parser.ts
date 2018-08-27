@@ -502,6 +502,10 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         return undefined;
     }
 
+    getCharacterAt(column: number, line: number): string {
+        return this.textBuffer.charAt(column, line);
+    }
+
     getRuleName(rule: ParserRuleContext): string {
         return this.parserWrapper.ruleIndexToNameMap.get(rule.ruleIndex);
     }

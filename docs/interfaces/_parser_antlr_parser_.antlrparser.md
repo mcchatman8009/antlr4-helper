@@ -39,6 +39,7 @@
 * [forEach](_parser_antlr_parser_.antlrparser.md#foreach)
 * [getAllRules](_parser_antlr_parser_.antlrparser.md#getallrules)
 * [getAllTokens](_parser_antlr_parser_.antlrparser.md#getalltokens)
+* [getCharacterAt](_parser_antlr_parser_.antlrparser.md#getcharacterat)
 * [getColumnCount](_parser_antlr_parser_.antlrparser.md#getcolumncount)
 * [getErrorRuleAt](_parser_antlr_parser_.antlrparser.md#geterrorruleat)
 * [getErrors](_parser_antlr_parser_.antlrparser.md#geterrors)
@@ -479,6 +480,22 @@ ___
 ▸ **getAllTokens**(): [AntlrTokenWrapper](_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
 
 **Returns:** [AntlrTokenWrapper](_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
+
+___
+<a id="getcharacterat"></a>
+
+###  getCharacterAt
+
+▸ **getCharacterAt**(column: *`number`*, line: *`number`*): `string`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| column | `number` |
+| line | `number` |
+
+**Returns:** `string`
 
 ___
 <a id="getcolumncount"></a>

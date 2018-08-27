@@ -65,6 +65,7 @@
 * [forEach](_parser_immutable_antlr_parser_.immutableantlrparser.md#foreach)
 * [getAllRules](_parser_immutable_antlr_parser_.immutableantlrparser.md#getallrules)
 * [getAllTokens](_parser_immutable_antlr_parser_.immutableantlrparser.md#getalltokens)
+* [getCharacterAt](_parser_immutable_antlr_parser_.immutableantlrparser.md#getcharacterat)
 * [getColumnCount](_parser_immutable_antlr_parser_.immutableantlrparser.md#getcolumncount)
 * [getErrorRuleAt](_parser_immutable_antlr_parser_.immutableantlrparser.md#geterrorruleat)
 * [getErrorRuleTable](_parser_immutable_antlr_parser_.immutableantlrparser.md#geterrorruletable)
@@ -660,6 +661,22 @@ ___
 ▸ **getAllTokens**(): [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
 
 **Returns:** [AntlrTokenWrapper](../interfaces/_parser_antlr_token_wrapper_.antlrtokenwrapper.md)[]
+
+___
+<a id="getcharacterat"></a>
+
+###  getCharacterAt
+
+▸ **getCharacterAt**(column: *`number`*, line: *`number`*): `string`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| column | `number` |
+| line | `number` |
+
+**Returns:** `string`
 
 ___
 <a id="getcolumncount"></a>

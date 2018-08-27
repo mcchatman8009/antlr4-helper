@@ -10,6 +10,8 @@ export interface AntlrParser {
 
     getRoot(): AntlrRuleWrapper;
 
+    getCharacterAt(column: number, line: number): string;
+
 
     /**
      * Parse the input string
