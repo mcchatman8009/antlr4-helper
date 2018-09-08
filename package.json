@@ -1,6 +1,6 @@
 {
   "name": "antlr4-helper",
-  "version": "1.0.46",
+  "version": "1.0.56",
   "description": "A NPM library that assists in various Antlr4 parse, language analysis, and language manipulation tasks",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +11,7 @@
     "build-json-sample": "antlr4-tool -o ./samples/json/parser grammars/json/JSON.g4 ",
     "clean": "rm -rf dist",
     "lint": "tslint -p . -c tslint.json -e 'src/xpath/parser/*.ts' 'src/**/*.ts'",
-    "build": "tsc && antlr4-tool -o ./test/tinyc grammars/tinyc/Tinyc.g4 && antlr4-tool -o ./dist/xpath/parser grammars/xpath/xpath.g4 && antlr4-tool -o ./src/xpath/parser grammars/xpath/xpath.g4"
+    "build": "tsc --sourceMap false && antlr4-tool -o ./test/tinyc grammars/tinyc/Tinyc.g4 && antlr4-tool -o ./dist/xpath/parser grammars/xpath/xpath.g4 && antlr4-tool -o ./src/xpath/parser grammars/xpath/xpath.g4"
   },
   "files": [
     "dist",
@@ -46,7 +46,7 @@
     "antlr4": "^4.7.1",
     "lodash": "^4.17.10",
     "rxjs": "^6.2.2",
-    "text-manipulation": "^1.0.10"
+    "text-manipulation": "^1.0.11"
   },
   "devDependencies": {
     "@types/antlr4": "^4.7.0",

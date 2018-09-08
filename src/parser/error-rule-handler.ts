@@ -138,6 +138,10 @@ export class ErrorRuleHandler extends ErrorListener {
         return {column: position.column + 1, line: position.line};
     }
 
+    private tokenIntervalText(token: Token): string {
+        return this.parser.getInputStream().getText(token.start, token.stop);
+    }
+
     private previousColumn(position: { column: number; line: number }): { column: number; line: number } {
         return {column: Math.max(position.column - 1, 0), line: position.line};
     }
@@ -146,7 +150,8 @@ export class ErrorRuleHandler extends ErrorListener {
         if (rule && rule.start && rule.stop) {
             // Return a correct rule
             const from = {column: rule.start.column, line: rule.start.line - 1};
-            const len = (rule.stop.type === -1) ? 0 : max((rule.stop.text.length), 0);
+            const text = this.tokenIntervalText(rule.stop);
+            const len = (rule.stop.type === -1) ? 0 : max((text.length), 0);
             const to = {column: rule.stop.column + len, line: rule.stop.line - 1};
 
             return sortRange([from, to]);
@@ -158,16 +163,21 @@ export class ErrorRuleHandler extends ErrorListener {
 
             if (sibling) {
                 const start = (sibling.stop) ? sibling.stop : sibling.start;
-                from = {column: start.column + start.text.length, line: start.line - 1};
+
+                const text = this.tokenIntervalText(start);
+                from = {column: start.column + text.length, line: start.line - 1};
                 to = {column: token.column, line: token.line - 1};
 
             } else if (rule && rule.exception) {
                 const offendingToken = rule.exception.offendingToken;
+
+                const text = this.tokenIntervalText(offendingToken);
                 from = {column: max(token.column - 1, 0), line: token.line - 1};
-                to = {column: offendingToken.column + offendingToken.text.length, line: offendingToken.line - 1};
+                to = {column: offendingToken.column + text.length, line: offendingToken.line - 1};
             } else {
+                const text = this.tokenIntervalText(token);
                 from = {column: max(token.column - 1, 0), line: token.line - 1};
-                to = {column: token.column + token.text.length, line: token.line - 1};
+                to = {column: token.column + text.length, line: token.line - 1};
             }
 
             return sortRange([from, to]);

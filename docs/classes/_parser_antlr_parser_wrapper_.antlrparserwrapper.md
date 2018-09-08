@@ -19,12 +19,15 @@
 ### Accessors
 
 * [literalNames](_parser_antlr_parser_wrapper_.antlrparserwrapper.md#literalnames)
-* [ruleIndexToNameMap](_parser_antlr_parser_wrapper_.antlrparserwrapper.md#ruleindextonamemap)
-* [ruleNameToIndexMap](_parser_antlr_parser_wrapper_.antlrparserwrapper.md#rulenametoindexmap)
 * [ruleNames](_parser_antlr_parser_wrapper_.antlrparserwrapper.md#rulenames)
-* [symbolToTypeMap](_parser_antlr_parser_wrapper_.antlrparserwrapper.md#symboltotypemap)
 * [symbolicNames](_parser_antlr_parser_wrapper_.antlrparserwrapper.md#symbolicnames)
-* [tokenTypeToSymoblMap](_parser_antlr_parser_wrapper_.antlrparserwrapper.md#tokentypetosymoblmap)
+
+### Methods
+
+* [getRuleIndexToNameMap](_parser_antlr_parser_wrapper_.antlrparserwrapper.md#getruleindextonamemap)
+* [getRuleNameToIndexMap](_parser_antlr_parser_wrapper_.antlrparserwrapper.md#getrulenametoindexmap)
+* [getSymbolToTypeMap](_parser_antlr_parser_wrapper_.antlrparserwrapper.md#getsymboltotypemap)
+* [getTokenTypeToSymoblMap](_parser_antlr_parser_wrapper_.antlrparserwrapper.md#gettokentypetosymoblmap)
 
 ---
 
@@ -67,24 +70,6 @@ getliteralNames(): `string`[]
 **Returns:** `string`[]
 
 ___
-<a id="ruleindextonamemap"></a>
-
-###  ruleIndexToNameMap
-
-getruleIndexToNameMap(): `ReadonlyMap`<`number`, `string`>
-
-**Returns:** `ReadonlyMap`<`number`, `string`>
-
-___
-<a id="rulenametoindexmap"></a>
-
-###  ruleNameToIndexMap
-
-getruleNameToIndexMap(): `ReadonlyMap`<`string`, `number`>
-
-**Returns:** `ReadonlyMap`<`string`, `number`>
-
-___
 <a id="rulenames"></a>
 
 ###  ruleNames
@@ -92,15 +77,6 @@ ___
 getruleNames(): `string`[]
 
 **Returns:** `string`[]
-
-___
-<a id="symboltotypemap"></a>
-
-###  symbolToTypeMap
-
-getsymbolToTypeMap(): `ReadonlyMap`<`string`, `number`>
-
-**Returns:** `ReadonlyMap`<`string`, `number`>
 
 ___
 <a id="symbolicnames"></a>
@@ -112,11 +88,41 @@ getsymbolicNames(): `string`[]
 **Returns:** `string`[]
 
 ___
-<a id="tokentypetosymoblmap"></a>
 
-###  tokenTypeToSymoblMap
+## Methods
 
-gettokenTypeToSymoblMap(): `ReadonlyMap`<`number`, `string`>
+<a id="getruleindextonamemap"></a>
+
+###  getRuleIndexToNameMap
+
+▸ **getRuleIndexToNameMap**(): `ReadonlyMap`<`number`, `string`>
+
+**Returns:** `ReadonlyMap`<`number`, `string`>
+
+___
+<a id="getrulenametoindexmap"></a>
+
+###  getRuleNameToIndexMap
+
+▸ **getRuleNameToIndexMap**(): `ReadonlyMap`<`string`, `number`>
+
+**Returns:** `ReadonlyMap`<`string`, `number`>
+
+___
+<a id="getsymboltotypemap"></a>
+
+###  getSymbolToTypeMap
+
+▸ **getSymbolToTypeMap**(): `ReadonlyMap`<`string`, `number`>
+
+**Returns:** `ReadonlyMap`<`string`, `number`>
+
+___
+<a id="gettokentypetosymoblmap"></a>
+
+###  getTokenTypeToSymoblMap
+
+▸ **getTokenTypeToSymoblMap**(): `ReadonlyMap`<`number`, `string`>
 
 **Returns:** `ReadonlyMap`<`number`, `string`>
 

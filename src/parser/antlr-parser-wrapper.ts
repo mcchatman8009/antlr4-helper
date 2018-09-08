@@ -21,7 +21,7 @@ export class AntlrParserWrapper {
         return parser.symbolicNames;
     }
 
-    get tokenTypeToSymoblMap(): ReadonlyMap<number, string> {
+    getTokenTypeToSymoblMap(): ReadonlyMap<number, string> {
         const map = new Map<number, string>();
         const clazz = (this.parser as any).constructor;
 
@@ -34,7 +34,7 @@ export class AntlrParserWrapper {
         return map;
     }
 
-    get symbolToTypeMap(): ReadonlyMap<string, number> {
+    getSymbolToTypeMap(): ReadonlyMap<string, number> {
         const map = new Map<string, number>();
         const clazz = (this.parser as any).constructor;
 
@@ -47,17 +47,17 @@ export class AntlrParserWrapper {
         return map;
     }
 
-    get ruleIndexToNameMap(): ReadonlyMap<number, string> {
+    getRuleIndexToNameMap(): ReadonlyMap<number, string> {
         const map = new Map<number, string>();
 
-        this.ruleNameToIndexMap.forEach((val: number, key: string) => {
+        this.getRuleNameToIndexMap().forEach((val: number, key: string) => {
             map.set(val, key);
         });
 
         return map;
     }
 
-    get ruleNameToIndexMap(): ReadonlyMap<string, number> {
+    getRuleNameToIndexMap(): ReadonlyMap<string, number> {
         const map = new Map<string, number>();
         const rules = this.ruleNames;
         const clazz = (this.parser as any).constructor;

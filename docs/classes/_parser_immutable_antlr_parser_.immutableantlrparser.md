@@ -26,15 +26,19 @@
 * [factory](_parser_immutable_antlr_parser_.immutableantlrparser.md#factory)
 * [functionalRuleParser](_parser_immutable_antlr_parser_.immutableantlrparser.md#functionalruleparser)
 * [inputStream](_parser_immutable_antlr_parser_.immutableantlrparser.md#inputstream)
+* [lexer](_parser_immutable_antlr_parser_.immutableantlrparser.md#lexer)
 * [parseCompleteSubject](_parser_immutable_antlr_parser_.immutableantlrparser.md#parsecompletesubject)
 * [parseStartedSubject](_parser_immutable_antlr_parser_.immutableantlrparser.md#parsestartedsubject)
 * [parserWrapper](_parser_immutable_antlr_parser_.immutableantlrparser.md#parserwrapper)
 * [rootRule](_parser_immutable_antlr_parser_.immutableantlrparser.md#rootrule)
+* [ruleIndexToNameMap](_parser_immutable_antlr_parser_.immutableantlrparser.md#ruleindextonamemap)
 * [ruleTable](_parser_immutable_antlr_parser_.immutableantlrparser.md#ruletable)
+* [ruleWrapperStack](_parser_immutable_antlr_parser_.immutableantlrparser.md#rulewrapperstack)
 * [stack](_parser_immutable_antlr_parser_.immutableantlrparser.md#stack)
 * [textBuffer](_parser_immutable_antlr_parser_.immutableantlrparser.md#textbuffer)
 * [tokenSubject](_parser_immutable_antlr_parser_.immutableantlrparser.md#tokensubject)
 * [tokenTable](_parser_immutable_antlr_parser_.immutableantlrparser.md#tokentable)
+* [tokenTypeToSymoblMap](_parser_immutable_antlr_parser_.immutableantlrparser.md#tokentypetosymoblmap)
 
 ### Methods
 
@@ -71,6 +75,7 @@
 * [getErrorRuleTable](_parser_immutable_antlr_parser_.immutableantlrparser.md#geterrorruletable)
 * [getErrors](_parser_immutable_antlr_parser_.immutableantlrparser.md#geterrors)
 * [getFactory](_parser_immutable_antlr_parser_.immutableantlrparser.md#getfactory)
+* [getInputStream](_parser_immutable_antlr_parser_.immutableantlrparser.md#getinputstream)
 * [getLine](_parser_immutable_antlr_parser_.immutableantlrparser.md#getline)
 * [getLineCount](_parser_immutable_antlr_parser_.immutableantlrparser.md#getlinecount)
 * [getRelevantError](_parser_immutable_antlr_parser_.immutableantlrparser.md#getrelevanterror)
@@ -107,9 +112,11 @@
 * [reduce](_parser_immutable_antlr_parser_.immutableantlrparser.md#reduce)
 * [reparse](_parser_immutable_antlr_parser_.immutableantlrparser.md#reparse)
 * [replaceRange](_parser_immutable_antlr_parser_.immutableantlrparser.md#replacerange)
+* [setLexer](_parser_immutable_antlr_parser_.immutableantlrparser.md#setlexer)
 * [setRuleText](_parser_immutable_antlr_parser_.immutableantlrparser.md#setruletext)
 * [setTokenText](_parser_immutable_antlr_parser_.immutableantlrparser.md#settokentext)
 * [siblingsHaveNoErrors](_parser_immutable_antlr_parser_.immutableantlrparser.md#siblingshavenoerrors)
+* [tokenIntervalText](_parser_immutable_antlr_parser_.immutableantlrparser.md#tokenintervaltext)
 * [visitErrorNode](_parser_immutable_antlr_parser_.immutableantlrparser.md#visiterrornode)
 * [visitTerminal](_parser_immutable_antlr_parser_.immutableantlrparser.md#visitterminal)
 
@@ -186,6 +193,13 @@ ___
 **● inputStream**: *`InputStream`*
 
 ___
+<a id="lexer"></a>
+
+### `<Private>` lexer
+
+**● lexer**: *`Lexer`*
+
+___
 <a id="parsecompletesubject"></a>
 
 ### `<Private>` parseCompleteSubject
@@ -214,11 +228,25 @@ ___
 **● rootRule**: *`ParserRuleContext`*
 
 ___
+<a id="ruleindextonamemap"></a>
+
+### `<Private>` ruleIndexToNameMap
+
+**● ruleIndexToNameMap**: *`ReadonlyMap`<`number`, `string`>*
+
+___
 <a id="ruletable"></a>
 
 ### `<Private>` ruleTable
 
 **● ruleTable**: *[RuleTable](_parser_rule_table_.ruletable.md)*
+
+___
+<a id="rulewrapperstack"></a>
+
+### `<Private>` ruleWrapperStack
+
+**● ruleWrapperStack**: *[AntlrRuleWrapper](../interfaces/_parser_antlr_rule_wrapper_.antlrrulewrapper.md)[]*
 
 ___
 <a id="stack"></a>
@@ -247,6 +275,13 @@ ___
 ### `<Private>` tokenTable
 
 **● tokenTable**: *[TokenTable](_parser_token_table_.tokentable.md)*
+
+___
+<a id="tokentypetosymoblmap"></a>
+
+### `<Private>` tokenTypeToSymoblMap
+
+**● tokenTypeToSymoblMap**: *`ReadonlyMap`<`number`, `string`>*
 
 ___
 
@@ -735,6 +770,15 @@ ___
 ▸ **getFactory**(): [AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md)
 
 **Returns:** [AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md)
+
+___
+<a id="getinputstream"></a>
+
+###  getInputStream
+
+▸ **getInputStream**(): `InputStream`
+
+**Returns:** `InputStream`
 
 ___
 <a id="getline"></a>
@@ -1230,6 +1274,21 @@ ___
 **Returns:** [AntlrRange](../modules/_types_types_.md#antlrrange)
 
 ___
+<a id="setlexer"></a>
+
+###  setLexer
+
+▸ **setLexer**(lexer: *`Lexer`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| lexer | `Lexer` |
+
+**Returns:** `void`
+
+___
 <a id="setruletext"></a>
 
 ###  setRuleText
@@ -1275,6 +1334,21 @@ ___
 | rule | `ParserRuleContext` |
 
 **Returns:** `boolean`
+
+___
+<a id="tokenintervaltext"></a>
+
+### `<Private>` tokenIntervalText
+
+▸ **tokenIntervalText**(token: *`Token`*): `string`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| token | `Token` |
+
+**Returns:** `string`
 
 ___
 <a id="visiterrornode"></a>

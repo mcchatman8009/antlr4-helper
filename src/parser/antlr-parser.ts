@@ -1,4 +1,4 @@
-import {ParserRuleContext, Token} from 'antlr4';
+import {InputStream, Lexer, ParserRuleContext, Token} from 'antlr4';
 import {AntlrFactory, AntlrRange, AntlrRuleClass} from '../';
 import {AntlrTokenWrapper} from './antlr-token-wrapper';
 import {AntlrRuleError} from './antlr-rule-error';
@@ -12,6 +12,7 @@ export interface AntlrParser {
 
     getCharacterAt(column: number, line: number): string;
 
+    setLexer(lexer: Lexer): void;
 
     /**
      * Parse the input string
@@ -83,6 +84,8 @@ export interface AntlrParser {
      * @returns {AntlrRange}
      */
     getRuleRange(rule: ParserRuleContext): AntlrRange;
+
+    getInputStream(): InputStream;
 
     /**
      * Add a listener for when the parser enters a given rule. See example below

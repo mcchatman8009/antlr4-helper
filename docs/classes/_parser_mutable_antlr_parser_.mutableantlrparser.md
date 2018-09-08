@@ -74,6 +74,7 @@ console.log(parser.getText());
 * [getErrorRuleAt](_parser_mutable_antlr_parser_.mutableantlrparser.md#geterrorruleat)
 * [getErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#geterrors)
 * [getFactory](_parser_mutable_antlr_parser_.mutableantlrparser.md#getfactory)
+* [getInputStream](_parser_mutable_antlr_parser_.mutableantlrparser.md#getinputstream)
 * [getLine](_parser_mutable_antlr_parser_.mutableantlrparser.md#getline)
 * [getLineCount](_parser_mutable_antlr_parser_.mutableantlrparser.md#getlinecount)
 * [getRelevantError](_parser_mutable_antlr_parser_.mutableantlrparser.md#getrelevanterror)
@@ -110,6 +111,7 @@ console.log(parser.getText());
 * [reduce](_parser_mutable_antlr_parser_.mutableantlrparser.md#reduce)
 * [reparse](_parser_mutable_antlr_parser_.mutableantlrparser.md#reparse)
 * [replaceRange](_parser_mutable_antlr_parser_.mutableantlrparser.md#replacerange)
+* [setLexer](_parser_mutable_antlr_parser_.mutableantlrparser.md#setlexer)
 * [setRuleText](_parser_mutable_antlr_parser_.mutableantlrparser.md#setruletext)
 * [setTokenText](_parser_mutable_antlr_parser_.mutableantlrparser.md#settokentext)
 * [siblingsHaveNoErrors](_parser_mutable_antlr_parser_.mutableantlrparser.md#siblingshavenoerrors)
@@ -628,6 +630,15 @@ ___
 **Returns:** [AntlrFactory](../interfaces/_factory_antlr_factory_.antlrfactory.md)
 
 ___
+<a id="getinputstream"></a>
+
+###  getInputStream
+
+▸ **getInputStream**(): `InputStream`
+
+**Returns:** `InputStream`
+
+___
 <a id="getline"></a>
 
 ###  getLine
@@ -1117,6 +1128,21 @@ ___
 | text | `string` |
 
 **Returns:** [AntlrRange](../modules/_types_types_.md#antlrrange)
+
+___
+<a id="setlexer"></a>
+
+###  setLexer
+
+▸ **setLexer**(lexer: *`Lexer`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| lexer | `Lexer` |
+
+**Returns:** `void`
 
 ___
 <a id="setruletext"></a>

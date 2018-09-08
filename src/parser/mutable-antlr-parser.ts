@@ -1,5 +1,5 @@
 import {AntlrFactory} from '../factory/antlr-factory';
-import {ParserRuleContext, Token} from 'antlr4';
+import {InputStream, Lexer, ParserRuleContext, Token} from 'antlr4';
 import {createBuffer, createTextRange, MutableTextRange, TextBuffer} from 'text-manipulation';
 import {AntlrParser} from './antlr-parser';
 import {AntlrRange, AntlrRuleClass} from '../';
@@ -70,6 +70,14 @@ export class MutableAntlrParser implements AntlrParser {
         });
     }
 
+    getInputStream(): InputStream {
+        return this.parser.getInputStream();
+    }
+
+    setLexer(lexer: Lexer): void {
+        this.parser.setLexer(lexer);
+    }
+
     getRoot(): AntlrRuleWrapper {
         return new MutableAntlrRuleWrapper(this.parser.getRoot().getRule(), this);
     }
@@ -79,7 +87,7 @@ export class MutableAntlrParser implements AntlrParser {
     }
 
     getAllRules(): AntlrRuleWrapper[] {
-        return this.getRuleStack().map((rule) => new MutableAntlrRuleWrapper(rule, this));
+        return this.parser.getAllRules().map((rule) => new MutableAntlrRuleWrapper(rule.getRule(), this));
     }
 
     getAllTokens(): AntlrTokenWrapper[] {

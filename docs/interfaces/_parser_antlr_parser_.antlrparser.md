@@ -44,6 +44,7 @@
 * [getErrorRuleAt](_parser_antlr_parser_.antlrparser.md#geterrorruleat)
 * [getErrors](_parser_antlr_parser_.antlrparser.md#geterrors)
 * [getFactory](_parser_antlr_parser_.antlrparser.md#getfactory)
+* [getInputStream](_parser_antlr_parser_.antlrparser.md#getinputstream)
 * [getLine](_parser_antlr_parser_.antlrparser.md#getline)
 * [getLineCount](_parser_antlr_parser_.antlrparser.md#getlinecount)
 * [getRelevantError](_parser_antlr_parser_.antlrparser.md#getrelevanterror)
@@ -78,6 +79,7 @@
 * [reduce](_parser_antlr_parser_.antlrparser.md#reduce)
 * [reparse](_parser_antlr_parser_.antlrparser.md#reparse)
 * [replaceRange](_parser_antlr_parser_.antlrparser.md#replacerange)
+* [setLexer](_parser_antlr_parser_.antlrparser.md#setlexer)
 * [setRuleText](_parser_antlr_parser_.antlrparser.md#setruletext)
 * [setTokenText](_parser_antlr_parser_.antlrparser.md#settokentext)
 * [siblingsHaveNoErrors](_parser_antlr_parser_.antlrparser.md#siblingshavenoerrors)
@@ -551,6 +553,15 @@ ___
 ▸ **getFactory**(): [AntlrFactory](_factory_antlr_factory_.antlrfactory.md)
 
 **Returns:** [AntlrFactory](_factory_antlr_factory_.antlrfactory.md)
+
+___
+<a id="getinputstream"></a>
+
+###  getInputStream
+
+▸ **getInputStream**(): `InputStream`
+
+**Returns:** `InputStream`
 
 ___
 <a id="getline"></a>
@@ -1068,6 +1079,21 @@ ___
 | text | `string` |
 
 **Returns:** [AntlrRange](../modules/_types_types_.md#antlrrange)
+
+___
+<a id="setlexer"></a>
+
+###  setLexer
+
+▸ **setLexer**(lexer: *`Lexer`*): `void`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| lexer | `Lexer` |
+
+**Returns:** `void`
 
 ___
 <a id="setruletext"></a>

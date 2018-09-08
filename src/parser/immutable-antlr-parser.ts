@@ -1,5 +1,5 @@
 import {AntlrFactory} from '../factory/antlr-factory';
-import {ParserRuleContext, CommonTokenStream, InputStream, Token} from 'antlr4';
+import {ParserRuleContext, CommonTokenStream, InputStream, Token, Lexer} from 'antlr4';
 import {ErrorNode, ErrorNodeImpl, ParseTreeListener, TerminalNode} from 'antlr4/tree/Tree';
 import {Subject} from 'rxjs/index';
 import {filter} from 'rxjs/operators';
@@ -36,9 +36,12 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
     private errorHandler: ErrorRuleHandler;
     private textBuffer: TextBuffer;
     private stack: ParserRuleContext[];
+    private ruleWrapperStack: AntlrRuleWrapper[];
     private functionalRuleParser: FunctionalRuleParser;
     private rootRule: ParserRuleContext;
-
+    private lexer: Lexer;
+    private ruleIndexToNameMap: ReadonlyMap<number, string>;
+    private tokenTypeToSymoblMap: ReadonlyMap<number, string>;
 
     /**
      * Provide an AntlrFactory to construct
@@ -51,7 +54,15 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         this.exitRuleSubject = new Subject<ParserRuleContext>();
         this.customValidatorSubject = new Subject<ParserRuleContext>();
         this.parseCompleteSubject = new Subject<void>();
+    }
 
+    getInputStream(): InputStream {
+        return this.inputStream;
+    }
+
+
+    setLexer(lexer: Lexer): void {
+        this.lexer = lexer;
     }
 
     getFactory(): AntlrFactory {
@@ -63,7 +74,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
     }
 
     getAllRules(): AntlrRuleWrapper[] {
-        return this.getRuleStack().map((rule) => new ImmutableAntlrRuleWrapper(rule, this));
+        return this.ruleWrapperStack;
     }
 
     getAllTokens(): AntlrTokenWrapper[] {
@@ -94,6 +105,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
      */
     parse(input: string): ParserRuleContext {
         this.stack = [];
+        this.ruleWrapperStack = [];
         this.functionalRuleParser = new FunctionalRuleParser(this);
         this.inputStream = new InputStream(input);
         this.textBuffer = createBuffer(input);
@@ -101,7 +113,14 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         this.ruleTable = new RuleTable(this.textBuffer, this);
         this.tokenTable = new TokenTable(this.textBuffer, this);
 
-        const lexer = this.factory.createLexer(this.inputStream);
+        if (this.lexer === undefined) {
+            this.lexer = this.factory.createLexer(this.inputStream);
+        } else {
+            this.lexer.inputStream = this.inputStream;
+            this.lexer.reset();
+        }
+
+        const lexer = this.lexer;
         lexer.removeErrorListeners();
         lexer.addErrorListener(new LexErrorHandler(this.errorHandler));
 
@@ -112,6 +131,8 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         parser.addErrorListener(this.errorHandler);
 
         this.parserWrapper = new AntlrParserWrapper(parser);
+        this.ruleIndexToNameMap = this.parserWrapper.getRuleIndexToNameMap();
+        this.tokenTypeToSymoblMap = this.parserWrapper.getTokenTypeToSymoblMap();
 
         parser.addParseListener(this);
 
@@ -153,7 +174,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
      * @returns {AntlrRange}
      */
     getTokenRange(token: (Token)): AntlrRange {
-        const text = token.text;
+        const text = this.tokenIntervalText(token);
         const table = text.split('\n');
         const lineCount = table.length;
 
@@ -214,6 +235,10 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
         return this.inputStream.getText(start, stop);
     }
 
+    private tokenIntervalText(token: Token): string {
+        return this.inputStream.getText(token.start, token.stop);
+    }
+
     /**
      * Get the range of a given rule, where the first object
      * is the start position and the last is the end position
@@ -223,9 +248,9 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
      */
     getRuleRange(rule: ParserRuleContext): AntlrRange {
         if (rule.start && rule.stop) {
-
             const start = {column: rule.start.column, line: rule.start.line - 1};
-            const end = {column: rule.stop.column + rule.stop.text.length, line: rule.stop.line - 1};
+            const stopText = this.tokenIntervalText(rule.stop);
+            const end = {column: rule.stop.column + stopText.length, line: rule.stop.line - 1};
             return [start, end];
         } else if (rule.start) {
             const start = {column: 0, line: rule.start.line - 1};
@@ -233,7 +258,8 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
             return [start, end];
         } else if (rule.stop) {
             const start = {column: 0, line: rule.stop.line - 1};
-            const end = {column: rule.stop.column + rule.stop.text.length, line: rule.stop.line - 1};
+            const stopText = this.tokenIntervalText(rule.stop);
+            const end = {column: rule.stop.column + stopText.length, line: rule.stop.line - 1};
             return [start, end];
         } else {
             const start = {column: 0, line: 0};
@@ -507,11 +533,11 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
     }
 
     getRuleName(rule: ParserRuleContext): string {
-        return this.parserWrapper.ruleIndexToNameMap.get(rule.ruleIndex);
+        return this.ruleIndexToNameMap.get(rule.ruleIndex);
     }
 
     getTokenName(token: Token): string {
-        return this.parserWrapper.tokenTypeToSymoblMap.get(token.type);
+        return this.tokenTypeToSymoblMap.get(token.type);
     }
 
     getRuleParent(rule: ParserRuleContext): ParserRuleContext {
@@ -551,6 +577,7 @@ export class ImmutableAntlrParser implements ParseTreeListener, AntlrParser {
      */
     enterEveryRule(ctx: ParserRuleContext): void {
         this.stack.push(ctx);
+        this.ruleWrapperStack.push(new ImmutableAntlrRuleWrapper(ctx, this));
         this.enterRuleSubject.next(ctx);
     }
 

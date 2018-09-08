@@ -39,6 +39,7 @@
 * [reportAttemptingFullContext](_parser_error_rule_handler_.errorrulehandler.md#reportattemptingfullcontext)
 * [reportContextSensitivity](_parser_error_rule_handler_.errorrulehandler.md#reportcontextsensitivity)
 * [syntaxError](_parser_error_rule_handler_.errorrulehandler.md#syntaxerror)
+* [tokenIntervalText](_parser_error_rule_handler_.errorrulehandler.md#tokenintervaltext)
 
 ---
 
@@ -348,6 +349,21 @@ ___
 | e | `any` |   |
 
 **Returns:** `void`
+
+___
+<a id="tokenintervaltext"></a>
+
+### `<Private>` tokenIntervalText
+
+▸ **tokenIntervalText**(token: *`Token`*): `string`
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| token | `Token` |
+
+**Returns:** `string`
 
 ___
 
